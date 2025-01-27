@@ -9,6 +9,7 @@ Reversing: Changing the order of nodes in the list.
 Advantages of Linked Lists
 Dynamic Size: Unlike arrays, linked lists do not require a predefined size. You can easily grow or shrink the list.
 Efficient Insertions/Deletions: Inserting or deleting elements at the beginning or middle of the list can be done in constant time, O(1), if the position is known.
+
 Disadvantages of Linked Lists
 Extra Memory: Each node requires extra memory for the pointer to the next node.
 Random Access is Not Possible: To access an element, you have to traverse the list from the head to the desired node, making it slower than an array for direct access.
