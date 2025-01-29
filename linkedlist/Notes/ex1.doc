@@ -1,3 +1,14 @@
+Linked is not stored in a contiguous location.
+
+LL can increase/decrease in size.
+
+In LL along with data next is also stored which is the location of the next element and for the last element is pointed to the null.
+
+At application level it’s used in browsers because n number of forwards and backwards can be done with this.
+
+In questions related to array they ask you to return the array but in question related to LL they usually ask for the starting point.
+
+
 Basic Operations on Linked Lists:
 Traversal: Moving through the list, node by node, starting from the head.
 Insertion: Adding a new node at the beginning, end, or in the middle of the list.
