@@ -40,12 +40,12 @@ The right subtree of a node contains only nodes with values greater than the nod
 Binary Tree Traversal
 Traversal is the process of visiting all the nodes in the tree in a specific order. There are three common types of tree traversal:
 
-1. Inorder Traversal: Visit the left subtree, then the node, and finally the right subtree (L-> N-> R).
+1. Inorder Traversal: Visit the left subtree, then the node, and finally the right subtree (Left-> root-> Right).
 For BST, this results in visiting the nodes in sorted order.
 
-2. Preorder Traversal: Visit the node first, then the left subtree, and finally the right subtree (N-> L-> R).
+2. Preorder Traversal: Visit the node first, then the left subtree, and finally the right subtree (root-> Left-> Right).
 
-3. Postorder Traversal: Visit the left subtree first, then the right subtree, and finally the node (L-> R-> N).
+3. Postorder Traversal: Visit the left subtree first, then the right subtree, and finally the node (Left-> Right-> Root).
 
 
 Number of ways BinaryTree can be constructed/OOPs concept

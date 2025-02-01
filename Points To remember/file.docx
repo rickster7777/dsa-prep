@@ -188,3 +188,148 @@ public class MyClass {
 
     // ... other methods ...
 }
+
+29 Jan 2025
+In Java, static is a keyword that can be used with variables, methods, blocks, and nested classes. It makes the member (variable or method) 
+belong to the class itself rather than to instances (objects) of that class. This means you can access static members without creating an 
+object of the class.
+
+
+1. Static Variables
+A static variable is shared by all instances of a class. It is initialized only once when the class is loaded into memory, and it retains its 
+value across all instances of the class.
+
+class Counter {
+    static int count = 0;
+
+    Counter() {
+        count++;
+    }
+
+    void display() {
+        System.out.println("Count: " + count);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Counter obj1 = new Counter();
+        Counter obj2 = new Counter();
+        obj1.display(); // Count: 2
+        obj2.display(); // Count: 2
+    }
+}
+
+
+
+2. Static Methods
+A static method can be called without creating an object of the class. It can only directly access other static members 
+(variables or methods) of the class. Static methods cannot access instance variables or instance methods.
+
+Example:
+class MathOperations {
+    static int add(int a, int b) {
+        return a + b;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int result = MathOperations.add(5, 3);
+        System.out.println("Result: " + result); // Result: 8
+    }
+}
+
+
+In Java, static is a keyword that can be used with variables, methods, blocks, and nested classes. It makes the member (variable or method) belong to the class itself rather than to instances (objects) of that class. This means you can access static members without creating an object of the class.
+
+Here’s a breakdown of how static works in Java:
+
+1. Static Variables
+A static variable is shared by all instances of a class. It is initialized only once when the class is loaded into memory, and it retains its value across all instances of the class.
+
+Example:
+
+class Counter {
+    static int count = 0;
+
+    Counter() {
+        count++;
+    }
+
+    void display() {
+        System.out.println("Count: " + count);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Counter obj1 = new Counter();
+        Counter obj2 = new Counter();
+        obj1.display(); // Count: 2
+        obj2.display(); // Count: 2
+    }
+}
+In this example, both obj1 and obj2 share the same count variable.
+
+2. Static Methods
+A static method can be called without creating an object of the class. It can only directly access other static members (variables or methods) of the class. Static methods cannot access instance variables or instance methods.
+
+Example:
+
+class MathOperations {
+    static int add(int a, int b) {
+        return a + b;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int result = MathOperations.add(5, 3);
+        System.out.println("Result: " + result); // Result: 8
+    }
+}
+
+
+3. Static Blocks
+Static blocks are used for static initialization of a class. They are executed only once, when the class is first loaded into memory.
+
+Example:
+class Initialization {
+    static {
+        System.out.println("Static block executed");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        new Initialization(); // Static block will be executed upon class loading
+    }
+}
+
+
+4. Static Nested Classes
+A static nested class is a nested class that is declared static. Unlike regular inner classes, static nested classes do not need an 
+instance of the outer class to be created.
+
+Example:
+class Outer {
+    static class Nested {
+        void show() {
+            System.out.println("Inside static nested class");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Outer.Nested nestedObj = new Outer.Nested();
+        nestedObj.show(); // Inside static nested class
+    }
+}
+
+Key Points:
+Static variables are shared across all instances of a class.
+Static methods can be called without an object and can only access other static members.
+Static blocks are used for initialization code that should only run once when the class is loaded.
+Static nested classes do not need an instance of the outer class.
