@@ -1,4 +1,3 @@
-import java.net.SocketTimeoutException;
 
 public class Sample {
     public static String mergeAlternately(String word1, String word2) {

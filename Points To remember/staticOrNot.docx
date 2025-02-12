@@ -1,0 +1,101 @@
+When not to use static:
+Instance-specific behavior:
+
+If a method or variable relies on or modifies the state of an individual object (instance of the class), it should not be static. These methods or variables 
+are tied to each specific instance of the class.
+Example:
+
+java
+
+class Car {
+    String model;
+    int speed;
+    
+    public void accelerate() {
+        speed++;
+    }
+}
+
+The accelerate method is instance-specific because it modifies the state of the object (speed) and should be called on an object (instance) of Car.
+Polymorphism:
+
+If you need to use inheritance and polymorphism, methods should not be static. Non-static methods can be overridden by subclasses, but static methods cannot be.
+Example:
+
+java
+
+class Animal {
+    void speak() {
+        System.out.println("Animal speaks");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void speak() {
+        System.out.println("Dog barks");
+    }
+}
+
+public static void main(String[] args) {
+    Animal animal = new Dog();
+    animal.speak();  // Prints "Dog barks"
+}
+If speak() were static, it would not be polymorphic, and the method call would be resolved at compile time rather than runtime, which defeats the purpose of inheritance.
+
+Instance methods (access to instance variables):
+
+If your method needs to access instance variables (non-static variables), then the method must not be static, as it would not have access to instance variables or instance methods without creating an instance.
+Example:
+
+
+class Book {
+    String title;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+}
+
+Summary of When to Use Static:
+1. Use static when you want the method or variable to be shared by all instances or when you don’t need any instance data.
+2. Don't use static when the method or variable depends on instance-specific data or behavior (object state).
+
+
+Example of when to use static vs. when not to:
+java
+
+class Example {
+    static int count = 0;  // Class-level variable, shared by all instances
+
+    int id;  // Instance-level variable, unique to each object
+
+    Example() {
+        count++;  // Shared by all instances
+        id = count;  // Unique to this instance
+    }
+
+    // Static method - doesn't need an instance of Example
+    public static void displayCount() {
+        System.out.println("Count: " + count);
+    }
+
+    // Instance method - needs an instance of Example
+    public void displayId() {
+        System.out.println("ID: " + id);
+    }
+
+    public static void main(String[] args) {
+        Example e1 = new Example();
+        Example e2 = new Example();
+
+        e1.displayId();  // Instance method
+        e2.displayId();  // Instance method
+
+        Example.displayCount();  // Static method
+    }
+}

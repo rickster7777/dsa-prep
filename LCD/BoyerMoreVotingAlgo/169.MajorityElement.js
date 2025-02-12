@@ -66,7 +66,7 @@ const moore = (nums) => {
 
     return candidate;
 }
-const nums = [3, 2, 3];
+const nums = [3,3,4];
 console.log(moore(nums));
 
 
