@@ -1,0 +1,30 @@
+The hashCode() and equals() methods are critical for ensuring that objects can be correctly stored and retrieved from hash-based collections like HashMap, HashSet, and Hashtable. Here's what each method is doing in your code:
+
+1. public int hashCode()
+The hashCode() method is responsible for returning an integer value that is used to determine the index (bucket) in the hash table where the object will be stored. This value helps to quickly locate the object in a collection like HashMap.
+
+Purpose: The hashCode() method computes a hash code based on the object's properties, which in this case are name and id.
+Objects.hash(name, id) is a utility method that combines the hash codes of multiple fields (name and id) and generates a final hash code for the object. This ensures that objects with the same 
+name and id values will have the same hash code, which is important for ensuring that they are treated as equivalent objects in collections like HashMap.
+
+How it works:
+When you insert an object into a HashMap, the hashCode() is called to determine where the object should go in the internal array (the bucket).
+When you later attempt to retrieve the object with a key (e.g., map.get(p1)), the hashCode() is used to find the bucket, and then the equals() method is used to compare the actual objects inside the bucket.
+
+
+
+2. public boolean equals(Object obj)
+The equals() method is used to compare whether two objects are semantically equal, not just whether they are the same object in memory.
+
+Purpose: The equals() method compares two objects (in this case, Person objects) to see if they are considered equal based on their attributes, name and id.
+How it works:
+First Check (this == obj): If the two references point to the same object in memory, they are obviously equal, so it returns true.
+Second Check (obj == null): If the other object is null, they can't be equal, so it returns false.
+Third Check (getClass() != obj.getClass()): If the other object is not of the same class (i.e., not a Person), they can't be equal, so it returns false.
+Field Comparison: Finally, if the objects are of the same class, it compares their fields (id and name). It uses Objects.equals(name, other.getName()) to compare the name fields (it handles null values gracefully), and id == other.getId() to compare the id values. If both the fields are equal, it returns true, meaning the two objects are considered equal.
+
+Why These Methods Matter
+In a HashMap:
+When you put an object into a HashMap, the hashCode() method helps determine the bucket where the object is stored. This helps the HashMap perform operations like put(), get(), and containsKey() efficiently.
+When you later search for the object using get(), the HashMap first uses the hashCode() to locate the correct bucket, and then it uses the equals() method to ensure that the objects inside the bucket match.
+Without a proper hashCode() and equals() implementation, the HashMap would not be able to determine if two objects are the same and might store duplicate values or fail to retrieve the correct object.
