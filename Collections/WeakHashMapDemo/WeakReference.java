@@ -1,4 +1,4 @@
-package Collections.WeakHashMapDemoVideo10;
+package Collections.WeakHashMapDemo;
 
 public class WeakReference {
     // Type it manually

@@ -1,9 +1,11 @@
-package Collections.SortedMapDemoVideo13;
+package Collections.SortedMapDemo;
 
 import java.util.NavigableMap;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+
+//Video 13
 public class SortedMapDemo {
     public static void main(String[] args) {
 
