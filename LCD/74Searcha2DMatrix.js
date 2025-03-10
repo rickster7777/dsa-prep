@@ -9,7 +9,7 @@ const searchMatrix = function (matrix, target) {
         if (matrix[i][n - 1] >= target) {
             let low = 0;
             let high = matrix[i].length - 1;
-            let mid;
+            let mid; 
             while (high >= low) {
                 mid = low + Math.floor((high - low) / 2);
 

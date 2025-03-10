@@ -54,7 +54,7 @@ public class Sample {
  * Overall Simplicity: You can simplify the logic slightly to make it more
  * compact without changing its structure.
  * 
- */
+
 public static String mergeAlternately(String word1, String word2) {
     // Use StringBuilder for efficient string concatenation
     StringBuilder finalWord = new StringBuilder();
@@ -78,3 +78,6 @@ public static String mergeAlternately(String word1, String word2) {
 
     return finalWord.toString();
 }
+
+*
+ */

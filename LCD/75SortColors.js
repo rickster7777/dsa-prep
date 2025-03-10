@@ -1,26 +1,26 @@
-const sortColors = (nums) => {
-    let zeros = 0
-    let ones = 1;
-    let twos = 2;
+// const sortColors = (nums) => {
+//     let zeros = 0
+//     let ones = 1;
+//     let twos = 2;
 
-    let n = nums.length;
+//     let n = nums.length;
 
-    // for (let i = 0; i < n; i++) {
-    //     if(nums[i] === 0){
-    //         zeros++;
-    //     } else if (nums[i] === 1){
-    //         ones++;
-    //     }else{
-    //         twos++;
-    //     }
-    // }
+//     // for (let i = 0; i < n; i++) {
+//     //     if(nums[i] === 0){
+//     //         zeros++;
+//     //     } else if (nums[i] === 1){
+//     //         ones++;
+//     //     }else{
+//     //         twos++;
+//     //     }
+//     // }
 
-    for (let i = 0; i < n; i++) {
+//     for (let i = 0; i < n; i++) {
 
-    }
-}
+//     }
+// }
 
-
+//https://leetcode.com/problems/sort-colors/
 /**
  * This problem is a variant of the Dutch National Flag problem, where you need to sort the array in-place with only three unique 
  * values (0, 1, and 2), corresponding to the colors red, white, and blue, respectively. The goal is to sort the array in a way such 

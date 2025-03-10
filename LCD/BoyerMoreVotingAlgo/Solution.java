@@ -1,4 +1,4 @@
-package LCD.BoyerMoreVotingAlgo;
+package lcd.BoyerMoreVotingAlgo;
 
 class Solution {
     public int majorityElement(int[] nums) {

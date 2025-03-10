@@ -110,17 +110,17 @@ public class Comparators {
 }
 
 /*
- * 
+ *
  * [Collections.Student@2f2c9b19, Collections.Student@31befd9f,
  * Collections.Student@1c20c684, Collections.Student@1fb3ebeb]
- * 
+ *
  * Above output is the default string representation of the Student objects in
  * the list. By
  * default, Java uses the toString() method from the Object class, which prints
  * the class name and the memory address (hash code) of the object.
- * 
+ *
  * To print the actual data (i.e., the student's name and GPA), you need to
  * override the toString() method in your Student class.
- * 
+ *
  * Step 1: Override the toString() Method in Student
  */
