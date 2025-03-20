@@ -25,8 +25,8 @@ var search = function (nums, target) {
     return -1;
 };
 
-const nums = [4, 5, 6, 7, 0, 1, 2], target = 0;
-console.log(search(nums, target));
+// const nums = [4, 5, 6, 7, 0, 1, 2], target = 0;
+// console.log(search(nums, target));
 
 
 //rotated sorted array approach
@@ -34,7 +34,7 @@ console.log(search(nums, target));
 var search = function (nums, target) {
     let low = 0;
     let high = nums.length - 1;
-    
+
     while (low <= high) {
         let mid = low + Math.floor((high - low) / 2);
 
@@ -51,7 +51,7 @@ var search = function (nums, target) {
             } else {
                 low = mid + 1;
             }
-        } 
+        }
         // Else the right half must be sorted
         else {
             // Target is in the right half

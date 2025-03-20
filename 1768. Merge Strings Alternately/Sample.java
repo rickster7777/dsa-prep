@@ -56,15 +56,15 @@ public class Sample {
  * 
 
 public static String mergeAlternately(String word1, String word2) {
-    // Use StringBuilder for efficient string concatenation
+    Use StringBuilder for efficient string concatenation
     StringBuilder finalWord = new StringBuilder();
 
     int ptr1 = 0, ptr2 = 0;
     int len1 = word1.length(), len2 = word2.length();
 
-    // Iterate until both pointers reach the end of the strings
+    Iterate until both pointers reach the end of the strings
     while (ptr1 < len1 || ptr2 < len2) {
-        // Append characters alternately from both words
+        Append characters alternately from both words
         if (ptr1 < len1) {
             finalWord.append(word1.charAt(ptr1));
             ptr1++;

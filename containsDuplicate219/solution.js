@@ -5,6 +5,7 @@ function containsNearbyDuplicate(nums, k) {
             return true;
         }
         window.add(nums[i]);
+
         if (window.size > k) {
             window["delete"](nums[i - k]);
         }

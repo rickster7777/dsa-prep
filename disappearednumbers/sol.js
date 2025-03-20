@@ -1,7 +1,7 @@
 const disappeareNumbers = (nums) => {
     const s = new Set(nums);
 
-    const arraySet = Array.from(s);
+    //const arraySet = Array.from(s);
 
     //arraySet.sort((a, b) => a - b);
 

@@ -12,7 +12,7 @@ var canPlaceFlowers = function (flowerbed, n) {
             if (i + 3 < flowerbed.length && (flowerbed[i + 3] === 0)) {
                 n--;
             }
-            
+
         }
         i = i + 2;
     }
@@ -35,7 +35,7 @@ var canPlaceFlowers = function (flowerbed, n) {
  */
 var canPlaceFlowers = function (flowerbed, n) {
     let i = 0;
-    
+
     // Traverse the flowerbed
     while (i < flowerbed.length) {
         // Check if the current plot is empty and the adjacent plots are empty
