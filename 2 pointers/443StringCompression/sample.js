@@ -71,7 +71,7 @@ var compress = function (chars) {
         // Write the character
         chars[writeIndex++] = currentChar;
         /**
-         * i was confused about the working of above line
+         * I was confused about the working of above line
          * Breaking It Down
             1️⃣ chars[writeIndex] = currentChar;
             This stores the current character (currentChar) at the writeIndex position.

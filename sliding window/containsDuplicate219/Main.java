@@ -47,7 +47,6 @@ public class Main {
             boolean result = containsNearbyDuplicate(testCases[i], kValues[i]);
             System.out.println("Test Case " + (i + 1) + ": " + result);
         }
-    }
 
     public static boolean containsNearbyDuplicate(int[] nums, int k) {
         Set<Integer> window = new HashSet<>();
@@ -61,4 +60,4 @@ public class Main {
         }
         return false;
     }
-}
+} 

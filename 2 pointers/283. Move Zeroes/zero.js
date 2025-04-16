@@ -59,5 +59,28 @@ var moveZeroes = function (nums) {
     }
     return nums;
 };
+
+var frontZeroes = function (nums) {
+    let start = 0;
+    let end = nums.length - 1;
+
+    while (start < end) {
+        if (nums[start] !== 0 && nums[end] === 0) {
+            temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        } else if (nums[start] === 0) {
+            start++;
+        } else {
+            end--;
+        }
+    }
+    return nums;
+};
+
+
 nums = [0, 1, 0, 3, 12]
-console.log(moveZeroes(nums));
+//console.log(moveZeroes(nums));
+console.log(frontZeroes(nums));
