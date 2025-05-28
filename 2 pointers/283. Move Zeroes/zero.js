@@ -49,14 +49,39 @@ var moveZeroes = function (nums) {
         return nums;
     }
     for (let i = 0; i < nums.length; i++) {
+        // If the current element is not zero
         if (nums[i] !== 0) {
+            // Move the non-zero element to the 'pointer' index
             nums[pointer] = nums[i];
+
+            // If current index is different from pointer,
+            // set the current index to 0 (since its value was moved)
             if (i !== pointer) {
                 nums[i] = 0;
+            }
+
+            // Move pointer to the next position
+            pointer++;
+        }
+    }
+    return nums;
+};
+
+// Cleaned Version:
+
+var moveZeroess = function (nums) {
+    let pointer = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== 0) {
+            // Swap only if i != pointer to avoid unnecessary operations
+            if (i !== pointer) {
+                [nums[pointer], nums[i]] = [nums[i], nums[pointer]];
             }
             pointer++;
         }
     }
+
     return nums;
 };
 
@@ -81,6 +106,32 @@ var frontZeroes = function (nums) {
 };
 
 
+// 🔄 Modified Version: Move Zeros to the Left
+// This version keeps non-zero elements at the end and pushes all zeroes to the start of the array, preserving the order of non-zero elements as well.
+
+
+var moveZeroesToLeft = function (nums) {
+    let pointer = nums.length - 1;
+
+    // Traverse the array from right to left
+    for (let i = nums.length - 1; i >= 0; i--) {
+        if (nums[i] !== 0) {
+            nums[pointer] = nums[i];
+            if (i !== pointer) {
+                nums[i] = 0;
+            }
+            pointer--;
+        }
+    }
+
+    // Fill remaining positions on the left with 0s
+    // for (let i = 0; i <= pointer; i++) {
+    //     nums[i] = 0;
+    // }
+
+    return nums;
+};
 nums = [0, 1, 0, 3, 12]
 //console.log(moveZeroes(nums));
-console.log(frontZeroes(nums));
+//console.log(moveZeroes(nums));
+console.log(moveZeroesToLeft(nums));
