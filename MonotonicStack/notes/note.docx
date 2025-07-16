@@ -1,0 +1,55 @@
+whats the difference between stack and mono stack
+
+
+| Feature              | **Regular Stack**                           | **Monotonic Stack**                                 |
+| -------------------- | ------------------------------------------- | --------------------------------------------------- |
+| **Definition**       | LIFO structure (Last-In, First-Out)         | A specialized stack that maintains a specific order |
+| **Order constraint** | No order constraint                         | Maintains increasing or decreasing order            |
+| **Used for**         | General purpose: DFS, undo, recursion, etc. | Problems like Next Greater Element, Histogram, etc. |
+| **Content**          | Any elements                                | Usually indices or values that maintain order       |
+| **Access pattern**   | Push, pop, peek (no condition)              | Push/pop based on value comparison                  |
+
+REGULAR Stack
+
+const stack = [];
+stack.push(1);
+stack.push(2);
+console.log(stack.pop()); // 2
+console.log(stack.pop()); // 1
+
+MONOTONIC Stack
+
+const stack = [];
+const nums = [3, 1, 4, 2];
+
+// Maintain increasing order
+for (let num of nums) {
+    while (stack.length && stack[stack.length - 1] > num) {
+        stack.pop();
+    }
+    stack.push(num);
+}
+console.log(stack); // [1, 2]
+
+
+🔄 Two Types of Monotonic Stacks:
+Monotonic Increasing Stack:
+Pops when current value is smaller
+Helps in finding next smaller / previous smaller elements
+
+Monotonic Decreasing Stack:
+Pops when current value is larger
+Helps in finding next greater / previous greater elements
+
+🧠 Use Cases of Monotonic Stack:
+Next Greater Element (Leetcode 496)
+Largest Rectangle in Histogram (Leetcode 84)
+Daily Temperatures (Leetcode 739)
+Trapping Rain Water
+
+✅ Summary:
+
+| Term           | Description                                                                       |
+| -------------- | --------------------------------------------------------------------------------- |
+| **Stack**      | Basic LIFO data structure without ordering rules                                  |
+| **Mono Stack** | Stack with enforced order (increasing or decreasing) for solving pattern problems |

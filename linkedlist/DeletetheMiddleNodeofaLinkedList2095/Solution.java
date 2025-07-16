@@ -41,8 +41,9 @@ package linkedlist.DeletetheMiddleNodeofaLinkedList2095;
  * }
  */
 
-class Solution {
+public class Solution {
 
+    // THs is already created by leetcode bts.
     public class ListNode {
         int val;
         ListNode next;
@@ -60,6 +61,7 @@ class Solution {
         }
     }
 
+    // This is the only main logic that needs to be added
     public ListNode deleteMiddle(ListNode head) {
         // Edge case: If there is only one node
         if (head == null || head.next == null) {
@@ -82,5 +84,38 @@ class Solution {
         prev.next = slow.next; // Skip the middle node by linking previous node to next node
 
         return head; // Return the modified list
+    }
+}
+
+// This main class and functin is only for the vscode to run this program
+class Main {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Create linked list: 1 -> 2 -> 3 -> 4 -> 5
+        Solution.ListNode head = solution.new ListNode(1);
+        head.next = solution.new ListNode(2);
+        head.next.next = solution.new ListNode(3);
+        head.next.next.next = solution.new ListNode(4);
+        head.next.next.next.next = solution.new ListNode(5);
+
+        System.out.println("Original List:");
+        printList(head);
+
+        // Call deleteMiddle
+        Solution.ListNode updatedHead = solution.deleteMiddle(head);
+
+        System.out.println("After Deleting Middle Node:");
+        printList(updatedHead);
+    }
+
+    // Helper method to print the linked list
+    public static void printList(Solution.ListNode node) {
+        while (node != null) {
+            System.out.print(node.val);
+            if (node.next != null) System.out.print(" -> ");
+            node = node.next;
+        }
+        System.out.println();
     }
 }

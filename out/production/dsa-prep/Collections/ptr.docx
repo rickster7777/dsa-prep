@@ -1,0 +1,19 @@
+Step 1: Ensure You're in the Correct Directory
+/dsa-prep
+    /Collections
+        Reflection.java
+
+Step 2: Compile the Program
+javac Collections/Reflection.java
+
+Step 3: Run the Program with --add-opens
+java --add-opens java.base/java.util=ALL-UNNAMED Collections.Reflection
+
+
+-------------------------------------------------------------------------------------------------------
+If the package structure is not needed
+If your Reflection.java isn't in a package (i.e., no package Collections; at the top), you would simply 
+run the commands from the directory where the Reflection.java file is located:
+
+javac Reflection.java
+java --add-opens java.base/java.util=ALL-UNNAMED Reflection

@@ -1,0 +1,63 @@
+Notes on the Code
+1. Comparator with Method References (Comparator.comparing)
+
+Comparator<Student> comparator = Comparator.comparing(Student::getGpa)
+                                           .reversed()
+                                           .thenComparing(Student::getName);
+Comparator.comparing(Student::getGpa): This creates a Comparator based on the gpa field of the Student class. 
+Student::getGpa is a method reference to the getGpa() method, which retrieves the GPA of each student.
+
+.reversed(): This reverses the order of the comparison, meaning instead of sorting the students in 
+ascending order of GPA, it will sort them in descending order (higher GPAs will appear first).
+
+.thenComparing(Student::getName): This specifies a secondary comparison if two students have the same GPA. It 
+compares the name field of the Student objects in natural (lexicographical) order. This will ensure that, 
+if two students have the same GPA, they will be sorted alphabetically by their name.
+
+2. Sorting the Students
+students.sort(comparator);
+This sorts the students list using the comparator defined earlier, i.e., first by descending GPA, and if 
+two students have the same GPA, it sorts them alphabetically by name.
+
+
+3. For Loop to Print the Sorted List
+
+for (Student s : students) {
+    System.out.println(s.getName() + ": " + s.getGpa());
+}
+This loop iterates over the sorted list and prints out each student's name and GPA in the order defined by the Comparator.
+
+
+4. Manual Comparator Using Lambda
+
+students.sort((o1, o2) -> {
+    if (o2.getGpa() - o1.getGpa() > 0) {
+        return 1;
+    } else if (o2.getGpa() - o1.getGpa() < 0) {
+        return -1;
+    } else {
+        return o2.getName().compareTo(o1.getName());
+    }
+});
+This is an alternative way to write a comparator using an explicit lambda expression. Let's break it down:
+
+Lambda Expression ((o1, o2) -> {}): This defines a custom comparator where o1 and o2 are two Student objects being compared.
+
+Comparing by GPA:
+if (o2.getGpa() - o1.getGpa() > 0) { return 1; }
+This compares the GPAs of the students. It returns:
+
+1 if the GPA of o2 is greater than o1 (i.e., o2 should come before o1 in descending order).
+-1 if the GPA of o1 is greater than o2 (i.e., o1 should come before o2).
+
+
+If GPAs are the same:
+return o2.getName().compareTo(o1.getName());
+This part compares the names of the students alphabetically (in descending order). Since o2.getName().compareTo(o1.getName()) is used, students 
+with the same GPA will be sorted in reverse alphabetical order by their name.
+
+5. Printing the Sorted List Again
+for (Student s : students) {
+    System.out.println(s.getName() + ": " + s.getGpa());
+}
+The second loop prints the list of students after the second sorting operation.

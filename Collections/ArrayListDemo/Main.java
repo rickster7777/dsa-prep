@@ -11,7 +11,7 @@ public class Main {
         ArrayList<Integer> arrayList = new ArrayList<>();
 
         // List<Integer> list1 = new List<>();
-        // Above line is incor rect because List is an interface in Java, and you cannot
+        // Above line is incorrect because List is an interface in Java, and you cannot
         // instantiate an interface directly.
         // You need to use a class that implements the List interface, such as ArrayList
         // or LinkedList.
@@ -31,7 +31,8 @@ public class Main {
         System.out.println(list.getClass().getName() + " " + list);
         System.out.println(arrayList.getClass().getName() + " " + arrayList);
 
-        System.out.println("Element at index: " + arrayList.get(2));
+        System.out.println("Element at index: 2" + arrayList.get(2));
+        System.out.println("index of: 2" + arrayList.indexOf(2));
         System.out.println("Fetching size of the arraylist: " + arrayList.size());
 
         // iterating over a list
@@ -134,11 +135,47 @@ public class Main {
         /*
          * toArray
          */
+        System.out.println("list values: " + list);
         Object[] array1 = list.toArray();
-        System.out.println(array1);
+        System.out.println("array1 values: "+ Arrays.toString(array1));
 
+        System.out.println("list 6 values: " + list6);
         Integer[] array2 = list6.toArray(new Integer[0]);
-        System.out.println(array2);
+        System.out.println("array1 values: "+ Arrays.toString(array2));
+
+        /*
+        ✅ Two Types of toArray() in Java:
+
+            1. Object[] toArray()
+
+            Object[] array1 = list.toArray();
+            Returns a new Object[] containing the list elements.
+
+            Requires type casting if you need to access elements as a specific type.
+            Not type-safe — if you assume it's Integer[], it may cause ClassCastException.
+
+            2. <T> T[] toArray(T[] a)
+
+            Integer[] array2 = list6.toArray(new Integer[0]);
+            Returns an array of the same runtime type as the passed array.
+            Type-safe: You get a real Integer[], not just Object[].
+            Can help avoid type-casting and is better for use with generics or type-specific APIs.
+
+            instead of Integer array if it's a String array then what 'lll be passed here
+            list.toArray(new Integer[0]);
+
+            Great question!
+
+            If your list contains String values instead of Integer, then you need to pass a String[] to the toArray()
+            method — not Integer[]. Passing the wrong type (like new Integer[0]) will result in a runtime error.
+
+            ✅ Correct usage with a List<String>:
+            List<String> list = Arrays.asList("apple", "banana", "cherry");
+
+            // Convert to String[]
+            String[] array = list.toArray(new String[0]);
+            System.out.println(Arrays.toString(array));
+         */
     }
 
 }
