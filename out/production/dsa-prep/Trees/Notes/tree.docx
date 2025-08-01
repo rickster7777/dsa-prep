@@ -38,15 +38,20 @@ The right subtree of a node contains only nodes with values greater than the nod
 
 
 Binary Tree Traversal
-Traversal is the process of visiting all the nodes in the tree in a specific order. There are three common types of tree traversal:
+Traversal is the process of visiting all the nodes in the tree in a specific order. There are the common types of tree traversal:
+🔹 Types of Tree Traversal
+1. Depth-First Traversal (DFS)
+Inorder: Left → Root → Right
+Preorder: Root → Left → Right
+Postorder: Left → Right → Root
+
+2. Breadth-First Traversal (BFS)
+Also known as Level Order Traversal
 
 1. Inorder Traversal: Visit the left subtree, then the node, and finally the right subtree (Left-> root-> Right).
 For BST, this results in visiting the nodes in sorted order.
-
 2. Preorder Traversal: Visit the node first, then the left subtree, and finally the right subtree (root-> Left-> Right).
-
 3. Postorder Traversal: Visit the left subtree first, then the right subtree, and finally the node (Left-> Right-> Root).
-
 
 Number of ways BinaryTree can be constructed/OOPs concept
 1. Node Class as a Separate Class Outside BinaryTree Class (Already Discussed)
@@ -72,3 +77,46 @@ require access to an instance of LL to function. It is simpler since we’re cre
 just a container for storing data and a reference to the next node.
 In contrast, in the BinaryTree example, we are creating a tree structure where Node references the parent (root), so we need to associate 
 the Node with the BinaryTree instance.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+✅ When Do You Use Stack?
+You use a stack when:
+
+You need to simulate DFS traversal manually.
+You're solving problems like:
+Iterative inorder, preorder, postorder
+Path from root to leaf (DFS variants)
+Backtracking on tree paths
+
+🆚 When Do You Use Queue?
+You use a queue when:
+
+You're doing level order traversal or BFS
+
+Solving:
+Minimum depth of binary tree
+Right side view / left side view
+Zigzag level order
+
+🔁 Summary Rule of Thumb
+Problem Type	            Use Recursion?	Use Stack?	Use Queue?
+DFS traversal (in/pre/post)	✅ Yes	            ✅ Yes	      ❌ No
+BFS traversal (level-order)	❌ No	            ❌ No	      ✅ Yes
+Tree building (from orders)	✅ Yes	            ❌ Usually	❌ No
+Path-related DFS	            ✅ Yes	            ✅ Sometimes	❌ No
+
+⚠️ Exceptions
+Morris Traversal — does not use recursion or stack
+It’s a space-optimized traversal (O(1) space), but rarely asked unless you're applying for Google-level roles.
+
+Serialization/Deserialization — can be solved with stack, queue, or recursion depending on the approach.
+
+✅ Interview Pro Tip
+If recursion is not allowed, first ask yourself:
+"Is it a DFS-type problem?"
+If yes → Use Stack
+
+If no (e.g., level order) → Use Queue

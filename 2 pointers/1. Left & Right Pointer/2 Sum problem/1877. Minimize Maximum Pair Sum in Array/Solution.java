@@ -1,5 +1,11 @@
 import java.util.Arrays;
-
+/*
+ in this problem biggest element is to be paired with the smallest possible element in the array
+ Summary:
+Biggest element + smallest element
+Second biggest + second smallest
+And so on...
+ */
 class Solution {
     public int minPairSum(int[] nums) {
         Arrays.sort(nums);

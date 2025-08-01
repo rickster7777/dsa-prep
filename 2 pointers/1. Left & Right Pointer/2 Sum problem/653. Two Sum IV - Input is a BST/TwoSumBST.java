@@ -9,6 +9,8 @@ class TreeNode {
 public class TwoSumBST {
     public boolean findTarget(TreeNode root, int k) {
         List<Integer> nums = new ArrayList<>();
+
+        // inorder traversal because it sorts it in the ascending order after that binary search can be performmed.
         inorder(root, nums);
 
         int left = 0, right = nums.size() - 1;

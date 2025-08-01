@@ -19,7 +19,8 @@ class Solution {
                 end--;
             }
 
-            words[i] = new String(chars); // convert back to string
+            //THIS IS TO REMEMBER
+            words[i] = new String(chars); // convert chars array back to string
         }
 
         // Join the reversed words with a space

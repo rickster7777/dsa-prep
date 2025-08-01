@@ -5,7 +5,7 @@ class Solution {
         int start = 0;
         int end = s.length - 1;
         char temp = '\0';
-        String a = "";
+        //strings can be declared like this String a = "";
 
         while (start < end) {
             temp = s[start];

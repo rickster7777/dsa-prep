@@ -14,7 +14,13 @@ class Solution {
 
             if (nums[i] > 0)
                 break;
-
+            /*
+            This is used to stop the loop early if the current number nums[i] is greater than 0.
+            Reason:
+            Since the array is sorted, if nums[i] is positive, all numbers after it will also be positive.
+            Three positive numbers cannot sum to zero, so there is no need to check further.
+            This improves efficiency by avoiding unnecessary iterations.
+             */
             int start = i + 1, end = nums.length - 1;
 
             while (start < end) {

@@ -6,7 +6,7 @@ import java.util.*;
 class TreeNode {
     int val;
     TreeNode left, right;
-    
+
     TreeNode(int val) {
         this.val = val;
         left = null;
@@ -16,13 +16,14 @@ class TreeNode {
 
 public class LevelOrder {
     private int index = 0; // To keep track of current position in the preorder list
-    
+
     public TreeNode buildTree(int[] preorder) {
         return buildTreeHelper(preorder);
     }
-    
+
     private TreeNode buildTreeHelper(int[] preorder) {
-        // Check if we have reached the end of the array or encountered -1 (indicating null)
+        // Check if we have reached the end of the array or encountered -1 (indicating
+        // null)
         if (index >= preorder.length || preorder[index] == -1) {
             index++; // Move to the next element
             return null;
@@ -31,11 +32,11 @@ public class LevelOrder {
         // Create the current node with the value at the current index
         TreeNode node = new TreeNode(preorder[index]);
         index++; // Move to the next element in the preorder list
-        
+
         // Recursively build the left and right subtrees
         node.left = buildTreeHelper(preorder);
         node.right = buildTreeHelper(preorder);
-        
+
         return node;
     }
 
@@ -51,7 +52,7 @@ public class LevelOrder {
         while (!queue.isEmpty()) {
             // Dequeue the front element
             TreeNode node = queue.poll();
-            
+
             // Print the value of the current node
             System.out.print(node.val + " ");
 
@@ -65,17 +66,52 @@ public class LevelOrder {
         }
     }
 
+    // To get nested output like this:
+    // [[3],[9,20],[15,7]]
+    public List<List<Integer>> levelOrderTraversalNested(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+            List<Integer> currentLevel = new ArrayList<>();
+
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode node = queue.poll();
+                currentLevel.add(node.val);
+
+                if (node.left != null)
+                    queue.add(node.left);
+                if (node.right != null)
+                    queue.add(node.right);
+            }
+
+            result.add(currentLevel);
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         LevelOrder tree = new LevelOrder();
-        
+
         // Given preorder traversal list
-        int[] preorder = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
-        
+        int[] preorder = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+
         // Build the tree
         TreeNode root = tree.buildTree(preorder);
-        
+
         // Print level-order traversal to verify the tree structure
         System.out.print("Level-Order Traversal: ");
         tree.levelOrderTraversal(root);
+
+        // Print level-order traversal in a nested structures.
+        System.out.print("Nested-Level-Order Traversal: ");
+        tree.levelOrderTraversalNested(root);
     }
 }

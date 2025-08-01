@@ -36,3 +36,27 @@ public class Solution {
     }
 
 }
+
+/*
+✅ What They Mean
+🔸 emptyLeft = (i == 0 || flowerbed[i - 1] == 0);
+This checks if the plot to the left of position i is empty.
+
+Two cases:
+    If i == 0, it’s the first plot, so there’s no left neighbor — it's considered empty.
+    Otherwise, it checks whether flowerbed[i - 1] is 0 (i.e., no flower planted there).
+
+🔸 emptyRight = (i == flowerbed.length - 1 || flowerbed[i + 1] == 0);
+This checks if the plot to the right of position i is empty.
+
+Two cases:
+    If i is the last index, there’s no right neighbor — it's considered empty.
+    Otherwise, it checks whether flowerbed[i + 1] is 0.
+
+✅ Why This Matters
+To safely plant a flower at index i, three conditions must be true:
+
+flowerbed[i] == 0 → the current spot is empty
+flowerbed[i - 1] == 0 or it’s the start of the array
+flowerbed[i + 1] == 0 or it’s the end of the array
+ */

@@ -17,3 +17,12 @@ var maxSubArray = function (nums) {
 
     return maxSum; // Return the maximum sum found
 };
+
+
+/**
+✅ Core Idea
+We go through the array, and at each step, we decide:
+"Should I continue the previous subarray, or start a new one from this element?"
+
+
+*/

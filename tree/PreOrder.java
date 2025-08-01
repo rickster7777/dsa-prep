@@ -105,8 +105,8 @@ public class PreOrder {
         PreOrder tree = new PreOrder();
 
         // Given preorder traversal list
-        int[] preorder = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
-
+        // int[] preorder = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+        int[] preorder = { 1, 2, 3, -1, 5 };
         // Build the tree
         TreeNode root = tree.buildTree(preorder);
 
@@ -118,7 +118,7 @@ public class PreOrder {
 
         // tree.levelOrderTraversal(root);
         int count = tree.countOfNodes(root);
-        System.out.println("\ncount "+ count);
+        System.out.println("\ncount " + count);
 
     }
 }
