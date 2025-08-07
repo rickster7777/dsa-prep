@@ -14,15 +14,16 @@ public class Solution {
      *
      *
      * ⚙️ 2. Using "aeiouAEIOU".indexOf(ch) != -1
+
      * public static boolean isVowel(char ch) {
      * return "aeiouAEIOU".indexOf(ch) != -1;
      * }
      *
      *
      * 🌀 3. Using Streams
+
      * public static boolean isVowel(char ch) {
-     * return Stream.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U')
-     * .anyMatch(v -> v == ch);
+     * return Stream.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U').anyMatch(v -> v == ch);
      * }
      * ✅ Pros:
      * Functional programming style

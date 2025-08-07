@@ -62,8 +62,8 @@ class Solution {
 
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] nums = { 1 };
-        int k = 1;
+        int[] nums = { 1,1,1,2,2,3 };
+        int k = 2;
 
         int[] result = sol.topKFrequent(nums, k);
 

@@ -144,3 +144,37 @@ while (!maxHeap.isEmpty()) {
 | Sort entries  | O(n log n) | Easier if you need full ranking   |
 | Streams       | O(n log n) | Clean one-liners, modern Java     |
 | PriorityQueue | O(n log n) | Top-K problems                    |
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+6 August 2025
+
+✅ Use a Min Heap when:
+You need quick access to the smallest element.
+
+🔹 Common Scenarios:
+Dijkstra's Algorithm (shortest path in graphs)
+Merging K Sorted Lists
+Task scheduling (where earliest-deadline task runs first)
+Finding the K largest elements (store them in a min heap of size K)
+Event simulation systems (where the next event is the earliest one)
+
+
+✅ Use a Max Heap when:
+You need quick access to the largest element.
+
+🔹 Common Scenarios:
+Heapsort (a sorting algorithm)
+Leaderboard systems (track top scores)
+Finding the K smallest elements (store them in a max heap of size K)
+Median of a data stream (often use two heaps: one min heap and one max heap)
+Priority queues where higher numbers mean higher priority
+
+🔁 Quick Rule of Thumb:
+Goal				            Use
+Get smallest element fast	    Min Heap
+Get largest element fast	    Max Heap
+Maintain top K largest items	Min Heap (size K)
+Maintain top K smallest items	Max Heap (size K)
+

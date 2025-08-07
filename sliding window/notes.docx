@@ -1,0 +1,118 @@
+| Type                 | Window Size | Common Tool | Use Case Example                          |
+| -------------------- | ----------- | ----------- | ----------------------------------------- |
+| Fixed-size window    | Fixed       | None        | Max average subarray                      |
+| Variable-size window | Dynamic     | HashSet     | Longest substring without repeating chars |
+| Frequency-based      | Dynamic     | HashMap     | Anagrams, character counts                |
+| Monotonic window     | Fixed       | Deque       | Sliding window max/min                    |
+| Two-pointer simple   | Variable    | None        | Subarray sum, count of subarrays          |
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+🧩 1. Fixed-Size Sliding Window
+✅ Use when the subarray/window size k is fixed.
+🧠 Key idea:
+Maintain a window of size k using a single loop.
+Keep updating the sum or another measurement as you slide.
+
+🛠 Common Use Cases:
+Max/Min/Average sum of subarray of size k
+
+Shortest/Longest subarray of fixed size satisfying a condition
+💡 Tools:
+No need for sets or maps — just pointers (left, right) and variables for tracking.
+
+Problem	Description	LeetCode #
+✅ Maximum Average Subarray I	Max average of subarray of size k	#643
+✅ Sliding Window Maximum	Max in every subarray of size k	#239
+Max Consecutive Ones III	Flip at most k 0s to 1	#1004
+Longest Subarray of 1's After Deleting One Element	Delete one element to maximize 1's	#1493
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+🔁 2. Variable-Size Sliding Window
+
+✅ Use when the size of the window is not fixed, but depends on some condition (e.g., sum, distinct characters, etc.).
+
+🧠 Key idea:
+Expand the window until the condition is invalid.
+Shrink it until the condition is valid again.
+Use two pointers (left, right), dynamically adjusting window size.
+
+💡 Tools:
+Use HashMap or HashSet if you need to track:
+Frequencies
+Uniqueness
+Specific counts
+
+Problem	Description	LeetCode #
+✅ Longest Substring Without Repeating Characters	Classic window with HashSet	#3
+✅ Longest Repeating Character Replacement	Replace characters to form a block	#424
+Minimum Size Subarray Sum	Smallest window with sum ≥ target	#209
+Maximum Points You Can Obtain from Cards	Window from two sides	#1423
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+🧮 3. Frequency-Based Window (HashMap)
+✅ Use when you need to count or track frequencies (e.g., matching pattern, anagram, etc.)
+
+💡 Tools:
+Use HashMap<Character, Integer> to track frequencies in the current window.
+Often used in problems involving strings, anagrams, or pattern matching.
+
+Problem	Description	LeetCode #
+✅ Permutation in String	Check if s2 contains an anagram of s1	#567
+✅ Find All Anagrams in a String	All anagram starting indices	#438
+✅ Minimum Window Substring	Smallest window with all target chars	#76
+Contains Duplicate II	Duplicates within k distance	#219
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+📉 4. Monotonic Queue / Deque
+✅ Use when you need to track max/min within a window efficiently.
+
+💡 Tools:
+Use Deque (Double-ended queue) to maintain decreasing/increasing order of elements (indexes usually).
+
+Problem	Description	LeetCode #
+✅ Sliding Window Maximum	Keep max in O(n) time	#239
+Sum of Subarray Minimums	Trickier variant with stack/deque	#907
+Shortest Subarray with Sum ≥ K	Prefix sums + deque	#862
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+➗ 5. Two Pointers / Math-Based Windows
+✅ Use when you're working with sorted arrays or two arrays, or simple numeric conditions like subarray sum.
+💡 Tools:
+Just two pointers (left, right) and basic math/logic.
+
+Problem	Description	LeetCode #
+✅ Subarray Product Less Than K	Count subarrays with product < k	#713
+✅ Count Number of Nice Subarrays	Count subarrays with exactly k odd numbers	#1248
+Longest Subarray with Absolute Diff ≤ Limit	Window with limit constraint	#1438
+Number of Subarrays With Bounded Maximum	Count valid subarrays within bounds	#795
+
+🧠 Bonus Practice Tips
+Pick 2–3 problems from each category.
+
+Focus on understanding the condition that causes the window to expand or contract.
+Always draw a few examples on paper before coding.
+Let me know if you want these organized in a downloadable table or a spreadsheet format!
+
+
+Yes — this is a standard type of sliding window problem, and the 2k + 1 formula is definitely worth remembering. It's commonly used in:
+
+✅ 1. K-radius subarray averages (like your problem)
+In this type of problem:
+
+You need to compute the average (or sum) of a subarray centered at each index.
+
+To do this, you must include k elements to the left and right of the center.
+
+So the total window size is always 2k + 1.
+
+✅ 2. Sliding window techniques in general
+The 2k + 1 idea comes up in multiple standard problems like:
+
+Moving averages
+
+Maximum/minimum in sliding windows
+
+Prefix sum applications
+
+Signal smoothing or noise reduction in data analysis
+

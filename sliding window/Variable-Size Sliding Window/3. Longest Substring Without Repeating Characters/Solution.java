@@ -40,7 +40,7 @@ import java.util.HashSet;
  * Will give wrong answers for cases like "abba" or "dvdf".
  */
 
- 
+
 class Solution {
     /**
      * Returns the length of the longest substring without repeating characters in the given string.
@@ -71,6 +71,41 @@ class Solution {
 
         return maxLen;
     }
+    /*
+    If I've to return the string instead of it's length
+    then what modification will take place.
+    afasik String.join("", seen);
+    will this work ?
+
+
+    No, String.join("", seen); will not work for this problem.
+    The seen set only contains the unique characters in the current window, not the actual substring.
+    Also, sets do not preserve order, so you won't get the correct substring.
+
+    Modification needed:
+    You should track the start and end indices of the longest substring, and return s.substring(start, end).
+     */
+    public String longestSubstringWithoutRepeatingCharacters(String s) {
+    int left = 0, right = 0, maxLen = 0;
+    int start = 0; // Start index of the longest substring
+    HashSet<Character> seen = new HashSet<>();
+
+    while (right < s.length()) {
+        char current = s.charAt(right);
+        if (!seen.contains(current)) {
+            seen.add(current);
+            if (right - left + 1 > maxLen) {
+                maxLen = right - left + 1;
+                start = left;
+            }
+            right++;
+        } else {
+            seen.remove(s.charAt(left));
+            left++;
+        }
+    }
+    return s.substring(start, start + maxLen);
+}
 
     public static void main(String[] args) {
         Solution sol = new Solution();
