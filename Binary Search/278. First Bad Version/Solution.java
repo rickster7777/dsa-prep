@@ -17,12 +17,10 @@ public class Solution extends VersionControl {
             boolean versionCheck = isBadVersion(mid);
 
             if (versionCheck) {
-                // Unlike problem 374 here only mid is used instead of mid - 1 as per the problem statement.
                 end = mid;
             } else {
                 start = mid + 1;
             }
-
         }
         return start;
     }

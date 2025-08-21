@@ -1,6 +1,4 @@
 public class Solution {
-
-
     /**
      * Returns the minimal length of a contiguous subarray of which the sum is at least target.
      * Uses the sliding window technique to efficiently find the answer in O(n) time.

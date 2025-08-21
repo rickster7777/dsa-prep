@@ -4,7 +4,7 @@ public class Solution {
         int start = 1;
         int end = n;
 
-        while (start < end) {
+        while (start <= end) {
             int mid = start + (end - start) / 2;
             int pick = guess(mid);
 

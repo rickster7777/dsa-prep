@@ -1,0 +1,45 @@
+| Goal                     | Loop Condition | `start` update    | `end` update    |
+| ------------------------ | -------------- | ----------------- | --------------- |
+| Find value               | `start <= end` | `start = mid + 1` | `end = mid - 1` |
+| Find boundary/peak/index | `start < end`  | `start = mid + 1` | `end = mid`     |
+
+
+🧠 TL;DR Summary:
+| Problem Type                                                            | Loop Condition         | Usually Return            |
+| ----------------------------------------------------------------------- | ---------------------- | ------------------------- |
+| Search for a **target value**                                           | `while (start <= end)` | return inside loop or -1  |
+| Search for a **boundary/position/index**                                | `while (start < end)`  | return `start` or `end`   |
+| Shrinking to **one final element** (e.g., min, peak, first bad version) | `while (start < end)`  | return `start` (or `end`) |
+
+
+✅ WHEN TO USE while (start <= end)
+➤ Use when:
+You are searching for an exact value (e.g., "find if X exists", "return its index").
+
+🔁 Loop ends when: start > end (i.e., you’ve checked everything)
+✅ Return: often inside the loop (return mid) or -1 if not found.
+
+🔨 Example Problems:
+
+Binary search for a target
+Search in rotated sorted array
+Find the square root (floor of root)
+Find kth smallest/largest exact value
+
+
+✅ WHEN TO USE while (start < end)
+➤ Use when:
+
+You are finding a position, boundary, or shrinking to one element.
+You’re not necessarily checking for an exact match.
+You’re narrowing down to a single index where a condition is true.
+
+🔁 Loop ends when: start == end → this is the final answer.
+✅ Return: usually start or end after the loop.
+🔨 Example Problems:
+
+Find peak element
+Find minimum in rotated sorted array
+First bad version
+Binary search answer (when you always have a valid answer to narrow toward)
+Find insert position
