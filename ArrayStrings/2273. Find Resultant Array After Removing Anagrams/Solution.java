@@ -3,6 +3,23 @@
 import java.util.*;
 
 public class Solution {
+ // provide the updated logic for non adjacent anagrams only that particular part
+        Set<String> seenAnagrams = new HashSet<>();
+
+        for (String word : words) {
+            char[] chars = word.toCharArray();
+            Arrays.sort(chars);
+            String signature = new String(chars);
+
+            if (!seenAnagrams.contains(signature)) {
+                result.add(word);
+                seenAnagrams.add(signature);
+            }
+        }
+        return result;
+    }
+
+    // For adjacently placed anagrams
     public static List<String> removeAnagrams(String[] words) {
         List<String> result = new ArrayList<>();
 

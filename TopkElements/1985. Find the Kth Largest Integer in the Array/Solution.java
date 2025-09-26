@@ -15,6 +15,15 @@ class Solution {
         return String.valueOf(longNums[longNums.length - k]);
     }
 
+    /*
+     ✅ Purpose:
+
+This code sorts an array of strings (nums) using a custom comparator with two sorting rules:
+
+Primary rule: Sort by length of the string (shorter strings come first).
+
+Secondary rule (tie-breaker): If lengths are equal, sort by lexicographical order (dictionary order).
+     */
     public String kthLargestNumberFixed(String[] nums, int k) {
 
         Arrays.sort(nums, (a, b) -> {

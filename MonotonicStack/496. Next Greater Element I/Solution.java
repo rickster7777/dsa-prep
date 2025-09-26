@@ -1,43 +1,75 @@
 import java.util.*;
 
-public class Solution {
+class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        Map<Integer, Integer> nextGreater = new HashMap<>(); // stores next greater for each element in nums2
-        Deque<Integer> stack = new ArrayDeque<>(); // monotonic decreasing stack
+        Map<Integer, Integer> nextGreaterMap = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
 
-        // Traverse nums2 from right to left
-        for (int i = nums2.length - 1; i >= 0; i--) {
-            int num = nums2[i];
+        // Step 1: Traverse nums2 to build next greater mapping
+        for (int num : nums2) {
 
-            // Maintain a decreasing stack
-            while (!stack.isEmpty() && stack.peek() <= num) {
-                stack.pop();
+
+            while (!stack.isEmpty() && num > stack.peek()) {
+                int top = stack.pop();
+                nextGreaterMap.put(top, num); // Current num is next greater for top
             }
 
-            // If stack is not empty, the top is the next greater element
-            nextGreater.put(num, stack.isEmpty() ? -1 : stack.peek());
 
-            // Push current element for future comparisons
             stack.push(num);
         }
 
-        // Build the result for nums1 from the map
+        // Step 2: Build result for nums1 using the map
         int[] result = new int[nums1.length];
         for (int i = 0; i < nums1.length; i++) {
-            result[i] = nextGreater.get(nums1[i]);
+            result[i] = nextGreaterMap.getOrDefault(nums1[i], -1);
         }
 
         return result;
     }
 
-    // Main method for quick test
+    // Example usage
     public static void main(String[] args) {
         Solution sol = new Solution();
         int[] nums1 = {4, 1, 2};
         int[] nums2 = {1, 3, 4, 2};
-        // nums1 is a subset of nums2
-        // for all values in nums1 it's next element in nums2 is to be found.
-        int[] result = sol.nextGreaterElement(nums1, nums2);
-        System.out.println("Result: " + Arrays.toString(result)); // Output: [-1, 3, -1]
+        System.out.println(Arrays.toString(sol.nextGreaterElement(nums1, nums2))); // Output: [-1, 3, -1]
     }
 }
+
+/*
+Here’s how the output is computed for
+int[] nums1 = {4, 1, 2};
+int[] nums2 = {1, 3, 4, 2};
+
+Step-by-step for each element in nums1:
+
+4:
+In nums2, 4 is at index 2.
+The next element is 2, which is not greater than 4.
+So, output is -1.
+
+1:
+In nums2, 1 is at index 0.
+The next elements are 3, 4, 2.
+The first greater element is 3.
+So, output is 3.
+
+
+2:
+In nums2, 2 is at index 3 (last element).
+There are no elements after 2.
+So, output is -1.
+Final Output:
+[-1, 3, -1]
+
+
+
+
+Sample Input 2:
+
+
+nums1 = [2, 4]
+nums2 = [1, 2, 3, 4]
+Sample Output:
+[3, -1]
+ */

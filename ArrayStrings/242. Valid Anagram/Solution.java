@@ -99,7 +99,7 @@ public class Solution {
 
         String s = "rat", t = "car";
 
-        System.out.println(sol.isAnagram(s, t));
+        System.out.println(sol.isAnagramFreqCount(s, t));
     }
 }
 

@@ -21,20 +21,20 @@ Instead of maintaining just a running sum, the correct and efficient way is:
  */
 
 var subarraySum = function (nums, k) {
-    let sum = 0;
-    let count = 0;
-    let map = new Map();
-    map.set(0, 1); // base case: sum 0 occurs once
+    let sum = 0;           // Step 1: Running prefix sum
+    let count = 0;         // Step 1: Number of subarrays found
+    let map = new Map();   // Step 1: Map to store frequency of prefix sums
+    map.set(0, 1);         // Step 2: Base case
 
     for (let i = 0; i < nums.length; i++) {
-        sum += nums[i];
+        sum += nums[i];    // Step 3a: Update running sum
 
-        if (map.has(sum - k)) {
-            count += map.get(sum - k);
+        if (map.has(sum - k)) {         // Step 3b: Check for subarray sum
+            count += map.get(sum - k);  // Increment count
         }
 
-        map.set(sum, (map.get(sum) || 0) + 1);
+        map.set(sum, (map.get(sum) || 0) + 1); // Step 3c: Update map
     }
 
-    return count;
+    return count; // Step 4: Return result
 };

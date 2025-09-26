@@ -95,7 +95,7 @@ class Solution {
             // Build a key from frequency array
             StringBuilder sb = new StringBuilder();
             for (int count : freq) {
-                sb.append(count).append('#');  // delimiter to avoid ambiguity
+                sb.append(count).append('#'); // delimiter to avoid ambiguity
             }
             String key = sb.toString();
 
@@ -104,6 +104,30 @@ class Solution {
 
         return new ArrayList<>(map.values());
     }
+
+    public static List<List<String>> groupAnagramsComm(String[] strs) {
+        // Step 1: Create a map to group words by their sorted character form
+        // Key: sorted string, Value: list of original words (anagrams)
+        Map<String, List<String>> map = new HashMap<>();
+
+        // Step 2: Loop over each word in the input array
+        for (String word : strs) {
+            // Step 2.1: Convert word to char array and sort it
+            char[] chars = word.toCharArray();
+            Arrays.sort(chars);
+
+            // Step 2.2: Use sorted string as the key
+            String sorted = new String(chars);
+
+            // Step 2.3: Use computeIfAbsent to get or create a list for this sorted key
+            // If the key doesn't exist, computeIfAbsent will put a new ArrayList
+            // Then we immediately add the current word to that list
+            map.computeIfAbsent(sorted, k -> new ArrayList<>()).add(word);
+            // ↑ .add(word) is called on the List returned from computeIfAbsent
+            // NOT on the Map itself — it's on the ArrayList inside the Map
+        }
+
+        // Step 3: Convert map values (List<List<String>>) to final result
+        return new ArrayList<>(map.values());
+    }
 }
-
-
