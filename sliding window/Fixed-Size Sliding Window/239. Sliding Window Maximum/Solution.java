@@ -1,4 +1,8 @@
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.List;
 
 /*
  Example 1:
@@ -89,12 +93,28 @@ class Solution {
         Deque<Integer> deque = new ArrayDeque<>();
 
         for (int i = 0; i < n; i++) {
-            // Remove indices that are out of the current window
+
+            /*
+             * // Remove indices that are out of the current window
+             * If the index at the front of the deque is outside the current window, remove
+             * it
+             * Example: If i = 5 and k = 3, the window is [i-2, i] → [3, 5].
+             * So any index less than 3 is now useless.
+             */
+
             while (!deque.isEmpty() && deque.peekFirst() < i - k + 1) {
                 deque.pollFirst();
             }
 
             // Remove indices whose corresponding values are less than nums[i]
+            /*
+             * If the value at the back of the deque is less than the current number, remove
+             * it.
+             * 
+             * Why? Because it will never be the max as long as nums[i] is in the window.
+             * 
+             * This ensures that the deque only keeps indices of descending values.
+             */
             while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
                 deque.pollLast();
             }
@@ -112,7 +132,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        int[] nums = {1,3,-1,-3,5,3,6,7};
+        int[] nums = { 1, 3, -1, -3, 5, 3, 6, 7 };
         int k = 3;
         System.out.println(Arrays.toString(Solution.maxSlidingWindowQueue(nums, k)));
     }

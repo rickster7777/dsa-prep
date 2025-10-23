@@ -1,0 +1,165 @@
+🔥 What is Rate Limiting?
+
+Rate Limiting controls how many requests or actions can be done in a given timeframe to prevent overload (e.g., avoid spamming an API).
+
+1️⃣ Leaky Bucket Algorithm
+Think of it as:
+
+A bucket with a small hole at the bottom.
+
+You pour water (requests) into the bucket at any speed.
+
+Water leaks out at a fixed rate.
+
+If the bucket overflows (too many requests come too fast), requests are dropped or delayed.
+
+Characteristics:
+
+Requests flow out at a constant rate.
+
+Bursts of requests are smoothed out.
+
+If too many requests come in, they are rejected once the bucket is full.
+
+Good for smoothing traffic.
+
+Simple analogy:
+
+Imagine a funnel where water (requests) comes in any way, but drips out steadily.
+
+If you pour too much too fast, the funnel spills over (requests rejected).
+
+2️⃣ Token Bucket Algorithm
+Think of it as:
+
+A bucket that collects tokens at a fixed rate.
+
+To make a request, you must take a token from the bucket.
+
+If tokens are available, the request is allowed.
+
+If no tokens are left, request is rejected or delayed.
+
+Tokens accumulate over time, allowing bursts.
+
+Characteristics:
+
+Allows bursty traffic up to the number of tokens available.
+
+Limits the average rate over time.
+
+More flexible than leaky bucket because it allows bursts.
+
+Simple analogy:
+
+You have a jar where tokens are added at a steady pace.
+
+Each request “spends” a token.
+
+If no tokens left, you wait until more tokens arrive.
+
+⚖️ Differences at a Glance:
+Feature	Leaky Bucket	Token Bucket
+Request flow	Requests flow out at a fixed rate	Requests flow if tokens available
+Burst handling	No bursts allowed (requests exceeding rate are dropped)	Bursts allowed up to token capacity
+Implementation	Usually queue + fixed drain rate	Token refill + token consumption
+Use case	Smooth traffic, constant output	Allow bursty traffic with rate limit
+🧠 When to use which?
+
+Use Leaky Bucket if you want a smooth, steady output (e.g., streaming data).
+
+Use Token Bucket if you want to allow short bursts but control average rate (e.g., API rate limiting).
+
+
+1️⃣ Leaky Bucket in Java
+public class LeakyBucket {
+    private final int capacity;
+    private final int leakRate; // units leaked per second
+    private int water = 0;      // current amount in bucket
+    private long lastLeakTime;
+
+    public LeakyBucket(int capacity, int leakRate) {
+        this.capacity = capacity;
+        this.leakRate = leakRate;
+        this.lastLeakTime = System.currentTimeMillis();
+    }
+
+    public synchronized boolean allowRequest(int units) {
+        leak(); // Leak water based on time passed
+
+        if (water + units <= capacity) {
+            water += units;
+            return true; // allowed
+        } else {
+            return false; // bucket full, reject request
+        }
+    }
+
+    private void leak() {
+        long now = System.currentTimeMillis();
+        long elapsed = now - lastLeakTime;
+
+        int leakedUnits = (int) (elapsed * leakRate / 1000); // leakRate per sec
+        if (leakedUnits > 0) {
+            water = Math.max(0, water - leakedUnits);
+            lastLeakTime = now;
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        LeakyBucket bucket = new LeakyBucket(10, 2); // capacity=10 units, leak 2 units/sec
+
+        for (int i = 0; i < 15; i++) {
+            boolean allowed = bucket.allowRequest(1);
+            System.out.println("Request " + i + ": " + (allowed ? "Allowed" : "Rejected"));
+            Thread.sleep(200); // 200ms between requests
+        }
+    }
+}
+
+2️⃣ Token Bucket in Java
+public class TokenBucket {
+    private final int capacity;
+    private final int refillRate; // tokens per second
+    private int tokens;
+    private long lastRefillTime;
+
+    public TokenBucket(int capacity, int refillRate) {
+        this.capacity = capacity;
+        this.refillRate = refillRate;
+        this.tokens = capacity; // start full
+        this.lastRefillTime = System.currentTimeMillis();
+    }
+
+    public synchronized boolean allowRequest(int tokensNeeded) {
+        refill();
+
+        if (tokens >= tokensNeeded) {
+            tokens -= tokensNeeded;
+            return true; // allowed
+        } else {
+            return false; // not enough tokens
+        }
+    }
+
+    private void refill() {
+        long now = System.currentTimeMillis();
+        long elapsed = now - lastRefillTime;
+
+        int newTokens = (int) (elapsed * refillRate / 1000);
+        if (newTokens > 0) {
+            tokens = Math.min(capacity, tokens + newTokens);
+            lastRefillTime = now;
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        TokenBucket bucket = new TokenBucket(5, 2); // capacity=5 tokens, refill 2 tokens/sec
+
+        for (int i = 0; i < 15; i++) {
+            boolean allowed = bucket.allowRequest(1);
+            System.out.println("Request " + i + ": " + (allowed ? "Allowed" : "Rejected"));
+            Thread.sleep(300); // 300ms between requests
+        }
+    }
+}
