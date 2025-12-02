@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SubsequencePrinter {
 
@@ -33,3 +34,72 @@ public class SubsequencePrinter {
         printSubsequences(arr, 0, current);
     }
 }
+
+
+
+/*
+Call: (0, [])
+│
+├── Include 1 → (1, [1])
+│   │
+│   ├── Include 2 → (2, [1, 2])
+│   │   │
+│   │   ├── Include 3 → (3, [1, 2, 3])
+│   │   │   └── print [1, 2, 3] and return ↑
+│   │   │
+│   │   └── Exclude 3 → (3, [1, 2])
+│   │       └── print [1, 2] and return ↑
+│   │
+│   └── Exclude 2 → (2, [1])
+│       │
+│       ├── Include 3 → (3, [1, 3])
+│       │   └── print [1, 3] and return ↑
+│       │
+│       └── Exclude 3 → (3, [1])
+│           └── print [1] and return ↑
+│
+└── Exclude 1 → (1, [])
+    │
+    ├── Include 2 → (2, [2])
+    │   │
+    │   ├── Include 3 → (3, [2, 3])
+    │   │   └── print [2, 3] and return ↑
+    │   │
+    │   └── Exclude 3 → (3, [2])
+    │       └── print [2] and return ↑
+    │
+    └── Exclude 2 → (2, [])
+        │
+        ├── Include 3 → (3, [3])
+        │   └── print [3] and return ↑
+        │
+        └── Exclude 3 → (3, [])
+            └── print [] and return ↑
+
+[1, 2, 3]
+[1, 2]
+[1, 3]
+[1]
+[2, 3]
+[2]
+[3]
+[]
+
+*/
+
+/*
+1️⃣ 78. Subsets →
+2️⃣ 90. Subsets II →
+3️⃣ 77. Combinations →
+4️⃣ 39. Combination Sum →
+5️⃣ 40. Combination Sum II →
+22
+17
+93
+7️⃣ 131. Palindrome Partitioning
+
+🧩 Level 3 — Subsequence Logic Specifically
+6️⃣ 491. Non-decreasing Subsequences →
+1143
+300
+ */
