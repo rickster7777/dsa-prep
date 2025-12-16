@@ -1,0 +1,121 @@
+✅ Optimal Solution: Reverse Method (O(n) time, O(1) space)
+Steps
+Reverse the entire array
+Reverse the first k elements
+Reverse the remaining n - k elements
+
+Example
+nums = [1,2,3,4,5,6,7], k = 3
+
+Reverse all:        [7,6,5,4,3,2,1]
+Reverse first k:    [5,6,7,4,3,2,1]
+Reverse rest:       [5,6,7,1,2,3,4]
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+k = k % n;  // Handle cases where k > n
+
+Explain in a simple and easy to understand manner that why it's needed
+and in general in what all scenarios, it is. Used
+
+
+Why do we do k = k % n?
+Think in terms of full rotations
+
+n = length of the array
+
+Rotating the array n times brings it back to the same original state
+
+So:
+Rotate n times → no change
+Rotate n + 1 times → same as rotating 1 time
+Rotate n + k times → same as rotating k times
+
+That’s exactly what modulus (%) captures.
+
+Simple Example
+Array nums = [1, 2, 3, 4, 5]
+n = 5
+
+Case 1: k = 2
+Right rotate by 2 → [4, 5, 1, 2, 3]
+
+Case 2: k = 7
+7 = 5 + 2
+Rotate by 5 → no change
+Rotate by 2 → same result
+
+So:
+k = 7 % 5 = 2
+
+👉 Both give the same final array
+
+What happens if we don’t do this?
+Example
+nums = [1,2,3], k = 100
+
+Without % n:
+
+We may try to reverse or access indices incorrectly
+Logic may break or do unnecessary work
+
+Performance may suffer
+
+With % n:
+
+100 % 3 = 1
+
+
+So we only rotate once, which is correct and efficient.
+
+Intuition (Real-life analogy 🚶)
+
+Imagine walking around a circular track with 10 steps:
+Walk 10 steps → back to start
+Walk 12 steps → same as walking 2 steps
+Walk 27 steps → same as walking 7 steps
+
+That’s:
+effectiveSteps = totalSteps % trackLength;
+
+In General, When Is % Used?
+1️⃣ Circular data structures
+
+Rotate array
+Circular queue
+Ring buffer
+
+index = (index + k) % n;
+
+2️⃣ Repeating patterns / cycles
+
+Clock problems
+Days of the week
+Pattern repetition
+day = (day + k) % 7;
+
+3️⃣ Prevent index out of bounds
+Ensures index always stays within [0, n-1]
+
+4️⃣ Optimization
+Reduces large numbers into meaningful small ones
+
+Key Takeaway ⭐
+Modulo helps you remove “full cycles” and keep only what actually matters.
+
+In rotate array:
+k = k % n;
+
+means:
+“Ignore all complete rotations — keep only the extra steps.”
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+When % n Is Used (General Rule)
+You’ll almost always see % n when:
+
+1️⃣ Rotating arrays or strings
+2️⃣ Working with circular buffers
+3️⃣ Calculating cyclic indices
+4️⃣ Preventing index overflow
+5️⃣ Mapping large values into a fixed range

@@ -1,0 +1,57 @@
+Approach 1:
+for(int i = 0; i < nums.length; i++) {
+int k = target - nums[i];
+}
+
+
+Approach 2:
+int k = 0;
+for(int i = 0; i < nums.length; i++) {
+k = target - nums[i];
+
+Which is a better approach and why ?
+
+Approach 1 (Recommended ✅)
+Why this is better
+1️⃣ Correct scope (most important)
+
+k is only needed inside the loop
+Declaring it inside the loop:
+Limits its visibility
+Prevents accidental misuse elsewhere
+This follows the rule: “Declare variables as close as possible to where they are used.”
+
+2️⃣ Cleaner and safer
+
+Each iteration gets a fresh k.
+There is no chance of:
+Using an old value
+Forgetting to update it
+Logical bugs when code changes later
+
+3️⃣ Easier to read
+
+When someone reads:
+int k = target - nums[i];
+They instantly understand:
+
+“This value is tied to this iteration.”
+No mental tracking required.
+
+4️⃣ Better for maintenance
+
+If later you:
+Add conditions
+Add nested loops
+Refactor logic
+You won’t accidentally depend on a stale value of k.
+
+Approach 2 (Works, but not ideal ⚠️)
+
+What’s wrong with it?
+❌ k exists outside the loop, even though it’s not needed there
+❌ Higher risk of accidental misuse later
+❌ Slightly harder to reason about
+❌ Breaks clean scoping principles
+
+Performance Difference? ❌ None

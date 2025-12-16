@@ -29,5 +29,7 @@ var subarraySum = function (nums, k) {
 // };
 
 const nums = [1, 1, 1], k = 2;
+const nums1 = [1,2,3], k1 = 3;
+
 //let prefix_sum = computePrefixSum(nums);
-console.log(subarraySum(nums, k));
+console.log(subarraySum(nums1, k1));

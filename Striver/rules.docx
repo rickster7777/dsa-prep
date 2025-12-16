@@ -1,0 +1,240 @@
+✅ Rules Specifically for LeetCode (Java-Oriented)
+
+These help you pass edge cases, write optimal code, and explain clearly.
+
+1️⃣ Always reduce k using modulo when working with cycles
+k %= n;
+
+
+Used in:
+Rotate array
+Circular buffers
+Cyclic shifts
+
+Why: Removes unnecessary full cycles and prevents index errors.
+
+2️⃣ Check edge cases early (Guard Clauses)
+if (nums == null || nums.length == 0) return;
+
+Used in:
+Arrays
+Strings
+Linked lists
+
+3️⃣ Prefer HashMap / HashSet for O(1) lookups
+Map<Integer, Integer> map = new HashMap<>();
+
+
+Used in:
+Two Sum
+Frequency counting
+Duplicate detection
+
+4️⃣ Use int indices, not wrapper classes
+for (int i = 0; i < n; i++)
+
+
+Avoid:
+Integer i
+
+Why: Faster and cleaner.
+5️⃣ Declare variables inside loops whenever possible
+for (int i = 0; i < n; i++) {
+    int complement = target - nums[i];
+}
+
+6️⃣ Avoid unnecessary helper data structures
+If problem says:
+O(1) extra space
+
+Don’t do:
+int[] temp = new int[n];
+
+7️⃣ Use problem constraints to choose data types
+
+int vs long
+
+Watch for overflow
+long sum = (long) a + b;
+
+8️⃣ Return immediately when the answer is found
+if (map.containsKey(k)) return new int[]{...};
+
+
+Avoid extra flags or loops.
+9️⃣ Don’t print anything
+System.out.println(...)
+
+
+❌ Will fail submission.
+🔟 Name variables after the problem concept
+int complement = target - nums[i];
+
+Better than:
+int k
+
+
+🚫 Top Mistakes Candidates Make on LeetCode
+1️⃣ Ignoring constraints
+Constraints tell you the expected algorithm
+
+❌ Using O(n²) when n = 10⁵
+
+✅ Rule:
+n ≤ 10⁵ → O(n) or O(n log n)
+n ≤ 10³ → O(n²) is okay
+
+2️⃣ Not handling edge cases
+Common misses:
+Empty array
+
+Single element
+k > n
+
+Duplicate values
+Negative numbers
+
+Always ask:
+“What is the smallest valid input?”
+
+
+9️⃣ Forgetting integer overflow
+int sum = a + b; // ❌
+
+Use:
+long sum = (long) a + b;
+
+
+☕ Java-Specific Clean Code Rules (Important for Interviews)
+
+1️⃣ Prefer final when values don’t change
+final int n = nums.length;
+Shows intent clearly.
+
+2️⃣ Use enhanced for loop when index is not needed
+for (int num : nums) { }
+
+3️⃣ Use Arrays.sort() instead of manual sort
+Arrays.sort(nums);
+Cleaner and safer.
+
+4️⃣ Avoid unnecessary object creation
+❌ Bad:
+new Integer(x)
+
+✅ Good:
+int x
+
+5️⃣ Use correct collection types
+Use case	                Collection
+Unique elements	            HashSet
+Key-value	                HashMap
+Ordered	                    TreeMap
+Stack behavior              Deque
+
+Avoid:
+Stack<Integer> stack = new Stack<>();
+
+Use:
+Deque<Integer> stack = new ArrayDeque<>();
+
+6️⃣ Always import what you use
+LeetCode supports:
+import java.util.*;
+
+
+Perfectly acceptable.
+
+7️⃣ Avoid deep nesting
+Use early returns.
+
+❌ Bad:
+
+if (a) {
+    if (b) {
+        if (c) {
+            return true;
+        }
+    }
+}
+
+
+✅ Good:
+
+if (!a) return false;
+if (!b) return false;
+return c;
+
+8️⃣ Keep helper methods private
+private void reverse(...) { }
+
+9️⃣ Never modify input unless problem allows
+Read the problem carefully.
+
+🔟 Optimize only after correctness
+Correct + readable > clever code.
+
+
+☕ Common Java Pitfalls That Cause WA / TLE
+1️⃣ Using == instead of .equals()
+s1.equals(s2); // ✅
+
+2️⃣ Using Stack instead of Deque
+
+❌
+
+Stack<Integer> stack = new Stack<>();
+
+
+✅
+
+Deque<Integer> stack = new ArrayDeque<>();
+
+3️⃣ Repeated string concatenation in loops
+
+❌
+
+s += ch;
+
+
+✅
+
+StringBuilder sb = new StringBuilder();
+sb.append(ch);
+
+4️⃣ Forgetting to reduce k
+k %= n;
+
+5️⃣ Using recursion without base case
+
+→ StackOverflowError
+
+6️⃣ Using recursion when iteration is required
+
+Causes:
+
+TLE
+
+Stack overflow
+
+7️⃣ Using slow I/O unnecessarily
+
+(Not common in LeetCode, but still)
+
+Avoid:
+
+Scanner
+
+8️⃣ Sorting when not needed
+
+Sorting = O(n log n)
+Hashing = O(n)
+
+9️⃣ Modifying loop variable incorrectly
+for (int i = 0; i < n; i++) {
+    i++; // ❌
+}
+
+🔟 Not clearing static/global state
+
+Causes wrong answers across test cases.

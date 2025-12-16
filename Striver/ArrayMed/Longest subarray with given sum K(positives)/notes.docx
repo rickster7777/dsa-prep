@@ -1,0 +1,96 @@
+This is a classic DSA problem and very important for interviews.
+The correct optimal approach depends on whether the array contains negative numbers or not.
+
+🔹 Case 1: Array can contain negative numbers (GENERAL CASE)
+
+👉 Use Prefix Sum + HashMap
+👉 Time: O(n), Space: O(n)
+👉 Works for all integers
+
+💡 Idea (Prefix Sum)
+
+Let prefixSum[i] = sum of elements from index 0 to i
+
+If at index i:
+
+prefixSum[i] - k = prefixSum[j]
+
+
+then the subarray (j+1 → i) sums to k
+
+Store the first occurrence of each prefix sum to maximize length
+
+
+
+🔹 Case 2: Array contains ONLY positive numbers
+
+👉 Use Sliding Window / Two Pointers
+👉 Time: O(n), Space: O(1)
+❌ Will NOT work with negative numbers
+
+
+| Condition                 | Approach               |
+| ------------------------- | ---------------------- |
+| Contains negative numbers | Prefix Sum + HashMap ✅ |
+| Only positive numbers     | Sliding Window         |
+| Asked generally           | Prefix Sum + HashMap   |
+
+
+
+Why sliding window doesnt work in case of negative elements?
+
+This is a very important conceptual question 👍
+Interviewers love asking this.
+
+Short Answer (Interview-ready)
+
+Sliding window fails with negative numbers because the window sum is no longer monotonic.
+Adding an element can decrease the sum and removing an element can increase the sum, so we can’t decide safely when to expand or shrink the window.
+
+Why Sliding Window Works for Positive Numbers
+
+When all elements are positive:
+
+Expanding the window (right++) 👉 sum always increases
+Shrinking the window (left++) 👉 sum always decreases
+
+This gives us a clear rule:
+
+If sum < k → expand window
+If sum > k → shrink window
+
+This predictable behavior is what makes sliding window work.
+
+What Breaks with Negative Numbers ❌
+With negative elements, this property is lost.
+
+❌ Adding an element can decrease the sum
+❌ Removing an element can increase the sum
+
+So we can’t decide whether to expand or shrink safely.
+
+Simple Counter Example 🚨
+nums = [3, -2, 5], k = 3
+
+Correct answer:
+
+Longest subarray = [3, -2, 5, -3] → sum = 3
+
+But let’s try sliding window logic:
+
+Step-by-step:
+right = 0 → sum = 3 ✅
+maxLen = 1
+
+right = 1 → sum = 1  (decreased!)
+right = 2 → sum = 6  (> k)
+
+
+Sliding window rule says:
+sum > k → shrink window
+But removing -2 increases the sum, which breaks the logic.
+
+Perfect Interview Answer ⭐
+
+“Sliding window doesn’t work with negative numbers because adding or removing elements does not change 
+the sum predictably. The monotonic property required for sliding window breaks, so we use prefix sum with hashmap instead.”
