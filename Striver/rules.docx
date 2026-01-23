@@ -181,25 +181,15 @@ s1.equals(s2); // ✅
 
 2️⃣ Using Stack instead of Deque
 
-❌
+❌ Stack<Integer> stack = new Stack<>();
+✅ Deque<Integer> stack = new ArrayDeque<>();
 
-Stack<Integer> stack = new Stack<>();
 
-
-✅
-
-Deque<Integer> stack = new ArrayDeque<>();
 
 3️⃣ Repeated string concatenation in loops
 
-❌
-
-s += ch;
-
-
-✅
-
-StringBuilder sb = new StringBuilder();
+❌ s += ch;
+✅ StringBuilder sb = new StringBuilder();
 sb.append(ch);
 
 4️⃣ Forgetting to reduce k

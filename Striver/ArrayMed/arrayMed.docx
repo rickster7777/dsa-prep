@@ -1,0 +1,181 @@
+31. Next permutation
+
+It is similar to dictionary order (e.g., 123 < 132 < 213 < 231 < 312 < 321).
+Example: The next permutation of [1,2,3] is [1,3,2].
+Step-by-Step Algorithm:
+
+1️⃣ Find the first decreasing element from the right
+Traverse the array backward and find the first element nums[i] where nums[i] < nums[i+1].
+This means nums[i] is the first number that needs to be swapped to get a bigger number.
+Example: [1,3,5,4,2], here 3 < 5, so i = 1.
+
+int n = nums.length;
+
+int i = n - 2;
+
+while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+
+2️⃣ Find the next larger number to swap
+Again, traverse backward and find the smallest number larger than nums[i].
+Swap them to get the next larger sequence.
+Example: In [1,3,5,4,2], nums[i] = 3, and the smallest number greater than 3 is 4. Swap 3 and 4, making [1,4,5,3,2].
+
+if (i >= 0) {  // Only proceed if a valid decreasing element is found
+            int j = n - 1;
+
+            // Step 2️⃣: Find the next larger number to swap
+            while (nums[j] <= nums[i]) {
+                j--;
+            }
+
+            // Swap nums[i] and nums[j]
+            swap(nums, i, j);
+        }
+
+3️⃣ Reverse the right part
+Since the right part is now in descending order, reverse it to get the smallest lexicographical order.
+Example: [1,4,5,3,2] → [1,4,2,3,5].
+
+reverse(nums, i + 1, n - 1);
+
+
+Helper functions reverse and swap
+Swap is called inside reverse as well.
+
+
+
+75. Sort colors/Dutch National Flag
+
+int low = 0, mid = 0;
+        int high = nums.length - 1;
+
+        while (mid <= high) {
+            if (nums[mid] == 0) {
+                // Swap current element with low pointer
+                swap(nums, low, mid);
+                low++;
+                mid++;
+            } else if (nums[mid] == 1) {
+                // 1 is in correct region; just move mid
+                mid++;
+            } else { // nums[mid] == 2
+                // Swap current element with high pointer
+                swap(nums, mid, high);
+                high--;
+                // mid is NOT incremented here because swapped value may need re-checking
+            }
+
+Helpers swap function.
+
+
+
+Kadane's
+Input: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+Maximum subarray: [4, -1, 2, 1]
+Output: Maximum sum: 6
+
+4 lines
+int maxSoFar = arr[0];
+int currentSum = arr[0];
+
+for (int i = 1; i < arr.length; i++) {
+     currentSum = Math.max(arr[i], currentSum + arr[i]);
+     maxSoFar = Math.max(maxSoFar, currentSum);
+}
+
+
+169. majority Element
+
+Boyer moore voting algorithm
+
+for (int index = 0; index < nums.length; index++) {
+
+            // If count drops to 0, we pick a new candidate
+            // This works because the majority element appears more than n/2 times
+            if (count == 0) {
+                candidate = nums[index];
+                count = 1;
+            } else {
+                // Increment or decrement count based on current element
+                // If it matches the candidate, increment count
+                // Otherwise, decrement count
+                if (candidate == nums[index]) {
+                    count++;
+                } else {
+                    count--;
+                }
+     }
+}
+
+
+121 Best time to buy and sell stock.
+
+
+const prices = [7, 1, 5, 3, 6, 4];
+
+Bought for ₹1 and sell at ₹6.
+So the output s profit of ₹5.
+
+
+
+let minPrice = Infinity;  // Start with a very high value for minPrice
+    let maxProfit = 0;  // Start with 0 profit
+
+    for (let i = 0; i < prices.length; i++) {
+        // Update the minimum price encountered so far
+        if (prices[i] < minPrice) {
+            minPrice = prices[i];
+        }
+
+        // Calculate the potential profit if we sell on the current day
+        const profit = prices[i] - minPrice;
+
+        // Update maxProfit if the current profit is greater than the previously recorded maxProfit
+        if (profit > maxProfit) {
+            maxProfit = profit;
+        }
+    }
+
+    return maxProfit;
+
+
+
+Leaders in an array
+
+A leader is an element in the array that is strictly greater than all the elements to its right.
+
+Approach:
+1. Start by considering the last element as a leader, since it has no elements to its right.
+2. Traverse the array from right to left.
+3. Keep track of the maximum element encountered so far. If the current element is greater than this maximum, it's a leader.
+4. Collect all leaders in a list and return them.
+
+// Start from the last element, which is always a leader
+        int maxFromRight = arr[n - 1];
+        leaders.add(maxFromRight);
+
+        // Traverse the array from right to left
+        for (int i = n - 2; i >= 0; i--) {
+            if (arr[i] > maxFromRight) {
+                leaders.add(arr[i]);
+                maxFromRight = arr[i];
+            }
+        }
+
+        // Since we traversed from right to left, we need to reverse the list
+        Collections.reverse(leaders);
+
+        return leaders;
+
+
+73. Matrix zeroes
+
+Perform these five steps to get the optimised solution.
+
+Step 1️⃣ Check if first row has any zero.
+Step 2️⃣ Check if first column has any zero.
+Step 3️⃣ Use first row & column as markers
+Step 4️⃣ Zero out cells based on markers
+Step 5️⃣ Zero first row / column if needed

@@ -121,3 +121,42 @@ class Solution {
         System.out.println("Test case 4: " + sol.lengthOfLongestSubstring(s4)); // Output: 2
     }
 }
+
+
+
+/*
+I know this is sliding window. But what's this approach or pattern to be the remembered for long time
+
+Two pointers maintaining a valid window”
+
+The key idea you should remember is not the HashSet or pointers, but this:
+Always maintain a window that satisfies a rule (invariant).
+If the rule breaks → shrink until it’s valid again.
+
+The invariant in this problem
+Invariant: The substring between left and right contains no duplicate characters
+
+Everything in the code exists only to protect this invariant.
+
+Mental checklist (this is what to memorize)
+When you see problems like this, run this checklist in your head:
+
+1️⃣ Define the window
+2️⃣ Define the invariant (MOST IMPORTANT)
+3️⃣ Decide how to expand
+4️⃣ Decide how to repair when invariant breaks
+
+
+A memory trick that actually sticks 🧠
+
+Think of it like this:
+
+Right hand picks items
+Left hand throws items away when rules are broken
+
+right = curiosity → “Can I add this?”
+left = discipline → “This breaks the rule, remove stuff.”
+
+This metaphor works across problems.
+
+*/

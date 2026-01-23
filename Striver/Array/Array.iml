@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/136. Single Number" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/1752. Check if Array Is Sorted and Rotated" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/26. Remove Duplicates from Sorted Array" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/268. Missing Number" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/349. Intersection of Two Arrays" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/485. Max Consecutive Ones" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Find union" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Largest Element in an Array" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Largest Second  Element in an Array without sorting" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Linear Search" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

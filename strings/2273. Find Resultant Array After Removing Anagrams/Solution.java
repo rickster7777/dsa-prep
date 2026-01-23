@@ -4,6 +4,9 @@ import java.util.*;
 
 public class Solution {
  // provide the updated logic for non adjacent anagrams only that particular part
+ 
+    public static List<String> removeNonAdjacentAnagrams(String[] words) {
+        List<String> result = new ArrayList<>();
         Set<String> seenAnagrams = new HashSet<>();
 
         for (String word : words) {

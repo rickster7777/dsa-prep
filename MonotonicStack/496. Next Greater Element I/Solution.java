@@ -1,6 +1,57 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 
+
+/*
+What LeetCode EXPECTS (Key Insight)
+
+“Instead of searching for next greater repeatedly,
+precompute next greater for every element in nums2 once.”
+
+That’s where Monotonic Stack + HashMap comes in.
+
+Mental Model to Remember Forever
+Next Greater / Next Smaller = Monotonic Stack
+
+
+Stack works in this case because:
+It is not “any greater element”
+It is not “the smallest greater element”
+It is strictly the next greater element to the right
+*/
 class Solution {
+
+    public int[] nextGreaterElementInutiveApproach(int[] nums1, int[] nums2) {
+        int[] result = new int[nums1.length];
+
+        for (int i = 0; i < nums1.length; i++) {
+            int target = nums1[i];
+            int ans = -1;
+            boolean found = false;
+
+            // Find target in nums2
+            for (int j = 0; j < nums2.length; j++) {
+                if (nums2[j] == target) {
+                    found = true;
+
+                    // Search to the right for next greater
+                    for (int k = j + 1; k < nums2.length; k++) {
+                        if (nums2[k] > target) {
+                            ans = nums2[k];
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            result[i] = ans;
+        }
+
+        return result;
+    }
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         Map<Integer, Integer> nextGreaterMap = new HashMap<>();
         Stack<Integer> stack = new Stack<>();
@@ -35,6 +86,11 @@ class Solution {
         System.out.println(Arrays.toString(sol.nextGreaterElement(nums1, nums2))); // Output: [-1, 3, -1]
     }
 }
+
+
+
+//In this prob what if the expected output is [-1, 2, 3]
+
 
 /*
 Here’s how the output is computed for

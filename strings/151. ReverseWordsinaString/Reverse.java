@@ -44,6 +44,19 @@ public class Reverse {
         return String.join(" ", words);
     }
 
+    /*
+     * ⏱ Time Complexity
+     * trim() → O(n)
+     * split("\\s+") → O(n)
+     * Reversing array → O(k) (k = number of words)
+     * String.join() → O(n)
+     * ✅ Overall Time: O(n)
+     * 
+     * 💾 Space Complexity
+     * split() creates an array of words → O(n)
+     * No extra data structure for reversing (in-place swap)
+     * ✅ Overall Space: O(n)
+     */
     // included below function After the TUF list
     public String reverseWords(String s) {
 
@@ -57,6 +70,19 @@ public class Reverse {
         return str.toString().trim();
     }
 
+    /*
+     * ⏱ Time Complexity
+     * trim() → O(n)
+     * split() → O(n)
+     * Loop through words → O(k)
+     * toString() → O(n)
+     * ✅ Overall Time: O(n)
+
+     * 💾 Space Complexity
+     * split() array → O(n)
+     * StringBuilder → O(n)
+     * ✅ Overall Space: O(n)
+     */
     public static void main(String[] args) {
         String input = "a good   example";
         String output = Reverse.reverseWordssfixed(input);

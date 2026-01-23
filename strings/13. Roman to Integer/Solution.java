@@ -26,7 +26,7 @@ D             500
 M             1000
  */
 
- //My sol It gave incorrect result
+//My sol It gave incorrect result
 // class Solution {
 //     public int romanToInt(String s) {
 //         int sum = 0;
@@ -73,34 +73,43 @@ class Solution {
     public int romanToInt(String s) {
         int sum = 0;
         int n = s.length();
-        
+
         // Iterate through the string
         for (int i = 0; i < n; i++) {
             // Get the value of the current Roman numeral character
             int currentValue = romanToValue(s.charAt(i));
-            
-            // Check if we need to subtract: if the current value is less than the next value
+
+            // Check if we need to subtract:
+            // if the current value is less than the next value
             if (i + 1 < n && currentValue < romanToValue(s.charAt(i + 1))) {
                 sum -= currentValue;
             } else {
                 sum += currentValue;
             }
         }
-        
+
         return sum;
     }
 
     // Helper function to convert Roman numeral characters to their integer values
     private int romanToValue(char c) {
         switch (c) {
-            case 'I': return 1;
-            case 'V': return 5;
-            case 'X': return 10;
-            case 'L': return 50;
-            case 'C': return 100;
-            case 'D': return 500;
-            case 'M': return 1000;
-            default: return 0;
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return 0;
         }
     }
 }

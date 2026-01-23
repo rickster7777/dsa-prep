@@ -1,0 +1,112 @@
+🔹 What are Frequency Count Problems?
+
+Problems where you:
+Count how many times something appears
+Use that count to make a decision (unique, duplicate, majority, anagram, etc.)
+
+🔹 Common Data Structures Used
+
+| Scenario                 | Best Choice    |
+| ------------------------ | -------------- |
+| Limited range (a–z, 0–9) | Array          |
+| Any characters / objects | HashMap        |
+| Order matters            | LinkedHashMap  |
+| Top-K frequent           | HashMap + Heap |
+
+
+🔹 Core Pattern (Template)
+1️⃣ Build frequency
+for (element : input) {
+    freq[element]++;
+}
+
+2️⃣ Use frequency
+for (element : input or freq) {
+    if (freq[element] condition) {
+        // answer
+    }
+}
+
+🔹 Classic Frequency Count Problems (Must-Know)
+1️⃣ First Unique Character
+
+LeetCode 387
+Count frequency
+Return first index where count == 1
+
+2️⃣ Check Anagram
+
+LeetCode 242
+count[s1[i]]++
+count[s2[i]]--
+
+3️⃣ Majority Element
+
+LeetCode 169
+Count occurrences
+Element appearing > n/2
+
+4️⃣ Find Duplicates
+
+LeetCode 217
+If freq > 1 → duplicate exists
+
+5️⃣ Sort Characters by Frequency
+
+LeetCode 451
+Count frequency
+Sort by count
+
+6️⃣ Top K Frequent Elements
+
+LeetCode 347
+HashMap + Min Heap
+
+7️⃣ First Repeating Character
+
+First character with freq > 1
+
+8️⃣ Character Replacement / Sliding Window
+
+Maintain frequency dynamically
+
+🔹 How to Identify a Frequency Problem (Interview Trick)
+
+If the question says:
+
+“how many times”
+“unique / duplicate”
+“first / most frequent”
+“anagram / rearrange”
+
+👉 Think frequency map immediately
+
+🔹 Interview-Ready Decision Guide
+
+Ask yourself:
+    Is the input range small? → Use array
+    Do I need order? → LinkedHashMap
+    Just count & query? → HashMap
+    Need max/min frequency? → Heap
+
+🔹 Example: Generic Frequency Template (Java)
+Map<Character, Integer> freq = new HashMap<>();
+
+for (char c : s.toCharArray()) {
+    freq.put(c, freq.getOrDefault(c, 0) + 1);
+}
+
+🔹 Key Takeaway
+
+80% of string & array interview problems boil down to frequency counting.
+
+If you master:
+    Building frequency
+    Using it correctly
+    Choosing the right data structure
+You’ll crack most of them easily.
+
+If you want, I can:
+    Give you a practice list ordered by difficulty
+    Show mistakes interviewers look for
+    Provide one reusable template per category

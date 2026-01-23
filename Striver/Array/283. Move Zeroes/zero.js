@@ -48,6 +48,9 @@ var moveZeroes = function (nums) {
     if (nums.length <= 1) {
         return nums;
     }
+
+    // Approach in this is to put all the non zero elements at the start of the array.
+    // Take action when there is a non zero element not the opposite
     for (let i = 0; i < nums.length; i++) {
         // If the current element is not zero
         if (nums[i] !== 0) {
@@ -66,6 +69,44 @@ var moveZeroes = function (nums) {
     }
     return nums;
 };
+/*
+How to memorize this approach I've done this several times but still i forget it:
+
+Your moveZeroes solution is not just for zeroes. It’s a type of “two-pointer / in-place rearrangement” problem.
+
+Core idea:
+“Keep a pointer for where the next valid element should go. Move elements forward, fill leftovers with default values.”
+
+Step 2: Make a mental story
+Think of it like a conveyor belt:
+nums = [0, 1, 0, 3, 12]
+pointer = 0
+
+1. You walk through the array with i
+2. If you see a non-zero, pick it up and place it at the pointer spot
+3. Fill the spot you left with zero (if needed)
+4. Move pointer forward
+
+
+Step 3: Turn it into a mini “template”
+
+Whenever you see problems like this, think:
+
+1. Keep a pointer for the next “valid” spot (pointer = 0)
+2. Loop through the array with index i
+3. If nums[i] is valid:
+    nums[pointer] = nums[i]
+    If i != pointer, fix the old spot
+    Move pointer++
+
+4. Done!
+
+This works for:
+Move zeroes to end
+Move all negative numbers to front
+Partition arrays by even/odd
+Sort 0s,1s,2s (Dutch national flag variant)
+*/
 
 // Cleaned Version:
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ArrayMed/560. Subarray Sum Equals K/560. Subarray Sum Equals K.iml" filepath="$PROJECT_DIR$/ArrayMed/560. Subarray Sum Equals K/560. Subarray Sum Equals K.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Array/Array.iml" filepath="$PROJECT_DIR$/Array/Array.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ArrayMed/ArrayMed.iml" filepath="$PROJECT_DIR$/ArrayMed/ArrayMed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BasicMaths/BasicMaths.iml" filepath="$PROJECT_DIR$/BasicMaths/BasicMaths.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Binary Search/Binary Search.iml" filepath="$PROJECT_DIR$/Binary Search/Binary Search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Striver.iml" filepath="$PROJECT_DIR$/Striver.iml" />
+    </modules>
+  </component>
+</project>

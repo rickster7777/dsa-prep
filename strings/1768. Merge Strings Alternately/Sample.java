@@ -1,31 +1,18 @@
 
 public class Sample {
     public static String mergeAlternately(String word1, String word2) {
-        int ptr1 = word1.length();
-        int ptr2 = word2.length();
+        StringBuilder sb = new StringBuilder();
 
-        int wordsize = ptr1;
+        int n1 = word1.length();
+        int n2 = word2.length();
+        int maxLen = Math.max(n1, n2);
 
-        if (wordsize < ptr2) {
-            wordsize = ptr2;
+        for (int i = 0; i < maxLen; i++) {
+            if (i < n1) sb.append(word1.charAt(i));
+            if (i < n2) sb.append(word2.charAt(i));
         }
 
-        int i = 0;
-
-        String finalWord = "";
-
-        while (i < wordsize) {
-            if (i < ptr1) {
-                finalWord += word1.charAt(i);
-            }
-
-            if (i < ptr2) {
-                finalWord += word2.charAt(i);
-            }
-
-            i++;
-        }
-        return finalWord;
+        return sb.toString();
     }
 
     public static void main(String[] args) {

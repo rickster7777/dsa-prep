@@ -10,8 +10,8 @@ Step 5️⃣ Zero first row / column if needed
 
 public class Solution {
     public static void setZeroes(int[][] matrix) {
-        int m = matrix.length;
-        int n = matrix[0].length;
+        int m = matrix.length; // rows
+        int n = matrix[0].length; // cols
 
         boolean firstRowZero = false;
         boolean firstColZero = false;
@@ -37,8 +37,8 @@ public class Solution {
             for (int j = 1; j < n; j++) {
                 if (matrix[i][j] == 0) {
 
-                    matrix[i][0] = 0;
-                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;  // marking row
+                    matrix[0][j] = 0;  // marking column
                 }
             }
         }
@@ -67,14 +67,15 @@ public class Solution {
         }
     }
 
-
     public static void main(String[] args) {
 
-        //int[][] matrix = new int{{1,1,1},{1,0,1},{1,1,1}};
+        // Test case with 3 rows and 4 columns
+        int[][] matrix = { { 1, 1, 1, 1 },
+                            { 1, 0, 1, 1 },
+                            { 1, 1, 1, 0 } };
 
-        int[][] matrix = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
 
-
+        
         Solution.setZeroes(matrix);
         System.out.println(java.util.Arrays.deepToString(matrix));
     }

@@ -49,7 +49,7 @@ class Solution {
         j = 0;
 
         for (int k = 0; k < nums.length; k++) {
-
+            // positive at even index, negative at odd index
             if (k % 2 == 0) {
                 nums[k] = pos[i];
                 i++;
@@ -67,7 +67,8 @@ class Solution {
 
         int posIndex = 0; // even indices
         int negIndex = 1; // odd indices
-
+        // Fill positive numbers at even indices and negative numbers at odd indices
+        // key idea: separate indices for pos and negatives and fill accordingly
         for (int num : nums) {
             if (num > 0) {
                 res[posIndex] = num;

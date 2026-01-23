@@ -1,4 +1,8 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
 public class Solution {
@@ -82,6 +86,25 @@ class Solution {
 //0 ms solution
 // ✅ Code: Frequency-Based Hashing
 
+/*
+Example 1:
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+Explanation:
+There is no string in strs that can be rearranged to form "bat".
+The strings "nat" and "tan" are anagrams as they can be rearranged to form each other.
+The strings "ate", "eat", and "tea" are anagrams as they can be rearranged to form each other.
+
+Example 2:
+Input: strs = [""]
+Output: [[""]]
+
+Example 3:
+Input: strs = ["a"]
+Output: [["a"]]
+*/
+
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
@@ -111,18 +134,18 @@ class Solution {
         Map<String, List<String>> map = new HashMap<>();
 
         // Step 2: Loop over each word in the input array
-        for (String word : strs) {
+        for (String s : strs) {
             // Step 2.1: Convert word to char array and sort it
-            char[] chars = word.toCharArray();
+            char[] chars = s.toCharArray();
             Arrays.sort(chars);
 
             // Step 2.2: Use sorted string as the key
-            String sorted = new String(chars);
+            String key = new String(chars);
 
             // Step 2.3: Use computeIfAbsent to get or create a list for this sorted key
             // If the key doesn't exist, computeIfAbsent will put a new ArrayList
             // Then we immediately add the current word to that list
-            map.computeIfAbsent(sorted, k -> new ArrayList<>()).add(word);
+            map.computeIfAbsent(key, k -> new ArrayList<>()).add(s);
             // ↑ .add(word) is called on the List returned from computeIfAbsent
             // NOT on the Map itself — it's on the ArrayList inside the Map
         }

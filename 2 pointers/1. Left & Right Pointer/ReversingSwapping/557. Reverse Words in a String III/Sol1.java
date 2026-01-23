@@ -1,7 +1,10 @@
 public class Sol1 {
-    
+
     public String reverseWordss(String input){
         char[] chars = input.toCharArray();
+
+        //Expected: [Let's, take, LeetCode, contest]
+        //Reality:  ['L','e','t',''','s',' ','t','a','k','e',' ','L','e','e','t','C','o','d','e',' ','c','o','n','t','e','s','t']
 
         System.out.println(chars);
         int start = 0;

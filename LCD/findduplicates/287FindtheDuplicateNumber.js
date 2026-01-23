@@ -67,14 +67,14 @@ do-while guarantees that we always move the pointers before checking slow == fas
 
 
 /**
-I'm getting the duplicate number after the step 1 only then why the step 2 is required ?
+I'm getting the duplicate number after the step 2 only then why the step 3 is required ?
 
 Great question!
-In Step 1, we detect the meeting point of the two pointers, but this does not
-necessarily give us the duplicate number. Step 2 is required to pinpoint the exact duplicate value.
+In Step 2, we detect the meeting point of the two pointers, but this does not
+necessarily give us the duplicate number. Step 3 is required to pinpoint the exact duplicate value.
 
-Why Do We Need Step 2?
-In Step 1, the slow and fast pointers meet somewhere in the cycle. However, that meeting point is not
+Why Do We Need Step 3?
+In Step 2, the slow and fast pointers meet somewhere in the cycle. However, that meeting point is not
 necessarily the duplicate number—it's just somewhere inside the cycle.
 
 To find the entrance to the cycle (which corresponds to the duplicate number), we reset slow and move
@@ -103,12 +103,13 @@ console.log(findDuplicate([3, 3, 3, 3, 3])); // Output: 3
 
 
 
- 
+
 /**
- Alternative Approaches
-Approach	Time Complexity	Space Complexity	Modifies Array?
-Sorting + Check Adjacent	O(n log n)	O(1)	✅ Yes
-HashSet (Extra Memory)	O(n)	O(n)	❌ No
-Floyd’s Cycle Detection (Best Approach)	O(n)	O(1)	❌ No
+Alternative Approaches
+
+Approach	                Time Complexity	        Space Complexity	    Modifies Array?
+Sorting + Check Adjacent	  O(n log n)	           O(1)                        	✅ Yes
+HashSet (Extra Memory)	      O(n)	                   O(n)	                        ❌ No
+Floyd’s Cycle Detection (Best Approach)	O(n)	       O(1)	                        ❌ No
 
  */

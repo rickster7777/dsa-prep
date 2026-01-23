@@ -29,3 +29,48 @@ class Solution {
         return stack.isEmpty();
     }
 }
+
+
+/*
+Suppose I want to remember this forever So how can you put this in words
+
+🧠 One-Line Memory Rule (This is the key)
+“Every closing bracket must close the most recent unmatched opening bracket.”
+That single sentence explains why a stack is used.
+
+🧠 The Story You Should Remember
+Imagine brackets are plates.
+Opening brackets → put a plate on the stack
+Closing brackets → remove the top plate and check if it matches
+
+Why?
+Because the last opened bracket must be closed first (LIFO).
+That is exactly what a stack does.
+
+🧩 Step-by-Step Logic in Words
+
+1. Odd length can never be valid
+    → brackets come in pairs.
+
+2. Scan the string from left to right
+
+    If it’s an opening bracket ( { [
+        👉 push it onto the stack
+
+    If it’s a closing bracket ) } ]
+        👉 pop the stack and check:
+            Stack empty? ❌ invalid
+            Mismatch? ❌ invalid
+
+3. At the end
+    Stack empty → ✅ all brackets matched
+    Stack not empty → ❌ some brackets never closed
+
+🧠 Ultra-Short Interview Explanation
+“I use a stack because brackets must close in reverse order of opening.
+I push opening brackets, and for each closing bracket I pop and validate.
+If at any point there’s a mismatch or the stack is empty, it’s invalid.
+Finally, the stack must be empty.”
+
+That’s a perfect answer.
+*/

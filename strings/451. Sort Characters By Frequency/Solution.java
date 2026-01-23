@@ -124,3 +124,30 @@ class Solution {
         System.out.println("Input: \"" + input3 + "\" -> Output: \"" + solver.frequencySortHeap(input3) + "\"");
     }
 }
+
+/*
+The main confusion in here is
+PriorityQueue<Character> maxHeap =
+            new PriorityQueue<>((a, b) -> freq.get(b) - freq.get(a));
+
+After this part I can see all the characters of map {A,a,b}with their values inside comparator -> args1 but the queue is empty 
+
+
+
+and queue gets filled with the same chars in descending order after this line
+maxHeap.addAll(freq.keySet());
+
+Explain this thing
+
+This confusion comes from how and when a comparator is executed.
+Once you understand this, heaps will feel obvious instead of magical.
+
+Creating a PriorityQueue with a comparator only initializes an empty heap and attaches a rule for how elements should be compared; it does not add any elements or 
+perform sorting. At that moment, the heap is empty and the comparator is just waiting to be used. The comparator’s parameters (a and b) are placeholders, not real 
+values, and they only receive actual characters when the heap needs to compare elements. The reason the debugger shows characters like {A, a, b} is because 
+the lambda captures the freq map reference and the debugger previews its contents—this does not mean the comparator has executed or that the queue contains data. 
+
+The comparator only runs when elements are added or removed, which is why the queue actually gets populated and ordered after calling maxHeap.addAll(freq.keySet()).
+
+
+*/

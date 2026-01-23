@@ -15,7 +15,20 @@ public class Solution {
 
         return Arrays.equals(sArr, tArr);
     }
+    /*
+    ⏱ Time Complexity
+        Convert to char arrays → O(n)
 
+        Sort sArr → O(n log n)
+        Sort tArr → O(n log n)
+        Compare arrays → O(n)
+        ✅ Total Time: O(n log n)
+
+        💾 Space Complexity
+        Two char arrays → O(n)
+        Sorting may use extra stack space (depends on JVM)
+        ✅ Total Space: O(n)
+    */
     public static boolean isAnagramFreqCount(String s, String t) {
         if (s.length() != t.length())
             return false;
@@ -34,7 +47,16 @@ public class Solution {
 
         return true;
     }
+    /*
+    ⏱ Time Complexity
+    Single pass through strings → O(n)
+    Check count array → O(26) ≈ O(1)
+    ✅ Total Time: O(n)
 
+    💾 Space Complexity
+    Fixed array of size 26
+    ✅ Total Space: O(1)
+    */
     public static boolean isAnagramMap(String s, String t) {
         if (s.length() != t.length())
             return false;
@@ -48,6 +70,7 @@ public class Solution {
         for (char c : t.toCharArray()) {
             if (!map.containsKey(c))
                 return false;
+
             map.put(c, map.get(c) - 1);
             if (map.get(c) == 0)
                 map.remove(c);
@@ -55,45 +78,27 @@ public class Solution {
 
         return map.isEmpty();
     }
+    /*
+    ⏱ Time Complexity
+    Build map → O(n)
+    Reduce using second string → O(n)
+    ✅ Total Time: O(n)
 
-    public boolean isAnagram(String s, String t) {
 
-        // Map<String, Integer> map = new HashMap<>();
-        // for (String i : s.split("")) {
-        // if (map.containsKey(i) && map.get(i) > 0) {
-        // map.put(i, map.get(i) + 1);
-        // } else {
-        // map.put(i, map.getOrDefault(i, 0) + 1);
-        // }
-        // }
-        // for (String i : t.split("")) {
-        // if (map.containsKey(i) && map.get(i) > 0) {
-        // map.put(i, map.get(i) - 1);
-        // } else {
-        // return false;
-        // }
-        // }
-        // return true;
-        if (s.length() != t.length()) {
-            return false;
-        }
+    💾 Space Complexity
+    HashMap storing distinct characters → O(k)
+    Worst case: O(n)
+    ✅ Total Space: O(n)
+    */
 
-        Map<Character, Integer> map = new HashMap<>();
 
-        for (char c : s.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
-        }
-
-        for (char c : t.toCharArray()) {
-            if (!map.containsKey(c) || map.get(c) == 0) {
-                return false;
-            }
-            map.put(c, map.get(c) - 1);
-        }
-
-        return true;
-    }
-
+    /*
+     * | Method | Time | Space | Best Use Case |
+     * | --------------- | ---------- | -------- | ------------------ |
+     * | Sorting (`Arr`) | O(n log n) | O(n) | Simple, Unicode |
+     * | Frequency Array | **O(n)** | **O(1)** | Lowercase letters |
+     * | HashMap | O(n) | O(n) | General characters |
+     */
     public static void main(String[] args) {
         Solution sol = new Solution();
 

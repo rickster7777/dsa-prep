@@ -27,6 +27,16 @@ public class LongestSubarraySumK {
     }
 
     public static void main(String[] args) {
+
+        // To test whyy map.put(0, -1) is necessary.
+        // Without it, the below test case would return 0 instead of 2.
+        int[] nums0 = {3, 1, 2};
+        System.out.println(longestSubarray(nums0, 3)); // 2
+
+        int[] nums = {1, -1, 5, -2, 3};
+        int k = 3;
+        System.out.println(longestSubarray(nums, k)); // 4
+
         int[] nums1 = {10, 5, 2, 7, 1, 9};
         System.out.println(longestSubarray(nums1, 15)); // 4
 
@@ -34,3 +44,4 @@ public class LongestSubarraySumK {
         System.out.println(longestSubarray(nums2, 6)); // 0
     }
 }
+

@@ -7,10 +7,16 @@ class Solution {
 
         // First pass: Find the candidate element
         for (int index = 0; index < nums.length; index++) {
+
+            // If count drops to 0, we pick a new candidate
+            // This works because the majority element appears more than n/2 times
             if (count == 0) {
                 candidate = nums[index];
                 count = 1;
             } else {
+                // Increment or decrement count based on current element
+                // If it matches the candidate, increment count
+                // Otherwise, decrement count
                 if (candidate == nums[index]) {
                     count++;
                 } else {

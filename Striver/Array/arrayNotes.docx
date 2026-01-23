@@ -1,0 +1,141 @@
+26. Remove duplicates from the sorted array
+
+How It Works (Quick Explanation)
+Because the array is sorted, all duplicates are adjacent
+uniqueIndex tracks where the next unique value should go
+i scans through the array
+When a new value is found, it is copied forward
+The first uniqueIndex + 1 elements of nums contain all unique values
+
+
+this works because just the count of unique Indexes needs to be returned
+int uniqueIndex = 0;
+
+        // Start from the first element and scan the array
+        for (int i = 0; i < nums.length; i++) {
+
+            // If the current element is different from the last unique element
+            if (nums[i] != nums[uniqueIndex]) {
+
+                // Move the unique index forward
+                uniqueIndex++;
+
+                // Update the array with the new unique element
+                nums[uniqueIndex] = nums[i];
+            }
+        }
+
+        // Number of unique elements is uniqueIndex + 1
+        return uniqueIndex + 1;
+
+
+136. Single number
+
+Xor
+
+int result = 0;
+
+for (int i = 0; i < nums.length; i++) {
+    result ^= nums[i];
+  }
+
+
+268. missing number
+
+n*(n + 1)/2;
+
+
+283. Move Zeroes
+
+ for (let i = 0; i < nums.length; i++) {
+        // If the current element is not zero
+        if (nums[i] !== 0) {
+            // Move the non-zero element to the 'pointer' index
+            nums[pointer] = nums[i];
+
+            // If current index is different from pointer,
+            // set the current index to 0 (since its value was moved)
+            if (i !== pointer) {
+                nums[i] = 0;
+            }
+
+            // Move pointer to the next position
+            pointer++;
+        }
+    }
+
+349. Intersection of 2 arrays
+
+Which means elements which are common to both the arrays
+
+Take two sets add element of first array to set 1
+
+Loop through the 2nd array and add element from second array to second set 
+only The element which are present in set one
+
+// Convert the 2nd set to an array
+return numSet2.stream().mapToInt(Integer::intValue).toArray();
+
+485. Max Consecutive One's
+
+1. Track it using two variables, Max Count and current count 
+2. For every 1 in the loop increase current count and update max count. 
+3. And for every zero update current count to zero 
+4. In the end, return the max count.
+
+
+1752. check if an array is rotated and sorted
+
+Correct and Simple Approach
+Key Idea:
+1. Count number of “drops” in the array (where nums[i] < nums[i-1])
+2. If there is more than one drop, it’s not rotated sorted
+3. Also, check wrap-around between last and first element
+
+
+Find Union
+
+This condition is the key  
+if (result.isEmpty() || result.get(result.size() - 1) != arr1[i]) 
+
+
+This is getting checked five times 
+
+1. First for the array one 
+2. Then for the array 2 
+3. Third time when both the values in array 1 and array 2 are equal 
+
+4. Then if there is any element left in the array one, 
+5. Similarly, if there is any element left in the array 2
+
+
+Largest element in an array
+int max = nums[0];
+
+    for (int i = 1; i < nums.length; i++) {
+        if (nums[i] > max) {
+            max = nums[i];
+        }
+    }
+    return max;
+
+
+Second largest in an array
+
+int largest = Integer.MIN_VALUE;
+    int secondLargest = Integer.MIN_VALUE;
+
+    for (int num : nums) {
+        if (num > largest) {
+            secondLargest = largest;
+            largest = num;
+        } else if (num > secondLargest && num < largest) {
+            secondLargest = num;
+        }
+    }
+
+
+Binary Search for sorted arr
+Hashset for large unsorted arr
+Linear search for the small arr
+

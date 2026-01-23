@@ -1,0 +1,12 @@
+| Feature                  | Bubble Sort             | Selection Sort          | Quick Sort             | Merge Sort       |
+| ------------------------ | ----------------------- | ----------------------- | ---------------------- | ---------------- |
+| Technique                | Repeated swapping       | Minimum selection       | Divide & Conquer       | Divide & Conquer |
+| How it works             | Swaps adjacent elements | Finds minimum and swaps | Partition around pivot | Divide and merge |
+| Time (Best)              | O(n)                    | O(n²)                   | O(n log n)             | O(n log n)       |
+| Time (Average)           | O(n²)                   | O(n²)                   | O(n log n)             | O(n log n)       |
+| Time (Worst)             | O(n²)                   | O(n²)                   | O(n²)                  | O(n log n)       |
+| Space Complexity         | O(1)                    | O(1)                    | O(log n)               | O(n)             |
+| Stable                   | ✅ Yes                  | ❌ No                 | ❌ No                  | ✅ Yes          |
+| In-place                 | ✅ Yes                  | ✅ Yes                | ✅ Yes                 | ❌ No           |
+| Recursive                | ❌ No                   | ❌ No                 | ✅ Yes                 | ✅ Yes          |
+| Efficient for large data | ❌ No                   | ❌ No                 | ✅ Yes                 | ✅ Yes          |

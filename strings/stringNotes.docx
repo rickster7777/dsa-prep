@@ -1,0 +1,513 @@
+5. Longest palindromic substring
+
+How to generate substrings ?
+
+Approach used in here: 
+
+1. Expand around the center.
+
+
+public expandAroundCenter(String s, int left, int right) {
+
+
+
+}
+
+
+String longest = "";
+
+for( i < s.length()) {
+
+String oddPalindrome =  expandAroundCenter(s, i, i);
+if oddpalindrome > longest then update longest
+
+// Similarly, for even Length palindrome.
+
+String evenPalindrome =  expandAroundCenter(s, i, i+1);
+if evenPalindrome > longest then update longest
+}
+
+
+
+13. Roman to integer
+
+Loop through the string. and check. whether the current character value is smaller or greater than its next
+value.
+
+If the next value is smaller than the current value then add to the sum. 
+If the next value is greater than the current value then subtract from the sum.
+
+for (i < n) {
+
+int currentValue = romanToValue(s.charAt(i));
+
+            // Check if we need to subtract:
+            // if the current value is less than the next value
+            if (i + 1 < n && currentValue < romanToValue(s.charAt(i + 1))) {
+                sum -= currentValue;
+            } else {
+                sum += currentValue;
+            }
+}
+
+One helper function to convert character to integer.
+switch(c) {
+	
+    case 'I':
+	return 1;
+	.
+	.
+	.
+	.
+   default:
+	return 0;
+
+}
+
+
+
+14. Longest common prefix.
+
+Input s =  ["flower", "flow", "flight"];
+Output = fl
+
+String prefix = strs[0];
+
+for(i = 1 to i < n) {
+
+while(strs[i].indexOf(prefix) != 0)
+
+	prefix = prefix.substring(0, prefix.lengt() - 1);
+	
+	if(prefix.isEmpty()) {
+	return "";
+	}	
+}
+
+}
+return prefix;
+
+The idea in words (simple explanation)
+
+1. Start by assuming the whole first word is the answer.
+	→ Call this the prefix.
+
+2. Compare this prefix with every other word, one by one.
+
+3. If a word does NOT start with the prefix,
+	→ shrink the prefix by removing the last letter.
+
+4. Keep shrinking until:
+	the word does start with the prefix, or
+	the prefix becomes empty (then the answer is "").
+
+5. After checking all words, whatever prefix remains is the longest common prefix.
+
+
+One-sentence version (great for exams/interviews)
+“Take the first string as the prefix, compare it with each string, and keep shortening the prefix until every string starts with it.”
+
+Why this works:
+The longest possible common prefix can’t be longer than the first word
+Every time a word disagrees, you reduce the prefix
+Once it fits all words, it’s guaranteed to be the longest
+
+
+20. Valid parenthesis
+
+
+1. Odd length can never be valid
+    → brackets come in pairs.
+
+2. Scan the string from left to right
+
+    If it’s an opening bracket ( { [
+        👉 push it onto the stack
+
+    If it’s a closing bracket ) } ]
+        👉 pop the stack and check:
+            Stack empty? ❌ invalid
+            Mismatch? ❌ invalid
+
+3. At the end
+    Stack empty → ✅ all brackets matched
+    Stack not empty → ❌ some brackets never closed
+
+
+
+49. Group Anagrams
+
+
+public List<List<String>> groupAnagrams(String[] strs) {
+    Map<String, List<String>> map = new HashMap<>();
+
+    for (String s : strs) {
+        char[] chars = s.toCharArray();
+        Arrays.sort(chars);
+        String key = new String(chars);
+
+        map.computeIfAbsent(key, k -> new ArrayList<>()).add(s);
+    }
+
+    return new ArrayList<>(map.values());
+}
+
+
+58.  Length of last word
+
+Input: s = "Hello World"
+Output: 5
+
+
+direct sol
+String[] sLength = s.split(" ");
+return sLength[sLength.length - 1].length();
+
+Eff sol:
+
+Start looping from behind 
+// Skip trailing spaces
+while (i >= 0 && s.charAt(i) == ' ') {
+      i--;
+}
+
+// Count the length of the last word
+while (i >= 0 && s.charAt(i) != ' ') {
+length++;
+i--;
+}
+return length;
+
+
+
+
+
+
+151. Reverse words in a string
+
+There are two approaches to
+First is first is split on the space
+
+
+
+Second approach again split on the space
+Looping backwards append to the string builder.
+
+This is common to both
+String[] arr = s.trim().split("\\s+");
+
+
+205.  Isomorphic strings  
+
+String s1 = "egg", t1 = "add";           // expected: true
+String s2 = "foo", t2 = "bar";           // expected: false
+
+For a string to be isomorphic These three conditions are important:
+
+✔ Same length
+✔ Same number of distinct characters
+✔ Same pattern & One-to-one consistent mapping
+
+
+Out of the three first is already given in the problem Second can be verified through set
+How to match pattern  that is tricky Because in this sequence is important?
+To achieve this hash map is used and how it's used That's a highlight.
+
+Map mapST
+Map mapTS
+
+for(i < s.length()) {
+
+//MAPPPING 
+
+char cs = s.charAt(i);
+char ct = t.charAt(i);
+
+// Check s → t mapping
+if (mapST.containsKey(cs)) {
+   if (mapST.get(cs) != ct) return false; // inconsistent mapping
+
+} else {
+	mapST.put(cs, ct);
+   }
+
+// Check t → s mapping 
+if (mapTS.containsKey(ct)) {
+   if (mapTS.get(ct) != cs) return false; // inconsistent reverse mapping     
+} else {
+          mapTS.put(ct, cs);
+    }
+}
+return true;
+}
+
+
+242. Valid anagram
+
+There are three approaches to this:
+
+1. First is sorting and comparing
+
+char[] sArr = s.toCharArray();
+char[] tArr = t.toCharArray();
+
+Arrays.sort(sArr);
+Arrays.sort(tArr);
+
+return Arrays.equals(sArr, tArr);
+
+
+2. Second is using the frequency count array 
+
+int[] count = new int[26]; // Assuming only lowercase letters
+
+for (int i = 0; i < s.length(); i++) {
+	count[s.charAt(i) - 'a']++;
+	count[t.charAt(i) - 'a']--;
+ }
+
+for (int val : count) {
+       if (val != 0)
+           return false;
+ }
+
+return true;
+
+3. Third approach is adding to the hash map and then in second pass, removing it from the hash map.
+
+HashMap<Character, Integer> map = new HashMap<>();
+
+
+for (char c : s.toCharArray()) {
+	map.put(c, map.getOrDefault(c, 0) + 1);
+}
+
+for (char c : t.toCharArray()) {
+      if (!map.containsKey(c))
+           return false;
+
+      map.put(c, map.get(c) - 1);
+       
+      if (map.get(c) == 0)
+             map.remove(c);
+ }
+
+return map.isEmpty();
+
+
+438. Find all anagrams in a string
+
+
+String s = "cbaebabacd", p = "abc";
+Output = [0, 6];
+
+public static List<Integer> findAnagrams(String s, String p) {
+        int k = p.length();
+        List<Integer> list = new ArrayList<>();
+
+        StringBuilder s1 = new StringBuilder();
+
+        for (int i = 0; i < s.length(); i++) {
+            s1.append(s.charAt(i));
+
+            if (s1.length() == k) {
+                boolean isAna = isAnagram(s1.toString(), p);
+
+                if (isAna) {
+                    list.add(i + 1 - k); // Fixed line
+                }
+                s1.deleteCharAt(0); // Slide the window
+            }
+        }
+        return list;
+    }
+
+
+451.  Sort characters by frequency
+
+This is bit tricky, not a straight intuitive approach will work in this
+
+String input1 = "tree"; // expected: "eert" or "eetr" (e appears 2x, t,r 1x each)
+String input2 = "cccaaa"; // expected: "cccaaa" or "aaaccc" (both c,a appear 3x)
+String input3 = "Aabb"; // expected: "bbAa" (b appears 2x, A,a 1x each)
+
+
+Step 1 is to add frequency of each character in a map.
+
+
+ PriorityQueue<Character> maxHeap =
+            new PriorityQueue<>((a, b) -> freq.get(b) - freq.get(a));
+
+        maxHeap.addAll(freq.keySet());
+
+        StringBuilder sb = new StringBuilder();
+        while (!maxHeap.isEmpty()) {
+            char c = maxHeap.poll();
+
+            // THis is same in both aproaches.
+            sb.append(String.valueOf(c).repeat(freq.get(c)));
+        }
+
+        return sb.toString();
+
+
+
+HowMaxheap.addall() Add string builder repeat works here is important.
+
+
+The main confusion in here is
+PriorityQueue<Character> maxHeap =
+            new PriorityQueue<>((a, b) -> freq.get(b) - freq.get(a));
+
+After this part I can see all the characters with their values inside args1 but the queue is empty
+
+and queue gets filled with the same chars in descending order after this line
+maxHeap.addAll(freq.keySet());
+
+Explain this thing
+
+Creating a PriorityQueue with a comparator only initializes an empty heap and attaches a rule for how elements should be compared; it does not add any elements or 
+perform sorting. At that moment, the heap is empty and the comparator is just waiting to be used. The comparator’s parameters (a and b) are placeholders, not real 
+values, and they only receive actual characters when the heap needs to compare elements. The reason the debugger shows characters like {A, a, b} is because 
+the lambda captures the freq map reference and the debugger previews its contents—this does not mean the comparator has executed or that the queue contains data. 
+
+The comparator only runs when elements are added or removed, which is why the queue actually gets populated and ordered after calling maxHeap.addAll(freq.keySet()).
+
+
+796. Rotate string 
+
+Given two strings s and goal, return true if and only if s can become goal after some number of shifts on s.
+A shift on s consists of moving the leftmost character of s to the rightmost position.
+
+String s1 = "abcde", goal1 = "cdeab";
+
+String doubleS = s + s;
+
+if(doubleS.indexOf(goal)  >= 0) return true;
+OR
+return doubleS.contains(goal);
+
+
+
+Key Insight:
+All possible rotations of a string s are substrings of s + s.
+
+
+1021. Remove outermost parenthesis 
+
+String s1 = "(()())(())";
+Output: "()()()"
+
+
+Depth Counter Approach:
+
+StringBuilder result = new StringBuilder();
+ int depth = 0;
+
+for (char c : s.toCharArray()) {
+     
+if (c == '(') {
+     if (depth > 0) {
+           result.append(c);  // Not outermost
+         }
+         depth++;
+ } 
+
+else { // c == ')'
+   depth--;
+   if (depth > 0) {
+      result.append(c);  // Not outermost
+                }
+            }
+        }
+
+        return result.toString();
+     
+
+
+1071. Greatest common divisor Of strings
+
+Input: str1 = "ABCABC", str2 = "ABC"
+Output: "ABC"
+Example 2:
+
+Input: str1 = "ABABAB", str2 = "ABAB"
+Output: "AB"
+
+Input: str1 = "LEET", str2 = "CODE"
+Output: ""
+
+
+if (!(str1 + str2).equals(str2 + str1)) {
+            return "";
+        }
+
+        // Find GCD of the lengths of both strings
+        int gcdLength = gcd(str1.length(), str2.length());
+
+        // Return the prefix of str1 up to the GCD length
+        return str1.substring(0, gcdLength);
+    }
+
+    // Helper method to compute GCD using Euclidean Algorithm
+    private int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+
+
+1614. max nesting depth of pARENTHESIS
+
+
+String input1 = "()(())((()()))";      // expected: 3
+String input2 = "(1)+((2))+(((3)))";         // expected: 3
+String input3 = "1+(2)";                     // expected: 1
+
+
+Approach Used in here is to just focus on the opening and closing places and ignore everything else
+
+public int maxDepth(String s) {
+        
+        int count = 0;
+        int maxCount = 0;
+
+        for(int i = 0; i < s.length(); i++) {
+
+            if ( (s.charAt(i) != '(') && (s.charAt(i) != ')' )){
+
+                continue;
+            }
+
+            if ( s.charAt(i) == '(') {
+                count++;
+                maxCount = Math.max(maxCount, count);
+            }  else {
+                count--;
+            }
+        }
+
+        return maxCount;
+    }
+
+
+1768. Merge strings alternately
+
+word1 = "abc"
+word2 = "pqr"
+Output: "apbqcr"
+
+word1 = "ab"
+word2 = "pqrs"
+Output: "apbqrs"
+
+
+Logic / Steps
+
+1. Initialize an empty StringBuilder.
+2. Use a loop to iterate through the longer length of the two strings.
+
+3. In each iteration:
+	If i < word1.length(), append word1.charAt(i)
+	If i < word2.length(), append word2.charAt(i)
+
+4. After the loop, return sb.toString().

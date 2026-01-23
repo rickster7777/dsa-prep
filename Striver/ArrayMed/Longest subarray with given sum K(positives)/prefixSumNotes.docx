@@ -1,0 +1,155 @@
+/*
+“map.put(0, -1) handles edge cases where the subarray starts at index 0 by treating prefix sum 0 as occurring before the array begins.”
+*/
+
+
+2️⃣ Example WITH map.put(0, -1)
+Input
+nums = [3, 1, 2]
+k = 3
+
+Step-by-step
+i	nums[i]	prefixSum	prefixSum - k	map contains?
+0	3	3	0	✅ (0 → -1)
+
+Length:
+
+i - (-1) = 1
+
+
+Correct subarray:
+
+[3]
+
+
+✅ Works perfectly.
+
+3️⃣ What happens if you REMOVE this line ❌
+
+Remove:
+
+map.put(0, -1);
+
+
+Now the map is empty initially.
+
+Same input
+nums = [3, 1, 2]
+k = 3
+
+Step-by-step
+i	nums[i]	prefixSum	prefixSum - k	map contains?
+0	3	3	0	❌
+
+🚨 The subarray [3] is missed completely.
+
+Why?
+
+Because:
+
+0 was never added to the map
+
+So subarrays starting at index 0 are invisible
+
+4️⃣ Why index -1 specifically?
+
+We store:
+
+0 → -1
+
+
+So when we compute length:
+
+i - (-1) = i + 1
+
+
+That gives the correct length for a subarray starting at index 0.
+
+If we used 0 → 0 instead:
+
+❌ Length would be wrong:
+
+i - 0 = i
+
+
+Off by one.
+
+
+
+Let's just focus on this part why and how this is working.
+
+  if (map.containsKey(prefixSum - k)) {
+                maxLen = Math.max(maxLen, i - map.get(prefixSum - k));
+            }
+
+
+
+1️⃣ WHY this works (the core idea)
+Prefix sum meaning
+
+At index i:
+
+prefixSum = nums[0] + nums[1] + ... + nums[i]
+
+
+Now imagine there is an earlier index j such that:
+
+prefixSum[j] = prefixSum[i] - k
+
+
+Subtracting:
+
+prefixSum[i] - prefixSum[j] = k
+
+
+That difference represents the sum of elements between them:
+
+nums[j+1] + nums[j+2] + ... + nums[i] = k
+
+
+📌 That means a subarray from j + 1 to i sums to k.
+
+So:
+
+If we’ve ever seen prefixSum - k before, we’ve found a valid subarray ending at i.
+
+That’s the why.
+
+2️⃣ HOW map.containsKey(prefixSum - k) finds a subarray
+
+The map stores:
+
+map<prefixSum, earliestIndex>
+
+
+So when you do:
+
+map.containsKey(prefixSum - k)
+
+
+You’re asking:
+
+“Was there some earlier index where the running sum was exactly
+currentPrefixSum - k?”
+
+If yes → a subarray exists.
+
+3️⃣ HOW the length formula works
+i - map.get(prefixSum - k)
+
+
+i = current index (end of subarray)
+
+map.get(prefixSum - k) = index before the subarray starts
+
+So the subarray is:
+
+(map.get(prefixSum - k) + 1) → i
+
+
+Length:
+
+i - map.get(prefixSum - k)
+
+
+That’s why the formula is correct.

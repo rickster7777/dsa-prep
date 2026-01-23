@@ -8,8 +8,9 @@ We track how deep we are inside nested parentheses:
 When we see '(':
 If depth > 0, we append it (it's not the outer parenthesis).
 Then increase depth.
-When we see ')':
 
+
+When we see ')':
 First decrease depth.
 If depth > 0, we append it.
 
@@ -64,6 +65,18 @@ class Solution {
         }
 
         return result.toString();
+    }
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        String s1 = "(()())(())";
+        String s2 = "(()())(())(()(()))";
+
+        System.out.println(sol.removeOuterParentheses(s1)); // Output: "()()()"
+        System.out.println(sol.removeOuterParentheses(s2)); // Output: "()()()()(())"
+
+        System.out.println(sol.removeOuterParenthesesStack(s1)); // Output: "()()()"
+        System.out.println(sol.removeOuterParenthesesStack(s2)); // Output: "()()()()(())"
     }
 }
 
