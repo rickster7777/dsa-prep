@@ -1,5 +1,3 @@
-package BitManipulation;
-
 //Check if a number is odd or not without %
 
 public class EveneOdd {

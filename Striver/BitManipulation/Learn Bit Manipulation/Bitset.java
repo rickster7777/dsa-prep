@@ -1,4 +1,3 @@
-package BitManipulation;
 /*
 Example 1
 Input: n = 5, i = 0

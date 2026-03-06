@@ -1,0 +1,112 @@
+Introduction to Priority Queues using Binary Heaps
+
+What is Priority Queue ?
+A Priority Queue is a special type of queue where each element is assigned a priority, and instead of being processed in the order they arrive (like a normal queue), the element with
+the highest priority is always processed first.
+
+explained with example of hospital patients
+
+Binary Heap:
+A Binary Heap is a Binary Tree that satisfies the following conditions.
+
+It should be a Complete Binary Tree.
+It should satisfy the Heap property.
+
+Complete Binary Tree:
+The tree in Which all the levels are completely filled except the last level and last level is filled in such a way that all the keys are as left as possible.
+
+
+Heap Property:
+Binary Heap is either a Min Heap or Max Heap. Property of the Binary Heap decides whether it is Min Heap or Max Heap.
+
+Min Heap property: For every node in a binary heap, if the node value is less than its right and left child’s value then Binary Heap is known as Min Heap.
+Max Heap property: For every node in a binary heap, if the node value is greater than its right and left child’s value then Binary Heap is known as Max Heap.
+
+Representation of the Binary Heap
+A Binary Heap is represented as an array.
+
+The root value is at arr[0]
+The below table summarizes how the node and its children are stored in an array.
+
+Node index: i
+Left child Index: 2*i+1
+Right Child Index: 2*i+2
+
+
+If the child is at index i, then its parent index can be found using the below formula.
+Child’s Index: i
+Parent’s Index: (i-1)/2
+
+
+
+Operations Associated with Min Heap
+Insert() 
+Heapify()
+getMin()
+ExtractMin()
+Delete()
+Decreasekey()
+
+
+Min Heap and Max Heap Implementation
+
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+
+Convert min Heap to max Heap and vice versa
+
+🔁 1️⃣ If you are using Java PriorityQueue (most practical)
+
+✅ Min Heap → Max Heap
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+PriorityQueue<Integer> maxHeap =
+        new PriorityQueue<>(Collections.reverseOrder());
+
+maxHeap.addAll(minHeap);
+
+✅ Max Heap → Min Heap
+PriorityQueue<Integer> maxHeap =
+        new PriorityQueue<>(Collections.reverseOrder());
+
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+minHeap.addAll(maxHeap);
+
+
+📌 Time Complexity:
+O(n) average (heapify during bulk insertion)
+
+
+🔹 Min Heap → Max Heap
+public static void minToMaxHeap(int[] arr) {
+    int n = arr.length;
+
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        maxHeapify(arr, n, i);
+    }
+}
+
+private static void maxHeapify(int[] arr, int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    if (largest != i) {
+        int temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+
+        maxHeapify(arr, n, largest);
+    }
+}
+
+🧠 Interview One-liner Answer
+
+To convert Min Heap to Max Heap, rebuild the heap by applying max-heapify from the last non-leaf node. This takes O(n) time.

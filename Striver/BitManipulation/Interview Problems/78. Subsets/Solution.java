@@ -81,6 +81,7 @@ class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
         int[] nums = {1, 2, 3};
+        // output: [[], [3], [2], [2, 3], [1], [1, 3], [1, 2], [1, 2, 3]]
         List<List<Integer>> subsets = solution.subsets(nums);
         System.out.println(subsets);
     }

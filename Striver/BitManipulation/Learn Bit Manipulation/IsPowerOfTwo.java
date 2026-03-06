@@ -7,7 +7,7 @@ This property allows for a fast check without looping or dividing.
  */
 public class IsPowerOfTwo {
 
-    int n  =6;
+    int n  = 6;
 
     boolean isPower = n > 0 && (n & (n - 1)) == 0;
 }

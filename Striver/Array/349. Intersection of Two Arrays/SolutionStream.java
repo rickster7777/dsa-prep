@@ -9,7 +9,7 @@ public class SolutionStream {
 
         // Retain only common elements
         numSet1.retainAll(numSet2);
-
+        return numSet1.stream().mapToInt(Integer::intValue).toArray();
         // Convert the result back to an int array
         // return numSet1.stream().mapToInt(Integer::intValue).toArray();
         // To Use it method return type should be updated OptionalInt

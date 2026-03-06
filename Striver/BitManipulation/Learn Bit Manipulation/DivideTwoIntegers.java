@@ -116,11 +116,11 @@ public class DivideTwoIntegers {
     public static void main(String[] args) {
         DivideTwoIntegers solution = new DivideTwoIntegers();
 
-        int dividend = 10;
+        int dividend = 6;
         int divisor = 3;
 
-        int result = solution.divide(dividend, divisor);
-        System.out.println("Quotient: " + result); // Expected output: 9
+        // int result = solution.divide(dividend, divisor);
+        // System.out.println("Quotient: " + result); // Expected output: 9
 
         int resultSub = solution.divideSubtraction(dividend, divisor);
         System.out.println("Quotient (Subtraction): " + resultSub); // Expected

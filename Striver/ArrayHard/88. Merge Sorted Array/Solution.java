@@ -1,4 +1,3 @@
-package lcd.mergesortedarray88;
 
 import java.util.Arrays;
 /*
