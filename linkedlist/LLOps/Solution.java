@@ -4,18 +4,26 @@ class ListNode {
 
     // Constructors
     ListNode() {
+        //Creates an empty node val defaults to 0, and next defaults to null.
     }
 
     ListNode(int val) {
+        // Creates a node with a given value next is still null.
         this.val = val;
     }
 
     ListNode(int val, ListNode next) {
+        // Creates a node with: a value a link to another node
         this.val = val;
         this.next = next;
     }
+    // 👉 int val and ListNode next are called parameters.
 }
-
+/*
+🔁 Simple way to remember
+Parameters = variables in definition
+Arguments = values in call
+*/
 public class Solution {
     public static void printList(ListNode head) {
         while (head != null) {

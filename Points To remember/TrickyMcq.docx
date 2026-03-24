@@ -1,0 +1,380 @@
+🔹 1. Parameters vs Arguments (you already saw this)
+
+Parameters → in definition
+
+Arguments → in call
+
+
+🔹 3. Stack vs Heap
+
+Stack → stores method calls & primitive variables
+
+Heap → stores objects
+
+int x = 10;          // stack
+ListNode node = new ListNode(5);  // object in heap
+
+👉 Confusion: variable node is on stack, object is in heap.
+
+🔹 4. Primitive vs Reference Types
+int a = 5;
+int b = a;  // copy
+
+b = 10;
+// a is still 5
+ListNode n1 = new ListNode(5);
+ListNode n2 = n1;
+
+n2.val = 10;
+// n1.val is ALSO 10 😵
+
+Primitives → copy value
+
+Objects → copy reference
+
+🔹 5. Pass by Value (but feels like reference 😅)
+
+Java is always pass-by-value, but:
+
+void change(ListNode node) {
+    node.val = 100;
+}
+
+This does modify the object → confusing!
+
+👉 Why? Because the reference is passed by value, not the object.
+
+
+
+---------------------------------------------------------------------
+
+int x = 10;
+change(x);
+System.out.println(x);
+
+void change(int x) {
+    x = 20;
+}
+
+✅ Correct — A) 10
+
+✔️ Why?
+Java is pass-by-value
+A copy of x is passed to change()
+Changing it inside the method does not affect the original
+
+🔥 Question 3
+
+What will be the output?
+
+ListNode node = new ListNode(5);
+change(node);
+System.out.println(node.val);
+
+void change(ListNode n) {
+    n.val = 20;
+}
+
+✅ Correct — B) 20
+
+✔️ Why?
+The reference to the object is passed by value
+But both node and n point to the same object in memory
+So changing n.val changes the original object
+
+The reference to the object is passed by value By value or reference ?
+
+Nice catch — this is exactly where people get confused 😄
+
+“By value or by reference?”
+
+👉 Java is ALWAYS pass-by-value.
+
+But here’s the subtle truth:
+
+For primitives → value is copied
+
+For objects → reference is copied (not the object)
+
+So:
+
+✔️ It is pass-by-value of the reference
+
+
+
+ListNode node = new ListNode(5);
+change(node);
+System.out.println(node.val);
+
+void change(ListNode n) {
+    n = new ListNode(20);
+}
+
+✅ Correct Answer: A) 5
+
+✔️ Why?
+void change(ListNode n) {
+    n = new ListNode(20);
+}
+
+A new object is created
+
+But only the local copy n now points to it
+
+Original node is unchanged
+
+Visual:
+
+Before:
+
+node ──► [5]
+n    ──► [5]
+
+After:
+
+node ──► [5]
+n    ──► [20]   (new object)
+
+👉 So node.val is still 5
+
+🔥 Key Rule to Remember
+
+Modify object → ✅ reflects outside
+Reassign reference → ❌ does NOT reflect outside
+
+
+🔥 Question 8 (tricky linked list / object reference)
+
+What will be the output?
+
+ListNode node1 = new ListNode(1);
+ListNode node2 = new ListNode(2);
+node1.next = node2;
+
+ListNode node3 = node1;
+node3.val = 10;
+
+System.out.println(node1.val);
+
+the correct answer is C) 10 ✅
+
+✔️ Explanation
+ListNode node1 = new ListNode(1);
+ListNode node2 = new ListNode(2);
+node1.next = node2;
+
+ListNode node3 = node1;  // node3 references the SAME object as node1
+node3.val = 10;
+
+node3 points to the same object as node1
+
+So changing node3.val also changes node1.val
+
+System.out.println(node1.val); // 10
+
+🔹 Key Idea
+Assignment of objects → copies reference, not the object
+Both variables point to same memory location
+
+
+In Java, arrays of primitives are automatically initialized with default values:
+
+int → 0
+double → 0.0
+boolean → false
+
+Arrays of objects → default is null
+
+int[] arr = new int[3];  // [0, 0, 0]
+System.out.println(arr[0]); // 0
+
+🔥 Question 11 (very tricky — String + compile-time)
+
+String s1 = "ab" + "c";
+String s2 = "abc";
+
+System.out.println(s1 == s2);
+
+correct answer is A) true ✅
+
+✔️ Why?
+String s1 = "ab" + "c";
+String s2 = "abc";
+
+"ab" + "c" is a compile-time constant expression
+
+Java optimizes it at compile time → becomes "abc"
+
+So both s1 and s2 point to the same string in the pool
+
+🔥 Key Insight
+Compile-time concatenation → goes to string pool
+Runtime concatenation → creates new object
+
+🔥 Question 12 (this is where people slip 😈)
+
+What will be the output?
+
+String s1 = "abc";
+String s2 = "ab";
+String s3 = s2 + "c";
+
+System.out.println(s1 == s3);
+
+correct answer is B) false ✅
+
+✔️ Why?
+String s1 = "abc";
+String s2 = "ab";
+String s3 = s2 + "c";
+
+s1 → string literal → stored in string pool
+s2 → also in string pool
+
+BUT:
+String s3 = s2 + "c";
+
+👉 This happens at runtime, not compile time
+👉 Java creates a new String object in heap
+
+So:
+s1 == s3  // false ❌ (different references)
+
+But:
+s1.equals(s3) // true ✅ (same content)
+
+🔥 Key Rule
+"a" + "b" → compile-time → pooled
+variable + "b" → runtime → new object
+
+🔥 Question 13 (reference trap 😈)
+
+What will be the output?
+
+int[] arr1 = {1, 2, 3};
+int[] arr2 = arr1;
+
+arr2[0] = 10;
+
+System.out.println(arr1[0]);
+
+correct answer is B) 10 ✅
+
+✔️ Why?
+int[] arr1 = {1, 2, 3};
+int[] arr2 = arr1;
+
+arr2 = arr1 does NOT create a new array
+Both variables point to the same array in memory
+
+Then:
+arr2[0] = 10;
+
+You modify the shared array
+
+So:
+System.out.println(arr1[0]); // 10
+
+🔹 Visual
+arr1 ──► [1, 2, 3]
+arr2 ──► same array
+
+After change:
+arr1 ──► [10, 2, 3]
+arr2 ──► same array
+
+🔥 Key Rule
+Arrays are objects in Java
+Assignment copies reference, not data
+
+🔥 Question 14 (method + array trap 😈)
+
+What will be the output?
+
+int[] arr = {1, 2, 3};
+change(arr);
+System.out.println(arr[0]);
+
+void change(int[] a) {
+    a[0] = 99;
+}
+correct answer is B) 99 ✅
+
+✔️ Why?
+int[] arr = {1, 2, 3};
+change(arr);
+
+Arrays are objects
+
+The reference is passed by value, but still points to the same array
+
+Inside method:
+void change(int[] a) {
+    a[0] = 99;
+}
+
+a and arr point to the same array
+
+So modifying a[0] changes the original array
+
+🔹 Key Reminder
+
+Modify object/array → ✅ affects original
+
+Reassign reference → ❌ does NOT affect original
+
+🔥 Question 15 (FINAL boss 😈)
+
+What will be the output?
+
+int[] arr = {1, 2, 3};
+change(arr);
+System.out.println(arr[0]);
+
+void change(int[] a) {
+    a = new int[]{9, 9, 9};
+}
+
+✅ Correct — A) 1 🎯
+
+✔️ Why?
+int[] arr = {1, 2, 3};
+change(arr);
+
+arr reference is passed (by value) to a
+
+Inside method:
+void change(int[] a) {
+    a = new int[]{9, 9, 9};
+}
+
+👉 This is the key:
+
+You are reassigning a to a new array
+
+This does NOT affect the original arr
+
+Visual:
+
+Before:
+
+arr ──► [1, 2, 3]
+a   ──► same array
+
+After reassignment:
+
+arr ──► [1, 2, 3]
+a   ──► [9, 9, 9]   (new array)
+So:
+System.out.println(arr[0]); //
+
+
+🔥 BIG takeaway from all questions
+
+👉 This is the rule that solves 90% of confusion:
+
+Java is always pass-by-value
+
+BUT:
+Modifying object → affects original ✅
+Reassigning reference → does NOT ❌

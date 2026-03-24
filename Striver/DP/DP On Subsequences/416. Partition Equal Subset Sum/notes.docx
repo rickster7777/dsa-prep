@@ -1,0 +1,171 @@
+6. Why We Loop Backwards (VERY IMPORTANT)
+
+Step 1: What We Want
+
+Each number in nums can be used only once.
+
+So when processing a number like:
+
+num = 5
+
+we should only use that 5 one time when updating the DP array.
+
+Step 2: Assume Current DP State
+
+Suppose before processing 5, the DP array is:
+
+Index: 0 1 2 3 4 5 6 7 8 9 10
+dp:    T T F F F F F F F F F
+
+Meaning:
+
+sum 0 possible
+sum 1 possible
+Step 3: If We Loop FORWARD (Wrong)
+
+Forward loop:
+
+for (s = 5; s <= 10; s++)
+Iteration 1
+s = 5
+
+Check:
+
+dp[5] = dp[5] || dp[5 - 5]
+      = false || dp[0]
+      = true
+
+Now DP becomes:
+
+dp: T T F F F T F F F F F
+
+We just created sum = 5 using the number 5.
+
+Iteration 2
+s = 6
+dp[6] = dp[6] || dp[1]
+      = false || true
+      = true
+
+DP:
+
+T T F F F T T F F F F
+Iteration 3 (Problem Happens)
+s = 10
+
+Now we compute:
+
+dp[10] = dp[10] || dp[10 - 5]
+       = dp[10] || dp[5]
+
+But dp[5] was just updated in THIS SAME LOOP.
+
+So:
+
+dp[10] = true
+
+Meaning we formed:
+
+10 = 5 + 5
+
+But we only had one 5 in this iteration!
+
+So we used the same number twice.
+
+❌ This breaks the 0/1 rule.
+
+Step 4: Why Backward Loop Fixes It
+
+Now we go:
+
+for (s = target; s >= num; s--)
+
+Example:
+
+s = 10 → 5
+Iteration 1
+s = 10
+dp[10] = dp[10] || dp[5]
+
+But dp[5] is still FALSE (not updated yet).
+
+So:
+
+dp[10] = false
+Iteration 2
+s = 9
+dp[9] = dp[9] || dp[4]
+
+Still false.
+
+Iteration 3
+
+Eventually:
+
+s = 5
+dp[5] = dp[5] || dp[0]
+      = true
+
+Now DP becomes:
+
+T T F F F T F F F F F
+
+But we already passed s=10 earlier, so we cannot reuse this new dp[5] to create dp[10].
+
+Thus 5 is used only once.
+
+Step 5: Visual Intuition
+
+Forward loop:
+
+5 → 10
+
+You build:
+
+5
+10 (using 5 again)
+
+Backward loop:
+
+10 → 5
+
+You try big sums first, before 5 is even created.
+
+So you cannot reuse the same number.
+
+Step 6: Simple Rule to Remember
+
+For 0/1 Knapsack (use item once)
+
+loop backwards
+
+For Unbounded Knapsack (use item unlimited times)
+
+loop forward
+Step 7: One-Line Mental Model
+
+Backward loop ensures:
+
+current number contributes only once
+
+because DP values used in calculation are from the previous state, not the updated state.
+
+
+🔑 Key Intuition
+
+Forward loop:
+
+small → big
+
+New values influence future calculations in the same iteration, causing reuse.
+
+Backward loop:
+
+big → small
+
+New values cannot affect earlier calculations, so each number is used once.
+
+🧠 The Golden Rule
+Problem Type	Loop Direction
+0/1 Knapsack (use item once)	Backward
+Unbounded Knapsack (reuse item)	Forward

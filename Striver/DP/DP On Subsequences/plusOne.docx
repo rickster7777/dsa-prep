@@ -1,0 +1,428 @@
+First explain why +1 is used and why we are starting a loop from one instead of zero
+
+one trick that makes visualizing DP tables for string problems extremely easy (the trick most interviewers expect).
+
+
+1️⃣ Why do we use +1 in DP tables?
+
+Given:
+
+int[][] dp = new int[g.length + 1][s.length + 1];
+
+Suppose:
+
+g = "ABC"   (length = 3)
+s = "DE"    (length = 2)
+
+The DP table becomes:
+
+4 rows × 3 columns
+
+because we add one extra row and one extra column.
+
+The reason: represent empty strings
+
+When solving string DP problems, we often compare prefixes of strings.
+
+Example prefixes of "ABC":
+
+""      (empty)
+"A"
+"AB"
+"ABC"
+
+That's 4 prefixes, not 3.
+
+So we need 4 rows.
+
+Same for "DE":
+
+""
+"D"
+"DE"
+
+That's 3 prefixes, not 2.
+
+So we need 3 columns.
+
+Visualization
+      ""   D   E
+""    ?    ?   ?
+A     ?    ?   ?
+B     ?    ?   ?
+C     ?    ?   ?
+
+Meaning:
+
+dp[i][j] = answer for
+first i characters of g
+first j characters of s
+
+Examples:
+
+dp[0][0] → "" vs ""
+dp[1][0] → "A" vs ""
+dp[0][2] → "" vs "DE"
+dp[3][2] → "ABC" vs "DE"
+
+This is why we need +1.
+
+
+2️⃣ Why do loops start from 1 instead of 0?
+
+Typical DP loop:
+
+for (int i = 1; i <= g.length; i++) {
+    for (int j = 1; j <= s.length; j++) {
+
+We start from 1 because:
+
+row 0 and column 0 are base cases
+
+They represent comparisons with empty strings.
+
+Example:
+
+dp[0][j] → comparing "" with prefix of s
+dp[i][0] → comparing prefix of g with ""
+
+These are usually known values.
+
+Example:
+
+For Longest Common Subsequence:
+
+dp[0][j] = 0
+dp[i][0] = 0
+
+Because if one string is empty → LCS length = 0.
+
+So we skip row 0 and column 0 in loops.
+
+
+
+3️⃣ The Interview Trick for Visualizing DP Tables
+
+Here is the trick interviewers expect:
+
+Always write the strings on the axes.
+
+Example:
+
+g = "ABC"
+s = "DE"
+
+Draw this:
+
+        ""   D   E
+     +----+----+----+
+""   | 0  | 0  | 0  |
+     +----+----+----+
+A    | 0  |    |    |
+     +----+----+----+
+B    | 0  |    |    |
+     +----+----+----+
+C    | 0  |    |    |
+     +----+----+----+
+
+Rule:
+
+Rows  → string g
+Columns → string s
+
+And remember:
+
+dp[i][j] depends on:
+dp[i-1][j]
+dp[i][j-1]
+dp[i-1][j-1]
+
+Which means the answer comes from:
+
+⬆ top
+⬅ left
+↖ diagonal
+
+That’s the DP triangle dependency.
+
+
+4️⃣ Mental Model (The Simplest Way)
+
+Think of:
+
+dp[i][j]
+
+as:
+
+Answer for first i chars of g and first j chars of s
+
+Example:
+
+dp[2][1]
+
+means:
+
+g prefix = "AB"
+s prefix = "D"
+
+
+5️⃣ Why this design makes life easier
+
+Without +1, you'd constantly write conditions like:
+
+if (i == 0 || j == 0)
+
+But with +1:
+
+dp[0][*] and dp[*][0] automatically handle base cases
+
+So transitions become clean:
+
+dp[i][j] = ...
+
+without worrying about negative indices.
+
+
+
+🔥 Summary
+Concept	Meaning
++1	represent empty string prefix
+row 0	empty g
+column 0	empty s
+start loop from 1	row/column 0 are base cases
+dp[i][j]	answer for first i chars of g and j chars of s
+
+✅ Golden rule used in interviews
+
+dp[i][j] = answer for prefixes
+g[0..i-1] and s[0..j-1]
+
+
+the 3 DP patterns that cover 90% of all string DP interview problems (LCS, Edit Distance, Subsequence). Once you know those, most LeetCode DP questions become predictable.
+The three big ones are:
+
+1️⃣ LCS Pattern (match / no-match)
+2️⃣ Edit Distance Pattern (operations)
+3️⃣ Subsequence Counting Pattern (take / skip)
+
+Let’s go through each one clearly.
+
+1️⃣ LCS Pattern (Longest Common Subsequence)
+
+This pattern appears when the problem asks about common characters between two strings.
+
+Typical problems:
+
+Longest Common Subsequence
+
+Longest Palindromic Subsequence
+
+Minimum deletions to make strings equal
+
+Shortest Common Supersequence
+
+DP Meaning
+dp[i][j] =
+LCS length of
+g[0..i-1] and s[0..j-1]
+Table Layout
+
+Example:
+
+g = "ABC"
+s = "AC"
+      ""  A  C
+""    0   0  0
+A     0
+B     0
+C     0
+Transition Rule
+If characters match
+g[i-1] == s[j-1]
+dp[i][j] = 1 + dp[i-1][j-1]
+
+Take the diagonal.
+
+If characters don't match
+dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+Choose the best from top or left.
+
+Code Template
+for (int i = 1; i <= g.length(); i++) {
+    for (int j = 1; j <= s.length(); j++) {
+
+        if (g.charAt(i-1) == s.charAt(j-1)) {
+            dp[i][j] = 1 + dp[i-1][j-1];
+        } else {
+            dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+        }
+    }
+}
+Key Visual Pattern
+match → diagonal + 1
+no match → max(top, left)
+
+This LCS logic solves a surprising number of problems.
+
+2️⃣ Edit Distance Pattern (Operations)
+
+Used when the problem involves modifying one string into another.
+
+Classic problem:
+
+Edit Distance (Levenshtein distance)
+
+Allowed operations usually are:
+
+Insert
+Delete
+Replace
+DP Meaning
+dp[i][j] =
+minimum operations to convert
+g[0..i-1] → s[0..j-1]
+Base Cases
+dp[i][0] = i  (delete everything)
+dp[0][j] = j  (insert everything)
+
+Example table start:
+
+      ""  A  B
+""    0   1  2
+A     1
+C     2
+Transition Rules
+If characters match
+dp[i][j] = dp[i-1][j-1]
+
+No operation needed.
+
+If characters differ
+
+We try three operations:
+
+insert  → dp[i][j-1]
+delete  → dp[i-1][j]
+replace → dp[i-1][j-1]
+
+Then:
+
+dp[i][j] = 1 + min(insert, delete, replace)
+Code Template
+if (g.charAt(i-1) == s.charAt(j-1)) {
+    dp[i][j] = dp[i-1][j-1];
+} else {
+    dp[i][j] = 1 + Math.min(
+        dp[i-1][j],     // delete
+        Math.min(
+            dp[i][j-1], // insert
+            dp[i-1][j-1] // replace
+        )
+    );
+}
+Key Visual Pattern
+top       → delete
+left      → insert
+diagonal  → replace
+
+Then choose minimum.
+
+3️⃣ Subsequence Counting Pattern
+
+This pattern appears when the problem asks:
+
+How many ways can we form a subsequence?
+
+Classic problem:
+
+Distinct Subsequences
+
+Example:
+
+s = "babgbag"
+t = "bag"
+
+How many ways to form "bag" from "babgbag"?
+
+Answer: 5
+
+DP Meaning
+dp[i][j] =
+number of ways to form
+t[0..j-1] from s[0..i-1]
+Base Cases
+dp[i][0] = 1
+
+Because empty string can always be formed.
+
+dp[0][j] = 0
+
+Because non-empty target can't be built from empty string.
+
+Transition Rule
+If characters match
+s[i-1] == t[j-1]
+
+Two choices:
+
+use the character
+skip the character
+
+So:
+
+dp[i][j] =
+dp[i-1][j-1] + dp[i-1][j]
+If characters don't match
+dp[i][j] = dp[i-1][j]
+
+Skip the character.
+
+Code Template
+if (s.charAt(i-1) == t.charAt(j-1)) {
+    dp[i][j] = dp[i-1][j-1] + dp[i-1][j];
+} else {
+    dp[i][j] = dp[i-1][j];
+}
+Key Visual Pattern
+match → diagonal + top
+no match → top
+🧠 The Quick Recognition Trick (Interview Hack)
+
+Ask yourself:
+
+Question 1
+
+Does the problem ask longest / maximum common?
+
+➡ LCS pattern
+
+Question 2
+
+Does it ask minimum operations to convert?
+
+➡ Edit Distance pattern
+
+Question 3
+
+Does it ask number of ways / count subsequences?
+
+➡ Subsequence counting pattern
+
+🎯 The Ultimate Memory Trick
+
+Look at what the DP returns.
+
+Problem Type	Return
+LCS	max
+Edit Distance	min
+Subsequence	count / sum
+
+So:
+
+max → LCS
+min → Edit Distance
+sum → Subsequence counting
+
+✅ Once you master these three patterns, you'll recognize 70–90% of string DP problems on platforms like LeetCode instantly.
+

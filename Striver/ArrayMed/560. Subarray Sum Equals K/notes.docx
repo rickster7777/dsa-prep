@@ -1,0 +1,158 @@
+HashMap tricks that solve/work in 50% problems in java interviews
+
+🔥 1. Frequency Map (MOST IMPORTANT)
+When to use:
+
+Counting
+
+Duplicates
+
+Anagrams
+
+Map<Integer, Integer> freq = new HashMap<>();
+
+for (int num : nums) {
+    freq.put(num, freq.getOrDefault(num, 0) + 1);
+}
+Problems:
+
+Two Sum (variant)
+
+Majority Element
+
+Valid Anagram
+
+🔥 2. Two Sum Pattern (value → index)
+Idea:
+
+Store what you’ve seen, check what you need.
+
+Map<Integer, Integer> map = new HashMap<>();
+
+for (int i = 0; i < nums.length; i++) {
+    int need = target - nums[i];
+
+    if (map.containsKey(need)) {
+        return new int[]{map.get(need), i};
+    }
+
+    map.put(nums[i], i);
+}
+Works for:
+
+Pair problems
+
+Difference problems
+
+Complement logic
+
+🔥 3. Prefix Sum + HashMap (VERY POWERFUL)
+When:
+
+Subarray sum problems
+
+Works even with negatives
+
+Map<Integer, Integer> map = new HashMap<>();
+map.put(0, 1);
+
+int sum = 0, count = 0;
+
+for (int num : nums) {
+    sum += num;
+
+    if (map.containsKey(sum - k)) {
+        count += map.get(sum - k);
+    }
+
+    map.put(sum, map.getOrDefault(sum, 0) + 1);
+}
+Problems:
+
+Subarray Sum Equals K
+
+Continuous Subarray Sum
+
+🔥 4. Longest Subarray (Prefix + first occurrence)
+Store first time you see a sum
+Map<Integer, Integer> map = new HashMap<>();
+map.put(0, -1);
+
+int sum = 0, maxLen = 0;
+
+for (int i = 0; i < nums.length; i++) {
+    sum += nums[i];
+
+    if (map.containsKey(sum - k)) {
+        maxLen = Math.max(maxLen, i - map.get(sum - k));
+    }
+
+    map.putIfAbsent(sum, i);
+}
+
+
+🔥 5. Sliding Window + HashMap
+For strings / distinct elements
+Map<Character, Integer> map = new HashMap<>();
+int left = 0;
+
+for (int right = 0; right < s.length(); right++) {
+    char c = s.charAt(right);
+    map.put(c, map.getOrDefault(c, 0) + 1);
+
+    while (map.get(c) > 1) {
+        char leftChar = s.charAt(left);
+        map.put(leftChar, map.get(leftChar) - 1);
+        left++;
+    }
+}
+Problems:
+
+Longest substring without repeating chars
+
+At most K distinct
+
+🔥 6. Grouping (VERY COMMON in Java interviews)
+Map<Character, List<String>> map = new HashMap<>();
+
+for (String s : strs) {
+    char key = s.charAt(0);
+
+    map.computeIfAbsent(key, k -> new ArrayList<>()).add(s);
+}
+Cleaner version (Streams):
+Arrays.stream(strs)
+      .collect(Collectors.groupingBy(s -> s.charAt(0)));
+
+
+🔥 7. Sort + HashMap (when order matters)
+
+Use map + sorting keys:
+
+Map<Integer, Integer> map = new HashMap<>();
+// fill map
+
+List<Integer> keys = new ArrayList<>(map.keySet());
+Collections.sort(keys);
+
+
+🔥 8. Top K Elements (Heap + HashMap)
+Map<Integer, Integer> freq = new HashMap<>();
+
+for (int n : nums)
+    freq.put(n, freq.getOrDefault(n, 0) + 1);
+
+PriorityQueue<Integer> pq =
+    new PriorityQueue<>((a, b) -> freq.get(a) - freq.get(b));
+
+for (int n : freq.keySet()) {
+    pq.add(n);
+    if (pq.size() > k) pq.poll();
+}
+
+
+🧠 Golden Rules (Interview Cheat Sheet)
+✅ Always think:
+
+“Can I store what I’ve seen?”
+“Can I trade space for time?”

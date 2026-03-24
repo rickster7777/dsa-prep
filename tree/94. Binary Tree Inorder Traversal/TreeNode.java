@@ -1,5 +1,6 @@
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /// * Definition for a binary tree node.
@@ -84,3 +85,35 @@ class Solution {
     }
 }
  */
+
+/*
+In option one and two, which is correct and why ?
+
+✅ Option 1 (Correct & Recommended)
+✔ Why this is better:
+    No shared state: The list is created fresh for every method call.
+    Thread-safe: Multiple calls won’t interfere with each other.
+    Reusable: You can call inorderTraversal() multiple times on different trees safely.
+    Clean design: Uses a helper function and avoids side effects.
+
+
+⚠️ Option 2 (Works, but risky)
+❌ Problems:
+
+Shared instance variable:
+    The list persists across multiple calls.
+    If you call inorderTraversal() twice, results will accumulate instead of resetting.
+
+Example issue:
+    Solution sol = new Solution();
+    sol.inorderTraversal(tree1); // [1,2,3]
+    sol.inorderTraversal(tree2); // [1,2,3,4,5] ❌ WRONG
+
+Not thread-safe
+Harder to debug
+Violates good design principles (hidden state)
+
+🧠 Key Insight
+    Option 1 → Functional style (safe, stateless)
+    Option 2 → Stateful (can cause bugs)
+*/

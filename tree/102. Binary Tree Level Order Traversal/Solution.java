@@ -1,5 +1,8 @@
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 
 // Definition for a binary tree node.
@@ -44,5 +47,18 @@ public class Solution {
         }
 
         return result;
+    }
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Example usage:
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+
+        List<List<Integer>> levels = solution.levelOrder(root);
+        System.out.println(levels); // Output: [[1], [2, 3], [4, 5]]
     }
 }

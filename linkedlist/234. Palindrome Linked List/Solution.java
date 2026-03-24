@@ -29,60 +29,47 @@ class Solution {
         }
     }
 
-    public ListNode reverse(ListNode head) {
-        ListNode prev = null;
-        ListNode curr = head;
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null)
+            return true;
 
+        // Step 1: Find middle
+        ListNode slow = head, fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Step 2: Reverse second half
+        ListNode secondHalf = reverse(slow.next);
+
+        // Step 3: Compare first and second halves
+        ListNode p1 = head, p2 = secondHalf;
+        boolean palindrome = true;
+        while (p2 != null) {
+            if (p1.val != p2.val) {
+                palindrome = false;
+                break;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        // Step 4 (optional): restore original list
+        slow.next = reverse(secondHalf);
+
+        return palindrome;
+    }
+
+    // Helper: reverse a linked list
+    private ListNode reverse(ListNode head) {
+        ListNode prev = null, curr = head;
         while (curr != null) {
-            ListNode next = curr.next;
+            ListNode nextNode = curr.next;
             curr.next = prev;
             prev = curr;
-            curr = next;
+            curr = nextNode;
         }
-
         return prev;
-    }
-
-    public ListNode findMiddle(ListNode head) {
-        ListNode hare = head;
-        ListNode turtle = head;
-
-        while (hare.next != null && hare.next.next != null) {
-            hare = hare.next.next;
-            turtle = turtle.next;
-        }
-        return turtle;
-    }
-
-    public boolean isPalindrome(ListNode head) {
-        // Handle empty list and list with single node
-        if (head == null || head.next == null) {
-            return true;
-        }
-
-        ListNode middle = findMiddle(head);
-        ListNode secondHalfStart = reverse(middle.next);
-
-        // Handle lists with odd number of nodes
-        // ListNode temp = secondHalfStart;
-        // while (temp != null && temp.next != null) {
-        // temp = temp.next;
-        // temp.next = middle;
-        // }
-
-        ListNode firstHalfStart = head;
-
-        while (secondHalfStart != null) {
-            if (firstHalfStart.val != secondHalfStart.val) {
-                return false;
-            }
-            firstHalfStart = firstHalfStart.next;
-            secondHalfStart = secondHalfStart.next;
-        }
-
-        // Reverse the second half back to its original order
-        // reverse(middle.next);
-
-        return true;
     }
 }

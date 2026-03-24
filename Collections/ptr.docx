@@ -17,3 +17,108 @@ run the commands from the directory where the Reflection.java file is located:
 
 javac Reflection.java
 java --add-opens java.base/java.util=ALL-UNNAMED Reflection
+
+-------------------------------------------------------------------------------------------------------
+how ?
+Queue<TreeNode> queue = new LinkedList<>();
+
+Then this is possible too
+Queue<TreeNode> queue = new ArrayList<>();
+
+Queue<TreeNode> queue = new LinkedList<>();
+✔ Why it works:
+Queue is an interface
+LinkedList implements Queue
+
+So Java allows:
+👉 interface reference → implementation object
+
+❌ This is INVALID
+Queue<TreeNode> queue = new ArrayList<>();
+❌ Why it fails:
+ArrayList does NOT implement Queue
+
+It only implements:
+    List
+    Collection
+
+So Java will give:
+Type mismatch: cannot convert from ArrayList to Queue
+
+
+
+🟢 1. LinkedList
+Queue<TreeNode> q = new LinkedList<>();
+✔ Features:
+    Doubly-linked list
+    Allows null (not recommended)
+Implements Queue + Deque
+⚠️ Downsides:
+    More memory overhead
+    Slower than ArrayDeque in most cases
+
+
+🟢 2. ArrayDeque ⭐ (Best general choice)
+Queue<TreeNode> q = new ArrayDeque<>();
+✔ Features:
+    Resizable array
+    Faster than LinkedList
+No null elements allowed
+🚀 Why preferred:
+    Better cache performance
+    No node allocation overhead
+
+👉 Use this by default unless you need something special
+
+
+🟡 3. PriorityQueue (Not FIFO!)
+Queue<Integer> q = new PriorityQueue<>();
+✔ Features:
+    Orders elements by priority (min-heap by default)
+    NOT normal queue behavior
+📌 Use when:
+    You need sorted processing
+    Examples: Dijkstra, Top K problems
+
+
+🔵 4. ArrayBlockingQueue (Thread-safe)
+Queue<Integer> q = new ArrayBlockingQueue<>(100);
+✔ Features:
+    Fixed size
+    Thread-safe (blocking)
+📌 Use when:
+    Producer-consumer problems
+    Multithreading
+
+🔵 5. LinkedBlockingQueue (Thread-safe)
+Queue<Integer> q = new LinkedBlockingQueue<>();
+
+🔵 6. ConcurrentLinkedQueue (Non-blocking)
+Queue<Integer> q = new ConcurrentLinkedQueue<>();
+
+🔵 7. DelayQueue
+Queue<Delayed> q = new DelayQueue<>();
+
+
+Quick Comparison
+| Implementation          | Type        | Order  | Thread-safe | Use Case           |
+| ----------------------- | ----------- | ------ | ----------- | ------------------ |
+| `ArrayDeque` ⭐          | Array       | FIFO   | ❌           | Best general       |
+| `LinkedList`            | Linked list | FIFO   | ❌           | Simple use         |
+| `PriorityQueue`         | Heap        | Sorted | ❌           | Priority problems  |
+| `ArrayBlockingQueue`    | Array       | FIFO   | ✅           | Fixed-size threads |
+| `LinkedBlockingQueue`   | Linked list | FIFO   | ✅           | Producer-consumer  |
+| `ConcurrentLinkedQueue` | Linked list | FIFO   | ✅           | High concurrency   |
+
+
+
+✅ Queue + Deque Comparison Table
+
+| Implementation          | Type        | Order  | Thread-safe | Use Case           | Queue Initialization                          | Deque Initialization                |
+| ----------------------- | ----------- | ------ | ----------- | ------------------ | --------------------------------------------- | ----------------------------------- |
+| `ArrayDeque` ⭐          | Array       | FIFO   | ❌           | Best general       | `Queue<T> q = new ArrayDeque<>();`            | `Deque<T> dq = new ArrayDeque<>();` |
+| `LinkedList`            | Linked list | FIFO   | ❌           | Simple use         | `Queue<T> q = new LinkedList<>();`            | `Deque<T> dq = new LinkedList<>();` |
+| `PriorityQueue`         | Heap        | Sorted | ❌           | Priority problems  | `Queue<T> q = new PriorityQueue<>();`         | ❌ Not supported                     |
+| `ArrayBlockingQueue`    | Array       | FIFO   | ✅           | Fixed-size threads | `Queue<T> q = new ArrayBlockingQueue<>(n);`   | ❌ Not supported                     |
+| `LinkedBlockingQueue`   | Linked list | FIFO   | ✅           | Producer-consumer  | `Queue<T> q = new LinkedBlockingQueue<>();`   | ❌ Not supported                     |
+| `ConcurrentLinkedQueue` | Linked list | FIFO   | ✅           | High concurrency   | `Queue<T> q = new ConcurrentLinkedQueue<>();` | ❌ Not supported                     |

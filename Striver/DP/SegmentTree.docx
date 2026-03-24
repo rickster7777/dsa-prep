@@ -1,0 +1,84 @@
+1. What is a Segment Tree?
+
+A Segment Tree is a data structure used to efficiently answer range queries and perform updates on an array.
+
+In simple words:
+    You have an array
+    You want to repeatedly ask questions about a range of elements
+    You may also update values
+
+A Segment Tree helps answer these queries much faster than normal methods.
+
+2. The Problem Segment Trees Solve
+
+Suppose we have an array:
+arr = [2, 5, 1, 4, 9, 3]
+
+Example Queries:
+    Sum from index 1 to 4
+    Minimum from 2 to 5
+    Maximum from 0 to 3
+
+
+3. Idea Behind Segment Tree
+
+Instead of calculating the range every time, we store results of segments (ranges) beforehand.
+
+We divide the array into segments:
+
+[0..5]
+ /    \
+[0..2] [3..5]
+ / \     / \
+[0..1][2..2][3..4][5..5]
+
+Each node stores information like:
+
+sum, minimum, maximum, gcd etc.
+So when a query arrives, we combine results from only relevant nodes.
+
+
+4. Structure of Segment Tree
+
+Example array:
+arr = [2, 5, 1, 4]
+
+Segment tree (for sum):
+
+           [0-3]=12
+          /       \
+      [0-1]=7     [2-3]=5
+      /    \       /   \
+ [0]=2   [1]=5  [2]=1 [3]=4
+
+Each node represents:
+range -> stored value
+
+| Structure    | Query   | Update  | Use Case         |
+| ------------ | ------- | ------- | ---------------- |
+| Array        | O(N)    | O(1)    | simple           |
+| Prefix Sum   | O(1)    | O(N)    | static arrays    |
+| Fenwick Tree | O(logN) | O(logN) | sums             |
+| Segment Tree | O(logN) | O(logN) | flexible queries |
+
+
+Segment Trees support more operations than Fenwick Tree.
+
+Final Intuition
+
+Segment Trees are used when:
+
+Many range queries + updates
+They allow you to answer complex queries in logarithmic time.
+
+✅ Short Summary
+Segment Tree is:
+
+A binary tree
+Stores range information
+Supports fast queries and updates
+
+Complexity:
+Build: O(N)
+Query: O(log N)
+Update: O(log N)
