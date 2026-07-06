@@ -95,8 +95,6 @@ public class Streams {
                                 .mapToInt(Integer::intValue)
                                 .sum();
 
-
-
                 // 🔴 6. Find First / Any
                 Optional<Integer> first = list.stream()
                                 .filter(x -> x > 10)
@@ -157,6 +155,9 @@ public static void main(String[] args) {
                 .map(String::toUpperCase)
                 .sorted(Comparator.comparingInt(String::length))
                 .collect(Collectors.toList());
+
+        //converted to uppercase but also rest are to be printed as it is then ?
+        list1.stream().map(s -> s.startsWith("a") ? s.toUpperCase() : s).toList();
 
         /*
          * ⚡ Key Learning (Important)

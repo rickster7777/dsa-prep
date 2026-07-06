@@ -29,4 +29,15 @@ class Solution {
         // Return the new length of the array after compression
         return writeIndex;
     }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        char[] chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};
+        int newLength = solution.compress(chars);
+        System.out.println("Compressed length: " + newLength);
+        System.out.print("Compressed array: ");
+        for (int i = 0; i < newLength; i++) {
+            System.out.print(chars[i] + " ");
+        }
+    }
 }

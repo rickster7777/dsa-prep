@@ -16,12 +16,31 @@ public class TerminalOps {
         list.stream().skip(1).collect(Collectors.toList());
         list.stream().skip(1).toList();
 
+        /*
+         * | Feature | `collect(Collectors.toList())` | `toList()` |
+         * | ------------ | ------------------------------ | -------------- |
+         * | Mutability | ✅ Mutable | ❌ Unmodifiable |
+         * | Java Version | Java 8+ | Java 16+ |
+         * | Performance | Slightly more overhead | More optimized |
+         */
+
         // 2. forEach
         list.stream().forEach(x -> System.out.println(x));
 
         // 3. reduce : Combines elements to produce a single result
         Optional<Integer> optionalInteger = list.stream().reduce(Integer::sum);
         System.out.println(optionalInteger.get());
+        /*
+         * 🔹 map() — transforms data
+         * Used when you want to convert each element into something else
+         * Returns a new stream
+         * Pure function style (no side effects ideally)
+
+         * 🔹 forEach() — consumes data
+         * Used when you want to perform an action
+         * Returns void (no new stream)
+         * Often used for side effects (printing, saving, updating)
+         */
 
         // 4. count
 
@@ -53,8 +72,6 @@ public class TerminalOps {
         System.out.println("Using forEachOrdered with parallel stream:");
         numbers0.parallelStream().forEachOrdered(System.out::println);
 
-
-
         // Example: Filtering and Collecting Names
         List<String> names = Arrays.asList("Anna", "Bob", "Charlie", "David");
         System.out.println(names.stream().filter(x -> x.length() > 3).toList());
@@ -67,7 +84,7 @@ public class TerminalOps {
         List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5);
         System.out.println(integers.stream().reduce(Integer::sum).get());
 
-        // Example:  Counting Occurrences of a Character
+        // Example: Counting Occurrences of a Character
         String sentence = "Hello world";
         System.out.println(sentence.chars().filter(x -> x == 'l').count());
 
@@ -75,12 +92,11 @@ public class TerminalOps {
         // Streams cannot be reused after a terminal operation has been called
         Stream<String> stream = names.stream();
         stream.forEach(System.out::println);
-//        List<String> list1 = stream.map(String::toUpperCase).toList(); // exception
+        // List<String> list1 = stream.map(String::toUpperCase).toList(); // exception
 
         // stateful & stateless
-        //map: It's a stateless function.
-        //sorted: It's a stateful function.
-
+        // map: It's a stateless function.
+        // sorted: It's a stateful function.
 
     }
 }

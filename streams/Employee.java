@@ -41,43 +41,95 @@ public class Employee {
                 new Employee("David", "HR", 60000),
                 new Employee("Eve", "Finance", 75000));
 
+        // find highest salary employee
+        Optional<Employee> highestPaid = employees.stream()
+                .max(Comparator.comparing(Employee::getSalary));
+        System.out.println("highestPaid" + highestPaid);
+
+        highestPaid.ifPresent(System.out::println); // Charlie (90000.0)
+
+        // 🔥 If you want highest salary per department (important variation)
+
         Map<String, Optional<Employee>> result = employees.stream()
                 .collect(Collectors.groupingBy(
                         Employee::getDepartment,
-                        Collectors.maxBy(Comparator.comparing(Employee::getSalary))));
+                        Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary))));
+        System.out.println("highest salary per department "+  result);
 
-        System.out.println(result);
+
+        // Group employees department
+        Map<String, List<Employee>> groupDept = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
+
+        System.out.println("group department:" + groupDept);
+
+        // Find average salary per department
+        Map<String, Double> avgDept = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment,
+                Collectors.averagingDouble(Employee::getSalary)));
+        System.out.println("average salary per department:" + avgDept);
+        // average salary per department:{Finance=[Eve (75000.0)], HR=[Bob (50000.0), David (60000.0)], 
+        // IT=[Alice (70000.0), Charlie (90000.0)]}
+
+        // Sort employees by salary
+        List<Employee> empSortSalary = employees.stream().
+        sorted(Comparator.comparingDouble(Employee::getSalary))
+        .collect(Collectors.toList());
+
+
+        System.out.println("employees by salary"+empSortSalary);
+
+        // filter employees with salary greater than 70 k
+        List<Employee> empSalary70 = employees.stream().filter(x -> x.getSalary() > 70000).collect(Collectors.toList());
+        System.out.println("salary greater than 70 k"+ empSalary70);
+
+        /*
+         downstream collectors
+         | Operation | Collector | Return Type |
+         | --------- | ------------------- | ------------- |
+         | Max | `maxBy()` | `Optional<T>` |
+         | Min | `minBy()` | `Optional<T>` |
+         | Average | `averagingDouble()` | `Double` |
+         | Sum | `summingDouble()` ✅ | `Double` |
+
+         */
+        // Map<String, Optional<Employee>> result = employees.stream()
+        // .collect(Collectors.groupingBy(
+        // Employee::getDepartment,
+        // Collectors.maxBy(Comparator.comparing(Employee::getSalary))));
+
+        // System.out.println(result);
     }
 }
 /*
-🔹 Explanation
-
-groupingBy(Employee::getDepartment)
-Groups all employees by their department:
-
-IT → [Alice, Charlie]
-HR → [Bob, David]
-Finance → [Eve]
-Collectors.maxBy(Comparator.comparing(Employee::getSalary))
-Finds the employee with the highest salary in each department.
-Optional<Employee>
-maxBy returns an Optional because the group might be empty.
-Here, every department has at least one employee.
-🔹 Optional: If you want just Employee without Optional
-Map<String, Employee> result2 = employees.stream()
-    .collect(Collectors.groupingBy(
-        Employee::getDepartment,
-        Collectors.collectingAndThen(
-            Collectors.maxBy(Comparator.comparing(Employee::getSalary)),
-            Optional::get
-        )
-    ));
-
-Output:
-
-{
- IT=Charlie (90000.0),
- HR=David (60000.0),
- Finance=Eve (75000.0)
-}
-*/
+ * 🔹 Explanation
+ * 
+ * groupingBy(Employee::getDepartment)
+ * Groups all employees by their department:
+ * 
+ * IT → [Alice, Charlie]
+ * HR → [Bob, David]
+ * Finance → [Eve]
+ * Collectors.maxBy(Comparator.comparing(Employee::getSalary))
+ * Finds the employee with the highest salary in each department.
+ * Optional<Employee>
+ * maxBy returns an Optional because the group might be empty.
+ * Here, every department has at least one employee.
+ * 
+ * 🔹 Optional: If you want just Employee without Optional
+ * Map<String, Employee> result2 = employees.stream()
+ * .collect(Collectors.groupingBy(
+ * Employee::getDepartment,
+ * Collectors.collectingAndThen(
+ * Collectors.maxBy(Comparator.comparing(Employee::getSalary)),
+ * Optional::get
+ * )
+ * ));
+ * 
+ * Output:
+ * 
+ * {
+ * IT=Charlie (90000.0),
+ * HR=David (60000.0),
+ * Finance=Eve (75000.0)
+ * }
+ */

@@ -53,6 +53,12 @@ Subarray sum problems
 
 Works even with negatives
 
+Input
+nums = [1, 1, 1]
+k = 2
+
+Output
+2
 Map<Integer, Integer> map = new HashMap<>();
 map.put(0, 1);
 
@@ -75,6 +81,13 @@ Continuous Subarray Sum
 
 🔥 4. Longest Subarray (Prefix + first occurrence)
 Store first time you see a sum
+
+nums = [1, -1, 5, -2, 3]
+k = 3
+
+Output:
+4
+
 Map<Integer, Integer> map = new HashMap<>();
 map.put(0, -1);
 

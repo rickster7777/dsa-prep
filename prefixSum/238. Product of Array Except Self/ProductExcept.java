@@ -8,7 +8,7 @@ public class ProductExcept {
         int prefix = 1;
         int n = nums.length;
 
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < n; i++) {
             answer[i] = prefix;
             prefix *= nums[i];
         }

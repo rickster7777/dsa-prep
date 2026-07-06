@@ -1,60 +1,51 @@
+import java.util.*;
 
+public class StringSorting {
+    public static void main(String[] args) {
+        // 1. Sort a List of Strings (Ascending)
+        List<String> list = new ArrayList<>(Arrays.asList("java", "stream", "api", "code"));
+        Collections.sort(list);
+        System.out.println(list);
+        // ✅ Output: [api, code, java, stream]
 
-import java.util.List;
+        // 2. Using Streams (Modern way)
+        List<String> sortedAscending = list.stream()
+                .sorted()
+                .toList();
+        System.out.println(sortedAscending);
 
-public record StringSorting() {
-    🔹 1. Sort a List of Strings (Ascending)
-List<String> list = Arrays.asList("java", "stream", "api", "code");
+        // 3. Reverse Order
+        List<String> reverseSorted = list.stream()
+                .sorted(Comparator.reverseOrder())
+                .toList();
+        System.out.println(reverseSorted);
 
-Collections.sort(list);
-System.out.println(list);
-✅ Output
-[api, code, java, stream]
-🔹 2. Using Streams (Modern way)
-List<String> sorted = list.stream()
-        .sorted()
-        .toList();
+        // 4. Sort by Length
+        List<String> sortByLength = list.stream()
+                .sorted(Comparator.comparing(String::length))
+                .toList();
+        System.out.println(sortByLength);
 
-System.out.println(sorted);
-🔹 3. Reverse Order
-list.sort(Comparator.reverseOrder());
+        // 5. Sort by Length (Descending)
+        List<String> sortByLengthDesc = list.stream()
+                .sorted(Comparator.comparing(String::length).reversed())
+                .toList();
+        System.out.println(sortByLengthDesc);
 
-or
+        // 6. Case-Insensitive Sorting
+        List<String> caseInsensitive = new ArrayList<>(Arrays.asList("Java", "stream", "API", "code"));
+        caseInsensitive.sort(String.CASE_INSENSITIVE_ORDER);
+        System.out.println(caseInsensitive);
 
-List<String> sorted = list.stream()
-        .sorted(Comparator.reverseOrder())
-        .toList();
-🔹 4. Sort by Length
-List<String> sorted = list.stream()
-        .sorted(Comparator.comparing(String::length))
-        .toList();
-✅ Output
-[api, java, code, stream]
-🔹 5. Sort by Length (Descending)
-List<String> sorted = list.stream()
-        .sorted(Comparator.comparing(String::length).reversed())
-        .toList();
-🔹 6. Case-Insensitive Sorting
-list.sort(String.CASE_INSENSITIVE_ORDER);
-🔹 7. Sort Array of Strings
-String[] arr = {"java", "stream", "api", "code"};
+        // 7. Sort Array of Strings
+        String[] arr = {"java", "stream", "api", "code"};
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
 
-Arrays.sort(arr);
-System.out.println(Arrays.toString(arr));
-🔹 8. Custom Sorting (Example)
-
-Sort by last character:
-
-List<String> sorted = list.stream()
-        .sorted(Comparator.comparing(s -> s.charAt(s.length() - 1)))
-        .toList();
-🧠 Key Concepts
-sorted() → returns a new sorted stream
-Collections.sort() / list.sort() → modifies original list
-Comparator → controls sorting logic
-⚡ Interview Tip
-
-Most asked pattern:
-
-list.stream().sorted().toList();
+        // 8. Custom Sorting (Sort by last character)
+        List<String> sortByLastChar = list.stream()
+                .sorted(Comparator.comparing(s -> s.charAt(s.length() - 1)))
+                .toList();
+        System.out.println(sortByLastChar);
+    }
 }

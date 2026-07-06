@@ -18,7 +18,7 @@ public class Solution {
         while (right < n) {
             sum += arr[right];
 
-            while (sum > k && left <= right) {
+            while (sum > k) {
                 sum -= arr[left];
                 left++;
             }
@@ -31,6 +31,16 @@ public class Solution {
         }
 
         return maxLen;
+
+    }
+
+    public static void main(String[] args) {
+        
+        Solution sol = new Solution();
+        int[] arr = { 1, -1, 5, -2, 3 };
+        int k = 3;  
+        System.out.println(sol.sumEqualsK(arr, k)); // Output: 4 (subarray [1, -1, 5, -2] sums to 3)    
+
 
     }
 }

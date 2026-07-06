@@ -1,7 +1,5 @@
 package linkedlist.ReverseLinkedList206;
 
-import java.util.LinkedList;
-
 public class Reverse {
 
     public class Node {
@@ -17,7 +15,7 @@ public class Reverse {
     }
 
     Node head;
-    // private Node Node; // THis is used for the recursion reverse 
+    // private Node Node; // THis is used for the recursion reverse
 
     public void createList(Integer data) {
         Node newNode = new Node(data);
@@ -90,7 +88,7 @@ public class Reverse {
 
     public static void main(String[] args) {
         Reverse list = new Reverse();
-       list.createList(1);
+        list.createList(1);
         list.createList(2);
         list.createList(3);
         list.createList(4);

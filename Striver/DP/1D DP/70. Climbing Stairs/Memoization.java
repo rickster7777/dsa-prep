@@ -38,6 +38,13 @@ public class Memoization {
         // Return stored result
         return map.get(n);
     }
+
+    public static void main(String[] args) {
+        Memoization solution = new Memoization();
+
+        int n = 5; // Output: 8 (1+1+1+1+1, 1+1+1+2, 1+1+2+1, 1+2+1+1, 2+1+1+1, 2+2+1, 2+1+2, 1+2+2)
+        System.out.println("Number of ways to climb " + n + " stairs: " + solution.climbStairs(n));
+    }
 }
 
 

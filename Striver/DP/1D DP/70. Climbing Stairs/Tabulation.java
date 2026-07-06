@@ -13,6 +13,10 @@ public class Tabulation {
         // dp[i] represents number of ways to reach step i
         int[] dp = new int[n + 1];
 
+        // dp[0] is not used, but we can consider it as 1 way (standing still)
+        // because it simplifies the logic for dp[1] and dp[2] by allowing us to use the same recurrence relation for all steps.
+
+
         // Initialize base cases
         dp[1] = 1;  // 1 way to reach step 1
         dp[2] = 2;  // 2 ways to reach step 2

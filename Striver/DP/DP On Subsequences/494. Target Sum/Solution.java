@@ -78,7 +78,14 @@ class Solution {
     public static void main(String[] args) {
         // Sample test to verify the implementation.
         int[] nums = { 1, 1, 1, 1, 1 };
-        int target = 3;
+        int target = 3; //Output: 5
+        // Explanation: There are 5 ways to assign symbols to make the sum of nums be target 3.
+        // -1 + 1 + 1 + 1 + 1 = 3
+        // +1 - 1 + 1 + 1 + 1 = 3
+        // +1 + 1 - 1 + 1 + 1 = 3
+        // +1 + 1 + 1 - 1 + 1 = 3
+        // +1 + 1 + 1 + 1 - 1 = 3
+
 
         System.out.println(findTargetSumWays(nums, target));
     }

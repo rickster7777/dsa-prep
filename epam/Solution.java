@@ -1,16 +1,17 @@
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Solution {
 
     public static Map<Character, List<String>> groupFirstLetterStream(String[] letters) {
 
-        Map<Character, List<String>> map = Arrays.stream(letters).collect(Collectors.groupingBy(s -> s.charAt(0)));
+        Map<Character, List<String>> map = Arrays.stream(letters).
+                    collect(Collectors.groupingBy(s -> s.charAt(0)));
 
         return map;
     }

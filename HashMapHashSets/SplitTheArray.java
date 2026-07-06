@@ -1,6 +1,7 @@
 package HashMapHashSets;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SplitTheArray {
 
@@ -23,7 +24,8 @@ public class SplitTheArray {
     }
 
     public static void main(String[] args) {
-        int[] arr = { 1, 1, 2, 2, 3, 4 };
+        int[] arr = { 1, 1,1, 2,2, 2, 3, 4 };
+        //Output: true (because 1 and 2 appear more than twice)
         System.out.println(SplitTheArray.split(arr));
     }
 

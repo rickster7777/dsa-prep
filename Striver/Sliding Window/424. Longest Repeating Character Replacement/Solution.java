@@ -1,21 +1,21 @@
 /**
- *Example 1:
-
-    Input: s = "ABAB", k = 2
-    Output: 4
-    Explanation: Replace the two 'A's with two 'B's or vice versa.
-
-
-    Example 2:
-    Input: s = "AABABBA", k = 1
-    Output: 4
-
-    Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
-
-    The substring "BBBB" has the longest repeating letters, which is 4.
-    There may exists other ways to achieve this answer too.
-
-
+ * Example 1:
+ * 
+ * Input: s = "ABAB", k = 2
+ * Output: 4
+ * Explanation: Replace the two 'A's with two 'B's or vice versa.
+ * 
+ * 
+ * Example 2:
+ * Input: s = "AABABBA", k = 1
+ * Output: 4
+ * 
+ * Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
+ * 
+ * The substring "BBBB" has the longest repeating letters, which is 4.
+ * There may exists other ways to achieve this answer too.
+ * 
+ * 
  * ✅ Longest Repeating Character Replacement
  * Problem: Find the length of the longest substring containing the same letter
  * after performing at most k replacements of any character.
@@ -65,21 +65,24 @@ public class Solution {
             maxCount = Math.max(maxCount, count[s.charAt(right) - 'A']);
 
             // STEP 4: Check if window is valid
-            // Characters to replace = window_length - maxCount
+            // What makes a window valid? For a window:
+            // window size - frequency of most common char <= k
+
             // If replacements needed > k, window is invalid
 
-            // STEP 5: Shrink the window from left until it becomes valid
-            while (right - left + 1 - maxCount > k) {
-                // Remove the leftmost character from frequency map
-                count[s.charAt(left) - 'A']--;
+            // STEP 5: This loop keeps shrinking until: window size - maxCount <= k
+            int windowSize = right - left + 1;
 
-                // Move left pointer forward to shrink the window
+            while (windowSize - maxCount > k) {
+                count[s.charAt(left) - 'A']--;
                 left++;
+
+                windowSize = right - left + 1;
             }
 
             // STEP 6: Update the maximum length with current valid window size
             // At this point, the window [left, right] is guaranteed to be valid
-            maxLength = Math.max(maxLength, right - left + 1);
+            maxLength = Math.max(maxLength, windowSize);
         }
 
         // STEP 7: Return the maximum length found
@@ -108,32 +111,40 @@ public class Solution {
 }
 
 /*
-Is it somewhat similar to the consecutive Ones III problem ?
-
-Similarities:
-+--------------------------+-----------------------------------------------+----------------------------------------------+
-| Category                 | 424. Longest Repeating Character Replacement | 1004. Max Consecutive Ones III                |
-+--------------------------+-----------------------------------------------+----------------------------------------------+
-| Input Type               | String (A–Z characters)                       | Binary array (0s and 1s)                      |
-| Allowed Operation        | Replace any character                         | Flip 0 to 1                                  |
-| What k Represents        | Max number of replacements                   | Max number of zero flips                     |
-| Window Valid When        | Characters to replace ≤ k                    | Zeros in window ≤ k                          |
-| How Window Cost is Measured| Window size − highest frequency              | Count of zeros                               |
-| Primary Variable Tracked | Max frequency of a character                 | Zero counter                                 |
-| Reason to Shrink Window  | Too many replacements needed                 | Too many zeros                               |
-| Window Goal              | All characters become the same               | All values become 1                          |
-| Core Technique           | Sliding window + frequency array             | Sliding window + counter                     |
-| Time Complexity          | O(n)                                         | O(n)                                         |
-+--------------------------+-----------------------------------------------+----------------------------------------------+
-
-
-Key Difference:
-424: Tracks character frequencies → replaces least frequent chars with most frequent one
-1004: Counts zeros in the window → replaces zeros with ones
-Both use the same sliding window template but solve different problems. The core logic is identical:
-
-Expand right pointer
-Update condition (maxCount vs zeroCount)
-Shrink left when invalid
-Track maximum window size
-*/
+ * Is it somewhat similar to the consecutive Ones III problem ?
+ * 
+ * Similarities:
+ * +--------------------------+-----------------------------------------------+-
+ * ---------------------------------------------+
+ * | Category | 424. Longest Repeating Character Replacement | 1004. Max
+ * Consecutive Ones III |
+ * +--------------------------+-----------------------------------------------+-
+ * ---------------------------------------------+
+ * | Input Type | String (A–Z characters) | Binary array (0s and 1s) |
+ * | Allowed Operation | Replace any character | Flip 0 to 1 |
+ * | What k Represents | Max number of replacements | Max number of zero flips |
+ * | Window Valid When | Characters to replace ≤ k | Zeros in window ≤ k |
+ * | How Window Cost is Measured| Window size − highest frequency | Count of
+ * zeros |
+ * | Primary Variable Tracked | Max frequency of a character | Zero counter |
+ * | Reason to Shrink Window | Too many replacements needed | Too many zeros |
+ * | Window Goal | All characters become the same | All values become 1 |
+ * | Core Technique | Sliding window + frequency array | Sliding window +
+ * counter |
+ * | Time Complexity | O(n) | O(n) |
+ * +--------------------------+-----------------------------------------------+-
+ * ---------------------------------------------+
+ * 
+ * 
+ * Key Difference:
+ * 424: Tracks character frequencies → replaces least frequent chars with most
+ * frequent one
+ * 1004: Counts zeros in the window → replaces zeros with ones
+ * Both use the same sliding window template but solve different problems. The
+ * core logic is identical:
+ * 
+ * Expand right pointer
+ * Update condition (maxCount vs zeroCount)
+ * Shrink left when invalid
+ * Track maximum window size
+ */

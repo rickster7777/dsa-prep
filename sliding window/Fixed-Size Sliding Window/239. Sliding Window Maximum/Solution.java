@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
-import recursionSeries.challenging.Solution;
-
 /*
  Example 1:
 

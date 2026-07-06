@@ -1,0 +1,190 @@
+🔥 Downstream Collectors (Summary)
+
+Used inside groupingBy() / partitioningBy() to decide what happens inside each group.
+
+🔥 1. Collecting (most important foundation)
+🔹 Collectors.toList()
+
+Collects elements into a List
+
+Collectors.toList()
+🔹 Collectors.toSet()
+
+Removes duplicates automatically
+
+Collectors.toSet()
+🔹 Collectors.toCollection()
+
+Custom collection type
+
+Collectors.toCollection(ArrayList::new)
+Collectors.toCollection(TreeSet::new)
+
+PTR
+Correct 👍 — you don’t need to write Collectors.toList() explicitly.
+
+List<String> words = List.of("a", "a", "b", "b", "b");
+
+groupingBy(
+    s -> s.charAt(0),
+    Collectors.toList()
+)
+
+a → [a, a]
+b → [b, b, b]
+
+groupingBy(
+    s -> s.charAt(0),
+    Collectors.toSet()
+)
+
+a → [a]
+b → [b]
+
+🔥 2. Counting / Size related
+🔹 Collectors.counting()
+
+Counts elements in each group
+
+Collectors.counting()
+
+👉 Result type: Long
+
+Map<Character, Long> result =
+    list.stream()
+        .collect(Collectors.groupingBy(
+            s -> s.charAt(0),
+            Collectors.counting()
+        ));
+
+{
+  a = 2,
+  b = 2
+}
+
+🔥 3. Mathematical reductions
+🔹 summingInt / Long / Double
+Collectors.summingInt(Employee::getSalary)
+
+🔹 averagingInt / Long / Double
+Collectors.averagingInt(Employee::getSalary)
+
+🔹 minBy / maxBy
+Collectors.maxBy(Comparator.comparing(Employee::getSalary))
+Collectors.minBy(Comparator.comparing(Employee::getSalary))
+(Refer Employee.java for the the maxBt demo)
+👉 returns Optional<T>
+
+🔥 4. Mapping (VERY important for groupingBy)
+🔹 Collectors.mapping()
+
+Transforms values inside a group
+
+Collectors.mapping(
+    Employee::getName,
+    Collectors.toList()
+)
+
+👉 Example:
+Dept → List of Employee names
+
+
+List<String> list = List.of("apple", "ant", "bat", "ball");
+Map<Character, List<Integer>> result =
+    list.stream()
+        .collect(Collectors.groupingBy(
+            s -> s.charAt(0),
+            Collectors.mapping(
+                String::length,
+                Collectors.toList()
+            )
+        ));
+✔ Instead of storing words → storing transformed values
+{
+  a = [5, 3],
+  b = [3, 4]
+}
+
+
+🔥 5. Joining (for Strings)
+🔹 Collectors.joining()
+Collectors.joining()
+🔹 With delimiter
+Collectors.joining(", ")
+🔹 With prefix/suffix
+Collectors.joining(", ", "[", "]")
+
+List<String> list = List.of("apple", "banana", "cherry");
+
+String result = list.stream()
+    .collect(Collectors.joining(", "));
+
+combining it with groupingBy
+
+Map<Character, String> result =
+    list.stream()
+        .collect(Collectors.groupingBy(
+            s -> s.charAt(0),
+            Collectors.mapping(
+                s -> s.toUpperCase(),
+                Collectors.joining(", ")
+            )
+        ));
+
+
+🔥 6. Reducing (custom logic)
+🔹 Collectors.reducing()
+
+Very flexible aggregation
+
+Collectors.reducing((a, b) -> a + b)
+
+Or with identity:
+
+Collectors.reducing(0, x -> x, Integer::sum)
+
+
+🔥 7. Group transformation helper
+🔹 Collectors.collectingAndThen()
+
+Post-process result
+
+Collectors.collectingAndThen(
+    Collectors.toList(),
+    List::size
+)
+
+👉 Convert List → count, or modify final result
+
+🔥 8. Special (partitioning support)
+🔹 partitioningBy downstream options
+
+Same collectors apply:
+
+Collectors.partitioningBy(
+    x -> x > 10,
+    Collectors.counting()
+)
+🔥 9. Common combinations (VERY IMPORTANT)
+🔹 Group + count
+groupingBy(key, counting())
+🔹 Group + list of names
+groupingBy(
+    Employee::getDept,
+    mapping(Employee::getName, toList())
+)
+🔹 Group + max salary
+groupingBy(
+    Employee::getDept,
+    maxBy(comparing(Employee::getSalary))
+)
+
+
+
+Collectors.averagingInt()
+Collectors.summingInt()
+Collectors.maxBy()
+Collectors.minBy()
+Collectors.mapping()
+Collectors.collectingAndThen()
+Collectors.counting()

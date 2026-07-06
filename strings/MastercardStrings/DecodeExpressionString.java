@@ -7,7 +7,7 @@ public class DecodeExpressionString {
 
     public static void main(String[] args) {
         String s = "6[2*3]5[2+2]3[2-2]";
-        System.out.println(decodeString(s));
+        System.out.println(decodeString(s)); //output: 66666644444000
     }
 
     public static String decodeString(String s) {

@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+
 /*
 
 Given an array of integers nums and an integer k. A continuous subarray is called nice if there are k odd numbers on it.
@@ -23,20 +24,52 @@ Output: 16
 */
 public class Solution {
 
-/*
-time complexity: O(n)
-space complexity: O(n)
-*/
-public int numberOfSubarrays1(int[] nums, int k) {
-     Map<Integer, Integer> map = new HashMap<>();
+    /*
+     * time complexity: O(n)
+     * space complexity: O(n)
+     */
+    public int numberOfSubarrays1(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        // STEP 1: Initialize data structures to keep track of prefix sums
         map.put(0, 1); // base case
 
         int prefixSum = 0;
         int result = 0;
 
         for (int num : nums) {
-            // Convert odd/even
+            // STEP 2: Calculate prefix sum for current number
+            // The trick is converting the problem into:
+            // “How many subarrays have sum = k?”
+            // because: odd -> 1 even -> 0
+            // nums = {1, 1, 2, 1, 1}; becomes nums = {1, 1, 0, 1, 1};
+
             prefixSum += (num % 2);
+
+            /*
+             * Understanding Prefix Sum
+             * prefixSum: total odd numbers seen so far
+             * Example: [1,1,0,1]
+             *
+             * Prefix sums:
+             * index 0 -> 1
+             * index 1 -> 2
+             * index 2 -> 2
+             * index 3 -> 3
+             */
+
+
+            /*
+            Main Formula
+                If: currentPrefixSum - oldPrefixSum = k
+                then: subarray between them has exactly k odds
+
+                Rearrange:
+                oldPrefixSum = currentPrefixSum - k
+
+                That’s why we check:
+                map.containsKey(prefixSum - k)
+            */
 
             // Count subarrays ending here with k odds
             if (map.containsKey(prefixSum - k)) {
@@ -48,19 +81,19 @@ public int numberOfSubarrays1(int[] nums, int k) {
         }
 
         return result;
-}
-
+    }
 
     /*
-    time complexity: O(n)
-    space complexity: O(1)
-    1. Use two pointers (left and right) to define the sliding window.
-    2. Expand the window by moving the right pointer and count odd numbers.
-    3. When the count of odd numbers equals k, calculate the number of nice subarrays
-        by counting even numbers on both sides of the window.
-    4. Move the left pointer to shrink the window and continue the process.
-    5. Return the total count of nice subarrays found.
-    */
+     * time complexity: O(n)
+     * space complexity: O(1)
+     * 1. Use two pointers (left and right) to define the sliding window.
+     * 2. Expand the window by moving the right pointer and count odd numbers.
+     * 3. When the count of odd numbers equals k, calculate the number of nice
+     * subarrays
+     * by counting even numbers on both sides of the window.
+     * 4. Move the left pointer to shrink the window and continue the process.
+     * 5. Return the total count of nice subarrays found.
+     */
     public int numberOfSubarrays(int[] nums, int k) {
         int left = 0, right = 0;
         int oddCount = 0;
@@ -93,7 +126,8 @@ public int numberOfSubarrays1(int[] nums, int k) {
                     tempLeft++;
                 }
 
-                // The number of nice subarrays is determined by the combinations of even counts on both sides
+                // The number of nice subarrays is determined by the combinations of even counts
+                // on both sides
                 result += (leftEvenCount + 1) * (rightEvenCount + 1);
 
                 // Move left pointer to shrink the window and reduce odd count
@@ -108,5 +142,19 @@ public int numberOfSubarrays1(int[] nums, int k) {
         }
 
         return result;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] nums = { 1, 1, 2, 1, 1 };
+        int k = 3;
+        System.out.println(sol.numberOfSubarrays(nums, k));
+        System.out.println(sol.numberOfSubarrays1(nums, k));
+
+        int[] nums1 = { 2, 4, 6 };
+        int k1 = 1;
+        System.out.println(sol.numberOfSubarrays(nums1, k1));
+        System.out.println(sol.numberOfSubarrays1(nums1, k1));
+
     }
 }

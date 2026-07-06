@@ -1,6 +1,9 @@
 import java.util.Arrays;
 
 class Solution {
+
+    // Time Complexity: O(n log n) due to sorting
+    // Space Complexity: O(1) if we ignore the space used by sorting, otherwise
     public int findNonMinOrMax(int[] nums) {
         int n = nums.length;
 
@@ -13,6 +16,8 @@ class Solution {
     }
 
 
+    //Time Complexity: O(n) due to single pass to find min and max, and another pass to find the non-min/max element
+    //Space Complexity: O(1)
     public int findNonMinOrMaxBetterApproach(int[] nums) {
         if (nums.length <= 2) {
             return -1;

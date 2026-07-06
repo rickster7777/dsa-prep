@@ -17,16 +17,16 @@ public class Solution {
         boolean firstColZero = false;
 
         // Step 1️⃣ Check if first row has any zero
-        for (int j = 0; j < n; j++) {
-            if (matrix[0][j] == 0) {
+        for (int i = 0; i < n; i++) {
+            if (matrix[0][i] == 0) {
                 firstRowZero = true;
                 break;
             }
         }
 
         // Step 2️⃣ Check if first column has any zero
-        for (int i = 0; i < m; i++) {
-            if (matrix[i][0] == 0) {
+        for (int j = 0; j < m; j++) {
+            if (matrix[j][0] == 0) {
                 firstColZero = true;
                 break;
             }
@@ -70,12 +70,16 @@ public class Solution {
     public static void main(String[] args) {
 
         // Test case with 3 rows and 4 columns
-        int[][] matrix = { { 1, 1, 1, 1 },
-                            { 1, 0, 1, 1 },
+        int[][] matrix =    { { 1, 1, 1, 1 },
+                            { 1, 0, 1, 1   },
                             { 1, 1, 1, 0 } };
 
-
-        
+        /*
+        output:
+        [[1, 0, 1, 0], 
+        0, 0, 0], 
+        [0, 0, 0, 0]]
+        */        
         Solution.setZeroes(matrix);
         System.out.println(java.util.Arrays.deepToString(matrix));
     }

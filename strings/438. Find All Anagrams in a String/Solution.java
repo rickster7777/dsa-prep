@@ -1,5 +1,6 @@
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // public class Solution {
 
@@ -65,7 +66,9 @@ public class Solution {
                 boolean isAna = isAnagram(s1.toString(), p);
 
                 if (isAna) {
-                    list.add(i + 1 - k); // Fixed line
+                    list.add(i + 1 - k); //here i+1-k is the starting index of the current window of size k
+                    // its added because we want to return the starting index of the anagram in the original 
+                    // string s, not the index of the last character in the window.
                 }
                 s1.deleteCharAt(0); // Slide the window
             }
@@ -94,6 +97,7 @@ public class Solution {
 
         String s = "cbaebabacd", p = "abc";
         List<Integer> result = findAnagrams(s, p);
-        System.out.println(result); // Output:
+        System.out.println(result); // Output: [0, 6]
+        // 1st anagram "cba" starts at index 0, and the 2nd anagram "bac" starts at index 6.
     }
 }
