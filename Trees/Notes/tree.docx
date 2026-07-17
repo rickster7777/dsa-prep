@@ -9,6 +9,7 @@ Parent: A node that has one or more child nodes.
 Child: A node that is a descendant of another node.
 Leaf Node: A node that does not have any children (end nodes).
 Edge: A connection between two nodes.
+
 Height of a Tree: The length of the longest path from the root to a leaf.
 Depth of a Node: The number of edges from the root to that node.
 

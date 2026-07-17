@@ -1,0 +1,313 @@
+how to intutively think about solving tree problems currently i cant do that
+
+This is one of the biggest hurdles with trees, and it's very common. The issue usually isn't that trees are inherently difficult—it's
+that they're recursive structures, so you need a different way of thinking than with arrays or strings.
+
+Here's the mental framework that helped many developers become comfortable with tree problems.
+
+Step 1: Forget the whole tree. Think about one node.
+
+When you see a tree like this:
+
+        4
+      /   \
+     2     7
+    / \   / \
+   1   3 6   9
+
+Don't think:
+
+"How do I invert this entire tree?"
+
+Instead ask:
+
+"If I'm standing at node 4, what should I do?"
+
+For invert tree, the answer is simply:
+
+Ask left subtree to invert itself.
+Ask right subtree to invert itself.
+Swap them.
+
+That's all.
+
+The recursion takes care of every other node.
+
+Step 2: Trust recursion
+
+When writing recursive tree code, pretend the recursive call already works perfectly.
+
+For example:
+
+TreeNode left = invertTree(root.left);
+
+Don't think:
+
+"How will it invert every node?"
+
+Instead assume:
+
+"When this line returns, the left subtree is already inverted."
+
+Now your job becomes trivial.
+
+left subtree  ✔ inverted
+right subtree ✔ inverted
+
+Now swap them.
+
+This is called the recursive leap of faith.
+
+Step 3: Every tree problem is one of three questions
+Question 1
+
+What should this function return?
+
+Examples:
+
+int maxDepth(root)
+
+returns
+
+height of this subtree
+boolean isBalanced(root)
+
+returns
+
+whether this subtree is balanced
+TreeNode invertTree(root)
+
+returns
+
+the inverted subtree
+Question 2
+
+What information do I need from my children?
+
+For example:
+
+Maximum depth
+
+Need:
+
+left height
+right height
+
+Diameter
+
+Need:
+
+left height
+right height
+
+Balanced tree
+
+Need:
+
+left balanced?
+right balanced?
+left height
+right height
+
+LCA
+
+Need:
+
+Did left subtree contain target?
+Did right subtree contain target?
+Question 3
+
+Once I have the children's answers, what do I do?
+
+For max depth
+
+return max(left,right)+1
+
+For invert
+
+swap
+return root
+
+For diameter
+
+update answer
+return height
+
+Everything reduces to these three questions.
+
+Example: Maximum Depth
+
+Instead of staring at
+
+        4
+      /   \
+     2     7
+
+Focus only on node 4.
+
+Ask
+
+What is my height?
+
+You don't know.
+
+Ask left child.
+
+left height = ?
+
+Ask right child.
+
+right height = ?
+
+Now compute yours.
+
+max(left,right)+1
+
+Done.
+
+Example: Validate BST
+
+Again, don't think about the entire tree.
+
+Think
+
+Can this subtree be a BST?
+
+Ask children.
+
+Is left valid?
+
+Is right valid?
+
+Now verify current node satisfies the BST constraints.
+
+Example: Lowest Common Ancestor
+
+Don't think
+
+Find LCA.
+
+Think
+
+At one node,
+
+Are both nodes left?
+
+Go left.
+
+Are both right?
+
+Go right.
+
+Otherwise
+
+I am the answer.
+
+Notice how tiny each decision is.
+
+Recognize common tree patterns
+
+Nearly every tree problem falls into one of these categories.
+
+Pattern 1 — DFS
+
+Visit every node.
+
+Examples
+
+Maximum depth
+Same tree
+Invert tree
+Path Sum
+Pattern 2 — Bottom-up
+
+Children solve themselves first.
+
+Examples
+
+Diameter
+Balanced tree
+Maximum path sum
+
+Usually looks like
+
+left = dfs(root.left);
+right = dfs(root.right);
+
+return something(left,right);
+Pattern 3 — Top-down
+
+Pass information downward.
+
+Examples
+
+Current path sum
+
+Current maximum
+
+Lower/upper bounds
+
+Depth
+Pattern 4 — BST
+
+Exploit ordering.
+
+left < root < right
+
+Problems become much simpler.
+
+Examples
+
+Search BST
+Insert
+Delete
+LCA BST
+Draw before coding
+
+For every problem, draw a tiny tree.
+
+Example
+
+      A
+     / \
+    B   C
+
+Then ask
+
+What should B return?
+
+What should C return?
+
+What should A do?
+
+You'll be surprised how often the solution appears.
+
+The question to ask yourself
+
+Instead of asking
+
+"How do I solve this tree?"
+
+Always ask
+
+"If every subtree could solve itself, what would I do at the current node?"
+
+That shift in perspective is the essence of recursive tree algorithms.
+
+A practical learning plan
+
+If you're practicing on LeetCode, solve these in order:
+
+Invert Binary Tree
+Same Tree
+Maximum Depth of Binary Tree
+Path Sum
+Symmetric Tree
+Validate Binary Search Tree
+Lowest Common Ancestor of a BST
+Binary Tree Level Order Traversal (BFS)
+Diameter of Binary Tree
+Binary Tree Maximum Path Sum
+
+By the time you've worked through these—especially if you dry-run them by hand—you'll start recognizing patterns 
+instead of treating each problem as entirely new. That's usually the point where tree problems become much more intuitive.

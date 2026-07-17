@@ -91,7 +91,14 @@ public class Solution {
     public static void main(String[] args) {
         Solution sol = new Solution();
         String str = "abciiidef";
-        int k = 3;
+        int k = 3; // Expected output: 3
+
+        String str2 = "aeiou";
+        int k2 = 2; // Expected output: 2
+
+        String str3 = "leetcode";
+        int k3 = 3; // Expected output: 2
+        
         System.out.println(sol.countVowels(str, k));
     }
 }

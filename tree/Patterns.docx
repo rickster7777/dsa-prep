@@ -1,0 +1,82 @@
+Tree Patterns
+
+Know these patterns:
+
+Pattern 1: Traverse
+Visit node
+Go left
+Go right
+
+Examples:
+
+Count nodes
+Sum nodes
+Search
+
+Pattern 2: Bottom-Up
+left answer
+right answer
+
+combine
+return
+
+Examples:
+
+Height
+Diameter
+Balanced Tree
+
+
+Pattern 3: Level Order
+Queue
+
+while queue not empty
+    process current level
+    push children
+
+Examples:
+
+Zigzag
+Right Side View
+Average of Levels
+
+5. Binary Search Tree
+
+Know these operations:
+
+Search
+Insert
+Delete
+Floor
+Ceil
+Kth Smallest
+Validate BST
+
+6. Important Tree Problems
+
+You should be comfortable with:
+
+Easy:
+
+Maximum Depth
+Same Tree
+Symmetric Tree
+Invert Tree
+Path Sum
+Count Nodes
+
+Medium:
+
+Diameter
+Balanced Tree
+LCA
+Binary Tree Right Side View
+Zigzag Traversal
+Construct Tree
+Serialize & Deserialize
+Kth Smallest (BST)
+
+Hard:
+
+Max Path Sum
+Vertical Order Traversal

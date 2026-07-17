@@ -17,6 +17,7 @@ public class Merge {
 
         for (int i = 1; i < intervals.length; i++) {
             // If the current interval overlaps with the next interval, merge them
+            // comparing the end of the current interval with the start of the next interval
             if (currentInterval[1] >= intervals[i][0]) {
                 currentInterval[1] = Math.max(currentInterval[1], intervals[i][1]);
             } else {
@@ -38,6 +39,7 @@ public class Merge {
         int[][] mergedIntervals = merge(intervals);
 
         int[][] intervals1 = { {4, 7}, {1, 4} }; // Output: [[1, 7]]
+        //explanation: The intervals [1, 4] and [4, 7] overlap, so they are merged into [1, 7].
         int[][] mergedIntervals1 = merge(intervals1);
 
         System.out.println("Merged Intervals:");
