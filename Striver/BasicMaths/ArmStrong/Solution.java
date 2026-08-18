@@ -37,6 +37,8 @@ class Solution {
         //how 153 is armstrong number
         // 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
 
+        // A number is armstrong if the sum of its own digits each raised to the power of the number 
+        // of digits is equal to the number itself.
 
     }
 }

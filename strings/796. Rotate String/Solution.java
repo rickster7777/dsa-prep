@@ -24,9 +24,11 @@ class Solution {
 
     public static void main(String[] args) {
 
-        String s1 = "abcde", goal1 = "cdeab";
-        String s2 = "abcde", goal2 = "abced";
+        String s1 = "abcde", goal1 = "cdeab"; 
+        // output: true explanation: "abcde" can be rotated 2 times to become "cdeab".
 
+        String s2 = "abcde", goal2 = "abced";
+        // output: false explanation: "abcde" cannot be rotated to become "abced".
 
         System.out.println(Solution.rotateString(s1, goal1));
 

@@ -69,6 +69,13 @@ public class Solution {
                     list.add(i + 1 - k); //here i+1-k is the starting index of the current window of size k
                     // its added because we want to return the starting index of the anagram in the original 
                     // string s, not the index of the last character in the window.
+                    /*
+                    Here i + 1 - k and i - k + 1 both will work ?
+
+                    Either one will work. i - k + 1 is slightly more direct, 
+                    while i + 1 - k is just the same expression written in a different order.
+                    (Asking this because I've used this in the sliding window maximum problem   )
+                    */
                 }
                 s1.deleteCharAt(0); // Slide the window
             }

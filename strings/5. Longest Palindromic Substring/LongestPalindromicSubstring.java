@@ -50,6 +50,9 @@ public class LongestPalindromicSubstring {
             right++;
         }
         // Return the palindrome found by expanding around the center
+        // why left + 1 because we decrement left one extra time in the while loop when the characters are no longer equal,
+        // so we need to add 1 to get back to the last valid index of the palindrome.
+        // Similarly, right is incremented one extra time, so we can use it directly as the end index for substring.
         return s.substring(left + 1, right);
     }
 
@@ -81,7 +84,17 @@ public class LongestPalindromicSubstring {
 
     // Test the implementation
     public static void main(String[] args) {
-        String input = "babad";
+        String input = "babad"; //output: "bab" or "aba"
+        //explanation: "aba" is also a valid answer.
         System.out.println("Longest Palindromic Substring: " + longestPalindrome(input)); // Output: "bab" or "aba"
+
+        String input2 = "cbbd"; //output: "bb"
+        System.out.println("Longest Palindromic Substring: " + longestPalindrome(input2)); // Output: "bb"
+
+        String input3 = "a"; //output: "a"
+        System.out.println("Longest Palindromic Substring: " + longestPalindrome(input3)); // Output: "a"
+
+        String input4 = "ac"; //output: "a" or "c"
+        System.out.println("Longest Palindromic Substring: " + longestPalindrome(input4 )); // Output: "a" or "c"
     }
 }

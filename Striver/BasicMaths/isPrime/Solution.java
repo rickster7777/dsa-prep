@@ -23,6 +23,7 @@ class Solution {
         }
 
         // Check divisibility only up to sqrt(n)
+        // i * i <= n is equivalent to i <= Math.sqrt(n) but avoids floating-point operations
         for (int i = 2; i * i <= n; i++) {
 
             // If n is divisible by any number, it is not prime

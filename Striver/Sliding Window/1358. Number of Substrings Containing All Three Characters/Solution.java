@@ -60,4 +60,16 @@ public class Solution {
         }
         return result;
     }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String s1 = "abcabc";
+        System.out.println(sol.numberOfSubstrings(s1)); // Output: 10
+
+        String s2 = "aaacb";
+        System.out.println(sol.numberOfSubstrings(s2)); // Output: 3
+
+        String s3 = "abc";
+        System.out.println(sol.numberOfSubstrings(s3)); // Output: 1
+    }
 }

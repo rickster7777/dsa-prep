@@ -1,6 +1,8 @@
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
 
 /*
 s = "eceba"
@@ -40,7 +42,12 @@ public class Solution {
         return maxLength;
     }
 
-
+    /*
+    Time Complexity
+    O(n) — Each character enters and leaves the window at most once.
+    Space Complexity
+    O(k) (or O(min(n, charset)))
+    */
     public int lengthOfLongestSubstringKDistinctfix(String s, int k) {
 
         // STEP 1:
@@ -111,9 +118,78 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
         System.out.println(solution.lengthOfLongestSubstringKDistinct("eceba", 2)); // Expected: 3
+        //explanation: The longest substring with at most 2 distinct characters is "ece" which has a length of 3.
+
         System.out.println(solution.lengthOfLongestSubstringKDistinct("aa", 1)); // Expected: 2
+        //explanation: The longest substring with at most 1 distinct character is "aa" which has a length of 2.
+
         System.out.println(solution.lengthOfLongestSubstringKDistinct("aabbcc", 2)); // Expected: 4
+        //explanation: The longest substring with at most 2 distinct characters is "aabb" or "bbcc" which has a length of 4.
+
         System.out.println(solution.lengthOfLongestSubstringKDistinct("abcadcacacaca", 3)); // Expected: 7
+        //explanation: The longest substring with at most 3 distinct characters is "cadcacac" which has a length of 7.
     }
 
 }
+
+/*
+why this can't be achieved using hash set ?
+
+A HashSet is not enough because this problem requires knowing how many times each character appears in the current window.
+
+A HashSet only tells you:
+
+whether a character exists or not.
+
+It does not tell you:
+
+how many occurrences of that character are still inside the window.
+Example
+s = "eceba"
+k = 2
+
+Suppose our window is:
+
+ece
+
+A HashSet contains:
+
+{e, c}
+
+Now we expand to include 'b':
+
+eceb
+
+Set becomes:
+
+{e, c, b}
+
+There are 3 distinct characters, so we need to shrink from the left.
+
+We remove the leftmost 'e':
+
+ceb
+
+Should we remove 'e' from the set?
+
+No!
+
+Because another 'e' is still inside the window.
+
+But a HashSet doesn't know that. If you do:
+
+set.remove('e');
+
+the set becomes:
+
+{c, b}
+
+which is wrong—the current window "ceb" still contains 'e'.
+Summary
+Data Structure	Knows if character exists?	Knows frequency?	Suitable?
+HashSet	✅	❌	No
+HashMap<Character, Integer>	✅	✅	Yes
+
+The key insight is that when shrinking a sliding window, you need to know whether a character has completely left the window.
+A HashSet cannot distinguish between "appears once" and "appears five times", while a HashMap can.
+*/

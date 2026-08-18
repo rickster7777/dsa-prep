@@ -1,0 +1,278 @@
+📘 LeetCode 417: Pacific Atlantic Water Flow — Interview Notes
+1. Core Intuition
+❌ Brute Force
+
+Start DFS/BFS from every cell and check whether it can reach both oceans.
+
+Repeats the same paths many times.
+Time Complexity: O((m × n)²) in the worst case.
+✅ Optimized Thinking (Reverse DFS)
+
+Instead of asking:
+
+"Can this cell reach the ocean?"
+
+Ask:
+
+"Starting from the ocean, which cells can reach me if I reverse the flow?"
+
+Reverse the water flow.
+
+Normal water flow:
+
+5 → 4 → 3 → 2 → Ocean
+
+Reverse DFS:
+
+Ocean → 2 → 3 → 4 → 5
+
+Move from lower/equal height to higher/equal height.
+
+2. Reverse DFS Rule
+
+Normal flow:
+
+neighbor <= current
+
+Reverse DFS:
+
+neighbor >= current
+
+This is the most important observation in the problem.
+
+3. Starting Points
+Pacific Ocean
+
+Touches:
+
+Top row
+Left column
+P P P P
+P . . .
+P . . .
+P . . .
+
+Run DFS from every Pacific border cell.
+
+Atlantic Ocean
+
+Touches:
+
+Bottom row
+Right column
+. . . A
+. . . A
+. . . A
+A A A A
+
+Run DFS from every Atlantic border cell.
+
+4. Two Visited Sets
+
+Maintain two sets:
+
+pacificVisited
+atlanticVisited
+
+After DFS:
+
+Pacific reachable cells
+
++
+
+Atlantic reachable cells
+
+Answer:
+
+Pacific ∩ Atlantic
+
+Take the intersection, not the union.
+
+5. DFS Logic
+
+For every DFS call:
+
+Enter DFS
+      ↓
+Base Case
+      ↓
+Mark Visited
+      ↓
+Explore Up
+      ↓
+Explore Down
+      ↓
+Explore Left
+      ↓
+Explore Right
+      ↓
+Return (Backtrack)
+6. Base Cases
+
+Stop DFS if:
+
+Out of bounds
+Already visited
+Neighbor height is smaller than current height (reverse DFS condition fails)
+7. Recursive Mental Model
+
+Always think like the computer.
+
+For every recursive call, ask:
+
+Which cell are we visiting?
+Does the base case trigger?
+What changes?
+Which neighbor is checked next?
+Does a recursive call happen?
+What does the call stack look like?
+When do we backtrack?
+8. Call Stack Example
+DFS(0,0)
+│
+└── DFS(0,1)
+      │
+      └── DFS(1,1)
+
+When DFS(1,1) finishes:
+
+DFS(0,0)
+│
+└── DFS(0,1)
+
+Execution continues from where it paused.
+
+It does not
+
+Restart the function ❌
+Return immediately ❌
+
+It continues with the next neighbor.
+
+9. Backtracking
+
+A DFS function returns only after:
+
+Up
+Down
+Left
+Right
+
+have all been processed.
+
+Backtracking happens because:
+
+The function has finished all its work.
+
+Not because of the base case.
+
+10. Why is visited Necessary?
+
+Equal heights create cycles.
+
+Example:
+
+2 2
+
+Reverse DFS:
+
+A ↔ B
+
+Without visited:
+
+DFS(A)
+ ↓
+DFS(B)
+ ↓
+DFS(A)
+ ↓
+DFS(B)
+ ...
+
+Infinite recursion.
+
+11. Important Observation
+
+Strictly increasing heights:
+
+1 → 2 → 3 → 4
+
+cannot create cycles because
+
+4 → 3
+
+is not allowed in reverse DFS.
+
+Only equal heights can create cycles.
+
+12. Overall Algorithm
+Create Pacific visited set
+
+Create Atlantic visited set
+
+Run DFS from:
+    Top row
+    Left column
+
+Store in Pacific
+
+Run DFS from:
+    Bottom row
+    Right column
+
+Store in Atlantic
+
+Return:
+Pacific ∩ Atlantic
+13. Complexity
+Time
+O(m × n)
+
+Each cell is visited at most once for Pacific and once for Atlantic.
+
+Space
+O(m × n)
+Two visited sets
+Recursion stack
+14. Common Mistakes
+
+❌ Running DFS from every cell
+
+❌ Forgetting to reverse the direction
+
+❌ Using
+
+neighbor <= current
+
+instead of
+
+neighbor >= current
+
+❌ Forgetting visited
+
+❌ Returning the union instead of the intersection
+
+15. Interview Explanation (30 Seconds)
+
+"Instead of starting DFS from every cell, which repeats many paths, I reverse the problem. I start DFS from the Pacific borders (top row and left column) and mark every cell that can reach the Pacific by moving only to neighbors with height greater than or equal to the current cell. I repeat the same process for the Atlantic borders (bottom row and right column). Finally, I return the intersection of the two visited sets because those are the cells that can reach both oceans."
+
+16. Similar Problems
+200. Number of Islands
+695. Max Area of Island
+130. Surrounded Regions
+1020. Number of Enclaves
+1254. Number of Closed Islands
+733. Flood Fill
+17. My DFS Checklist (Use for Every Graph Problem)
+
+Before coding, ask yourself:
+
+✅ Can I reverse the search?
+✅ What are the starting nodes?
+✅ What is the DFS condition?
+✅ What is my visited structure?
+✅ What are the base cases?
+✅ When does the function return?
+✅ Am I looking for a union or an intersection?
+
+Following this checklist will help you approach not only this problem, but many graph and DFS interview questions systematically.

@@ -36,8 +36,13 @@ class Solution {
         int[] nums = {5,7,7,8,8,10};
         int target = 8;
 
+        int[] nums2 = {5,7,7,8,8,10};
+        int target2 = 6;
+        int[] result2 = solution.searchRange(nums2, target2);
+
         int[] result = solution.searchRange(nums, target);
 
         System.out.println("First and Last Position of Target " + target + ": [" + result[0] + ", " + result[1] + "]"); // Output: [3, 4]
+        System.out.println("First and Last Position of Target " + target2 + ": [" + result2[0] + ", " + result2[1] + "]"); // Output: [-1, -1]
     }
 }

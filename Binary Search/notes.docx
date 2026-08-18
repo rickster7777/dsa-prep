@@ -43,3 +43,120 @@ Find minimum in rotated sorted array
 First bad version
 Binary search answer (when you always have a valid answer to narrow toward)
 Find insert position
+
+
+4-08-2026
+
+In binary search dsa pattern input should always be sorted to perform binary search ?
+
+Yes—for the classic binary search algorithm, the input must be sorted (or otherwise arranged in a monotonic order).
+
+Why?
+
+Binary search works by comparing the target with the middle element.
+
+If the array is sorted in ascending order:
+target < mid → search the left half
+target > mid → search the right half
+
+This only works because all smaller elements are on one side and all larger elements are on the other.
+
+In DSA, "Binary Search Pattern" is broader
+
+Many interview problems use the binary search pattern even when the input array itself isn't sorted. 
+The trick is that you're not searching a sorted array—you are searching a sorted answer space or a monotonic condition.
+
+Examples:
+
+Find the minimum eating speed (Koko Eating Bananas)
+Allocate minimum pages
+Capacity to ship packages within D days
+Aggressive cows
+Split array largest sum
+
+In these problems:
+
+The array may be unsorted.
+But the search space (possible answers) is monotonic.
+You binary search on the answer, not on the array.
+
+| Situation                             | Need sorted input?                        |
+| ------------------------------------- | ----------------------------------------- |
+| Search an element in an array         | ✅ Yes                                     |
+| Find first/last occurrence            | ✅ Yes                                     |
+| Lower bound / Upper bound             | ✅ Yes                                     |
+| Binary search on answer               | ❌ No (need a monotonic condition instead) |
+| Binary search on a monotonic function | ❌ No sorted array required                |
+
+What is monotonic condition ?
+
+A monotonic condition is a condition that changes only once as you move through an ordered search space. This property is
+what makes binary search possible even when you're not searching a sorted array.
+
+There are two common forms:
+
+False → True
+
+x:        1 2 3 4 5 6 7 8
+possible: F F F F T T T T
+
+Binary search can find the first True.
+
+True → False
+
+x:        1 2 3 4 5 6 7 8
+possible: T T T T F F F F
+
+Binary search can find the last True or the first False.
+
+The important point is that the condition never flips back. It changes at most once.
+
+Example 1: Koko Eating Bananas
+
+Suppose the possible eating speeds are:
+
+Speed:       1 2 3 4 5 6 7 8
+Can finish?  F F F T T T T T
+Speed = 2 → Too slow ❌
+Speed = 4 → Fast enough ✅
+Any speed greater than 4 is also fast enough.
+
+This is a False → True monotonic condition, so binary search can find the minimum valid speed.
+
+Example 2: Ship Packages Within D Days
+
+Suppose ship capacities are:
+
+Capacity:    5 6 7 8 9 10
+Can ship?    F F T T T T
+
+Once a capacity works, every larger capacity also works.
+
+Example 3: Classic Binary Search
+
+For a sorted array:
+
+[2, 5, 8, 12, 16, 23, 38]
+
+The array itself is ordered, which lets you eliminate half the search space after each comparison. You aren't explicitly checking a monotonic boolean condition, but you're relying on the same underlying idea: the ordering guarantees that the target, if present, must lie entirely on one side of the middle element.
+
+When binary search doesn't work
+
+If the condition behaves like this:
+
+F T F T T F
+
+or
+
+T F T F
+
+it is not monotonic because it changes back and forth. Binary search cannot safely discard half the search space.
+
+A quick rule
+
+Before using binary search, ask yourself:
+
+If a value works, do all larger values (or all smaller values) also work?
+
+If yes, the condition is monotonic, and binary search is usually applicable.
+If no, binary search is generally not the right approach.

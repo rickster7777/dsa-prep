@@ -1,0 +1,93 @@
+Collectors
+│
+├── Collection
+│   ├── toList
+│   ├── toSet
+│   └── toCollection
+│
+├── Map
+│   ├── toMap
+│   └── toConcurrentMap
+│
+├── Grouping / Partitioning
+│   ├── groupingBy
+│   ├── groupingByConcurrent
+│   └── partitioningBy
+│
+├── Statistics
+│   ├── counting
+│   ├── summing*
+│   ├── averaging*
+│   ├── summarizing*
+│   ├── minBy
+│   └── maxBy
+│
+├── Transformation
+│   ├── mapping
+│   ├── filtering
+│   └── flatMapping
+│
+├── Combination
+│   ├── joining
+│   └── reducing
+│
+└── Finishing
+    └── collectingAndThen
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Counting
+Collectors.counting()
+
+Example:
+
+long count = employees.stream()
+    .collect(Collectors.counting());
+
+But normally you'd simply write:
+
+long count = employees.stream().count();
+
+counting() becomes particularly useful downstream:
+
+employees.stream()
+    .collect(Collectors.groupingBy(
+        Employee::getDepartment,
+        Collectors.counting()
+    ));
+
+--------------------------------------------------------------------------------------------------------------------------------------
+Map<String, List<String>> namesByDepartment =
+    employees.stream()
+        .collect(Collectors.groupingBy(
+            Employee::getDepartment,
+            Collectors.mapping(
+                Employee::getName,
+                Collectors.toList()
+            )
+        ));
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Map<String, List<Employee>> result =
+    employees.stream()
+        .collect(Collectors.groupingBy(
+            Employee::getDepartment,
+            Collectors.filtering(
+                e -> e.getSalary() > 100000,
+                Collectors.toList()
+            )
+        ));
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Collectors.summarizingInt()
+Collectors.summarizingLong()
+Collectors.summarizingDouble()
+
+IntSummaryStatistics stats =
+    employees.stream()
+        .collect(Collectors.summarizingInt(Employee::getSalary));
+
+stats.getCount();
+stats.getSum();
+stats.getMin();
+stats.getAverage();
+stats.getMax();

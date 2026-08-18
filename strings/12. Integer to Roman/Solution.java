@@ -120,14 +120,16 @@ class Solution {
         // Space Complexity: O(1) - Fixed size arrays (13 elements each, constant)
         // Create arrays for values and their corresponding Roman numerals
         // Include subtractive cases (900, 400, 90, 40, 9, 4) in descending order
+
+        //Step 1: Create arrays for values and their corresponding Roman numerals
         int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
         String[] numerals = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
         StringBuilder result = new StringBuilder();
 
-        // Greedy approach: iterate through values from largest to smallest
+        // Step 2: Greedy approach: iterate through values from largest to smallest
         for (int i = 0; i < values.length; i++) {
-            // While num is greater than or equal to current value
+            // Step 3: While num is greater than or equal to current value
             while (num >= values[i]) {
                 result.append(numerals[i]);
                 num -= values[i];
@@ -156,21 +158,21 @@ class Solution {
         romanMap.put(5, "V");
         romanMap.put(4, "IV");
         romanMap.put(1, "I");
-        
+
         StringBuilder result = new StringBuilder();
-        
+
         // Iterate through map entries in insertion order
         for (Map.Entry<Integer, String> entry : romanMap.entrySet()) {
             int value = entry.getKey();
             String symbol = entry.getValue();
-            
+
             // Greedily subtract and append symbol
             while (num >= value) {
                 result.append(symbol);
                 num -= value;
             }
         }
-        
+
         return result.toString();
     }
 }

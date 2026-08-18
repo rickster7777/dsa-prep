@@ -24,8 +24,11 @@ class Solution {
         // Reverse digits until we reach (or cross) the middle of the number
         while (x > rev) {
 
-            // Take the last digit of x and add it to rev
-            rev = rev * 10 + x % 10;
+            // Take the last digit of x  
+            int digit = x % 10;
+
+            // add it to rev
+            rev = rev * 10 + digit;
 
             // Remove the last digit from x
             x /= 10;
@@ -34,6 +37,7 @@ class Solution {
         // For even number of digits: x == rev
         // For odd number of digits: middle digit is ignored using rev / 10
         return x == rev || x == rev / 10;
+        //here rev/10 removes the middle digit in case of odd length numbers, because the middle digit doesn't affect the palindrome property.
     }
 }
 

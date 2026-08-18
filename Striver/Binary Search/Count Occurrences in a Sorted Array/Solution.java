@@ -27,9 +27,11 @@ public class Solution {
             if (arr[mid] == target) {
                 bound = mid;
                 if (isFirst) {
-                    right = mid - 1;
+                    right = mid - 1; //if we are looking for the first occurrence, we move the right pointer
+                    // to mid - 1 to continue searching in the left half
                 } else {
-                    left = mid + 1;
+                    left = mid + 1; //if we are looking for the last occurrence, we move the left pointer
+                    // to mid + 1 to continue searching in the right half
                 }
             } else if (arr[mid] < target) {
                 left = mid + 1;

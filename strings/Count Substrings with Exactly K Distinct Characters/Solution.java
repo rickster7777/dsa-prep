@@ -9,7 +9,10 @@ public class Solution {
      * 
      * Example: s = "pqpqs", k = 2
      * - Substrings with at most 2 distinct chars: 8
+     * which are as follows: "p", "q", "p", "q", "s", "pq", "qp", "pq"
+     *
      * - Substrings with at most 1 distinct char: 1
+     * which are as follows: "p", "q", "p", "q", "s"
      * - Result: 8 - 1 = 7 (exactly 2 distinct)
      */
     public static int substrCount(String s, int k) {
@@ -19,7 +22,7 @@ public class Solution {
     /**
      * Helper function: Count substrings with AT MOST K distinct characters.
      * Uses a sliding window approach with two pointers (left and right).
-     * 
+     *
      * STRATEGY:
      * - Expand window by moving right pointer
      * - When we exceed k distinct chars, shrink from left
@@ -68,10 +71,13 @@ public class Solution {
         // Sample inputs
         String s1 = "pqpqs";
         int k1 = 2;
+        // output: 7
+        //explanation: The substrings with exactly 2 distinct characters are: "pq", "pqp", "pqpq", "qp", "qpq", "pq", "qs"
 
         String s2 = "aabacbebebe";
         int k2 = 3;
-
+        //output: 10
+        //explanation: The substrings with exactly 3 distinct characters are: "aab", "aba", "bac", "acb", "cbe", "beb", "ebe", "beb", "ebe", "be"
         System.out.println("Input: s = \"" + s1 + "\", k = " + k1);
         System.out.println("Output: " + substrCount(s1, k1));
         System.out.println("Expected: 7\n");

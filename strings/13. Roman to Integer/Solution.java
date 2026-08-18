@@ -112,4 +112,13 @@ class Solution {
                 return 0;
         }
     }
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Test cases
+        String input1 = "III"; // Output: 3
+        System.out.println("Input: \"" + input1 + "\" => Output: " + solution.romanToInt(input1));
+
+        String input2 = "LVIII"; // Output: 58
+        System.out.println("Input: \"" + input2 + "\" => Output: " + solution.romanToInt(input2));
 }

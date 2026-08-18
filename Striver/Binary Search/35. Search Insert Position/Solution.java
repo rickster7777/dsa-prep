@@ -39,4 +39,22 @@ class Solution {
         return left;
 
     }
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        int[] nums = {1,3,5,6};
+        int target = 5;
+        int result = solution.searchInsert(nums, target);
+        System.out.println("Insert Position of Target " + target + ": " + result); // Output: 2
+
+        int[] nums2 = {1,3,5,6};
+        int target2 = 2;
+        int result2 = solution.searchInsert(nums2, target2);
+        System.out.println("Insert Position of Target " + target2 + ": " + result2); // Output: 1
+
+        int[] nums3 = {1,3,5,6};
+        int target3 = 7;
+        int result3 = solution.searchInsert(nums3, target3);
+        System.out.println("Insert Position of Target " + target3 + ": " + result3); // Output: 4
+    }
 }

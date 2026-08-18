@@ -9,6 +9,11 @@ Even though the array is not sorted, the peak must exist and we can find it usin
 | Why does this work?          | Because a **peak always exists** and the **slope** guides the search |
 
 */
+
+/*
+Peak Element is an element that is strictly greater than its neighbors. Given an integer array nums, find a peak element, and return its index. 
+If the array contains multiple peaks, return the index to any of the peaks.
+ */
 public class Solution {
     public int findPeakElement(int[] nums) {
         int start = 0;
@@ -38,6 +43,19 @@ public class Solution {
         int[] nums2 = {1, 2, 1, 3, 5, 6, 4};
 
         System.out.println(sol.findPeakElement(nums1)); // Output: 2 (index of 3)
+
         System.out.println(sol.findPeakElement(nums2)); // Output: 5 (index of 6)
+        /*
+        A peak is an element that is strictly greater than its neighbors.
+        Index 1 (value = 2)
+        2 > 1 ✅
+        2 > 1 ✅
+        Peak
+
+        Index 5 (value = 6)
+        6 > 5 ✅
+        6 > 4 ✅
+        Peak
+         */
     }
 }

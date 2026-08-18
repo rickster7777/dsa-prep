@@ -1,0 +1,69 @@
+Interview Tip
+
+There are two common DFS patterns you'll encounter:
+
+1. Preorder DFS (Most graph problems)
+dfs(node){
+
+    visited[node] = true;   // Process first
+
+    for(neighbor){
+        dfs(neighbor);
+    }
+}
+
+Used in:
+
+✅ Number of Islands
+✅ Pacific Atlantic Water Flow
+✅ Flood Fill
+✅ Clone Graph
+✅ Graph Traversal
+
+
+2. Postorder DFS
+dfs(node){
+
+    for(neighbor){
+        dfs(neighbor);
+    }
+
+    answer.add(node);       // Process after children
+}
+
+Used in:
+
+✅ Topological Sort (DFS version)
+✅ Course Schedule II
+✅ Tree DP
+✅ Serialize/Destroy tree problems
+
+
+Quick rule to remember
+| When is the current node processed? | Traversal Type                |
+| ----------------------------------- | ----------------------------- |
+| **Before** recursive calls          | ✅ Preorder                    |
+| **After** recursive calls           | ✅ Postorder                   |
+| Between left and right child        | ✅ Inorder (binary trees only) |
+
+
+Does Inorder exist here?
+
+❌ No.
+
+Inorder is only defined for Binary Trees because there is a clear meaning of:
+
+Left
+Node
+Right
+
+A graph (or a grid) has:
+
+Up
+Down
+Left
+Right
+
+or even an arbitrary number of neighbors.
+
+There is no universal "middle" position, so Inorder doesn't apply.

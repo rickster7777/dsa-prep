@@ -1,0 +1,421 @@
+🔥 The ones I'd memorize first
+
+If you're preparing for coding interviews/DSA, learn these especially well:
+
+% 10          → last digit
+/ 10          → remove last digit
+% 2            → even/odd
+i * i <= n     → prime checking
+rev*10 + digit → reverse number
+GCD            → Euclidean algorithm
+LCM            → a*b/GCD
+% n            → cyclic/repeating patterns
+Math.abs()     → absolute difference
+Math.max/min() → comparisons
+
+Absolutely. If you're learning Java/problem-solving, these **mathematical tricks** come up constantly in coding problems.
+
+### 1. Get the last digit
+
+```java
+int last = num % 10;
+```
+
+Example: `123 % 10 = 3`
+
+### 2. Remove the last digit
+
+```java
+num = num / 10;
+```
+
+Example: `123 / 10 = 12`
+
+Together, these are useful for **digit problems**:
+
+```java
+while (num > 0) {
+    int digit = num % 10;
+    num /= 10;
+}
+```
+
+---
+
+### 3. Check even or odd
+
+```java
+if (num % 2 == 0)
+    System.out.println("Even");
+else
+    System.out.println("Odd");
+```
+
+---
+
+### 4. Check divisibility
+
+```java
+if (num % 5 == 0)
+```
+
+Common rules:
+
+| Divisible by | Trick                        |
+| ------------ | ---------------------------- |
+| 2            | Last digit is even           |
+| 3            | Sum of digits divisible by 3 |
+| 5            | Last digit is 0 or 5         |
+| 9            | Sum of digits divisible by 9 |
+| 10           | Last digit is 0              |
+
+---
+
+### 5. Swap two numbers
+
+Using a temporary variable:
+
+```java
+int temp = a;
+a = b;
+b = temp;
+```
+
+Without a third variable:
+
+```java
+a = a + b;
+b = a - b;
+a = a - b;
+```
+
+In practice, **use the temporary variable** because it avoids overflow issues.
+
+---
+
+### 6. Find maximum/minimum
+
+```java
+int max = Math.max(a, b);
+int min = Math.min(a, b);
+```
+
+For three numbers:
+
+```java
+int max = Math.max(a, Math.max(b, c));
+```
+
+---
+
+### 7. Absolute value
+
+Useful when you don't care about the sign:
+
+```java
+int x = Math.abs(-10);  // 10
+```
+
+---
+
+### 8. Power
+
+```java
+double result = Math.pow(2, 3);
+```
+
+Result:
+
+```text
+8.0
+```
+
+For integer problems, remember `Math.pow()` returns `double`.
+
+---
+
+### 9. Square root
+
+```java
+double root = Math.sqrt(25);  // 5.0
+```
+
+Useful for checking primes efficiently.
+
+Instead of:
+
+```java
+for (int i = 2; i < n; i++)
+```
+
+use:
+
+```java
+for (int i = 2; i * i <= n; i++)
+```
+
+You only need to check up to √n.
+
+---
+
+### 10. Prime number check ⭐
+
+```java
+boolean prime = true;
+
+if (n < 2) {
+    prime = false;
+}
+
+for (int i = 2; i * i <= n; i++) {
+    if (n % i == 0) {
+        prime = false;
+        break;
+    }
+}
+```
+
+**Important idea:** If `n` has a factor greater than √n, it must also have a factor smaller than √n.
+
+---
+
+### 11. Reverse a number ⭐
+
+```java
+int num = 1234;
+int rev = 0;
+
+while (num > 0) {
+    int digit = num % 10;
+    rev = rev * 10 + digit;
+    num /= 10;
+}
+
+System.out.println(rev);
+```
+
+Output:
+
+```text
+4321
+```
+
+The important formula is:
+
+```text
+rev = rev * 10 + digit
+```
+
+---
+
+### 12. Count digits
+
+```java
+int count = 0;
+
+while (num > 0) {
+    count++;
+    num /= 10;
+}
+```
+
+`12345` → `5 digits`
+
+For `0`, handle it separately if needed.
+
+---
+
+### 13. Sum of digits
+
+You already learned this:
+
+```java
+int sum = 0;
+
+while (num > 0) {
+    sum += num % 10;
+    num /= 10;
+}
+```
+
+`12345` → `15`
+
+---
+
+### 14. GCD / HCF ⭐⭐⭐
+
+One of the most important mathematical algorithms:
+
+```java
+while (b != 0) {
+    int temp = b;
+    b = a % b;
+    a = temp;
+}
+
+System.out.println(a);
+```
+
+For `12, 18`:
+
+```text
+GCD = 6
+```
+
+This is called the **Euclidean algorithm**.
+
+---
+
+### 15. LCM
+
+Using:
+
+```text
+LCM(a,b) = |a × b| / GCD(a,b)
+```
+
+Java:
+
+```java
+int gcd = ...;
+int lcm = Math.abs(a * b) / gcd;
+```
+
+For large numbers, be careful about integer overflow.
+
+---
+
+### 16. Check palindrome number ⭐
+
+A number is palindrome if it reads the same backward.
+
+`121` → palindrome
+`123` → not palindrome
+
+```java
+int original = 121;
+int num = original;
+int rev = 0;
+
+while (num > 0) {
+    int digit = num % 10;
+    rev = rev * 10 + digit;
+    num /= 10;
+}
+
+if (original == rev)
+    System.out.println("Palindrome");
+```
+
+---
+
+### 17. Leap year
+
+```java
+if (year % 400 == 0 || 
+    (year % 4 == 0 && year % 100 != 0)) {
+    System.out.println("Leap year");
+}
+```
+
+Remember:
+
+```text
+Divisible by 400 → leap
+OR
+Divisible by 4 but NOT 100 → leap
+```
+
+---
+
+### 18. Modulo for cycling ⭐⭐⭐
+
+`%` is extremely important beyond digits.
+
+For example, to cycle through positions:
+
+```java
+index = (index + 1) % n;
+```
+
+If `n = 5`:
+
+```text
+0 → 1 → 2 → 3 → 4 → 0 → 1 ...
+```
+
+This appears frequently in **arrays, circular queues, games, scheduling, and algorithms**.
+
+---
+
+### 19. Check power of 2 ⭐⭐⭐
+
+For positive integers:
+
+```java
+if ((n & (n - 1)) == 0)
+```
+
+Examples:
+
+```text
+1   → power of 2
+2   → power of 2
+4   → power of 2
+8   → power of 2
+16  → power of 2
+10  → not power of 2
+```
+
+This uses a **bit manipulation trick**, which is worth learning alongside mathematics.
+
+---
+
+### 20. Integer division
+
+This is very important in Java:
+
+```java
+System.out.println(7 / 2);
+```
+
+Output:
+
+```text
+3
+```
+
+Because both are integers.
+
+But:
+
+```java
+System.out.println(7.0 / 2);
+```
+
+Output:
+
+```text
+3.5
+```
+
+---
+
+## 🔥 The ones I'd memorize first
+
+If you're preparing for coding interviews/DSA, learn these especially well:
+
+```text
+% 10          → last digit
+/ 10          → remove last digit
+% 2            → even/odd
+i * i <= n     → prime checking
+rev*10 + digit → reverse number
+GCD            → Euclidean algorithm
+LCM            → a*b/GCD
+% n            → cyclic/repeating patterns
+Math.abs()     → absolute difference
+Math.max/min() → comparisons
+```
+
+A very good next step is to practice **10–15 beginner problems based only on these tricks**—sum of digits, reverse, palindrome, Armstrong number, prime, GCD/LCM, factorial, Fibonacci, etc. That builds the mathematical foundation you need for DSA.

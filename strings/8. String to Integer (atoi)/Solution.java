@@ -1,3 +1,6 @@
+
+import java.util.stream.Stream;
+
 /*
 The algorithm for myAtoi(string s) is as follows:
 
@@ -122,5 +125,17 @@ class Solution {
         // STEP 6: Apply sign and return answer
         // --------------------------------------
         return result * sign;
+    }
+
+    public static void main (String[] args) {
+
+        Stream.of(
+                "42", // Output: 42
+                "   -42", // Output: -42
+                "4193 with words", // Output: 4193
+                "words and 987", // Output: 0
+                "-91283472332" // Output: -2147483648 (clamped to Integer.MIN_VALUE)
+        ).forEach(s ->
+            System.out.println("Input: \"" + s + "\" => Output: " + new Solution().myAtoi(s)));
     }
 }

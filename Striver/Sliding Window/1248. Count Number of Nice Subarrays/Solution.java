@@ -148,12 +148,12 @@ public class Solution {
         Solution sol = new Solution();
         int[] nums = { 1, 1, 2, 1, 1 };
         int k = 3;
-        System.out.println(sol.numberOfSubarrays(nums, k));
+        //System.out.println(sol.numberOfSubarrays(nums, k));
         System.out.println(sol.numberOfSubarrays1(nums, k));
 
         int[] nums1 = { 2, 4, 6 };
         int k1 = 1;
-        System.out.println(sol.numberOfSubarrays(nums1, k1));
+        //System.out.println(sol.numberOfSubarrays(nums1, k1));
         System.out.println(sol.numberOfSubarrays1(nums1, k1));
 
     }

@@ -56,7 +56,8 @@ class Solution {
 
         // Step 1 — Create empty array of lists
         List<Character>[] buckets = new List[s.length() + 1];
-
+        // int[] buckets = new int[s.length() + 1]; // this is for counting sort, but here we need to store characters, so we use List<Character>[]
+        //same as List<Character>[] buckets = new ArrayList[s.length() + 1];
         for (char c : freq.keySet()) {
             int f = freq.get(c);
 
@@ -65,6 +66,8 @@ class Solution {
                 buckets[f] = new ArrayList<>();
             }
 
+        // // So if a character appears 3 times:
+        // buckets[3].add(character);
         // Step 3 — Add characters to that list
             buckets[f].add(c);
         }
@@ -74,6 +77,7 @@ class Solution {
         for (int i = buckets.length - 1; i >= 0; i--) {
             if (buckets[i] == null)
                 continue;
+            // looping here because we can have multiple characters with the same frequency, so we need to add all of them to the result
             for (char c : buckets[i]) {
                 result.append(String.valueOf(c).repeat(i));
             }
@@ -85,6 +89,7 @@ class Solution {
 
     //using max heap
     public String frequencySortHeap(String s) {
+        // STEP 1: Count frequency of each character
         Map<Character, Integer> freq = new HashMap<>();
 
         // Count frequency
@@ -92,15 +97,16 @@ class Solution {
             freq.put(c, freq.getOrDefault(c, 0) + 1);
         }
 
-        // Max heap sorting by frequency
+        // STEP 2: Max heap sorting by frequency
         PriorityQueue<Character> maxHeap =
             new PriorityQueue<>((a, b) -> freq.get(b) - freq.get(a));
 
         maxHeap.addAll(freq.keySet());
 
+        // STEP 3: Build the result string based on frequency
         StringBuilder sb = new StringBuilder();
         while (!maxHeap.isEmpty()) {
-            char c = maxHeap.poll();
+            char c = maxHeap.poll(); // this will give us the character with the highest frequency first, then the next highest, and so on.
 
             // THis is same in both aproaches.
             sb.append(String.valueOf(c).repeat(freq.get(c)));

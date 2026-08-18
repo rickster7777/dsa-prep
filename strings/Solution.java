@@ -69,7 +69,7 @@ class Solution {
         */
     }
 
-    // Second way to check whether the spring is anagram.
+    // Second way to check whether the string is anagram.
 
     public boolean isAnagramArray(String s, String t) {
 
@@ -98,7 +98,7 @@ class Solution {
         return true;
     }
 
-    // Third way to check whether the spring is anagram.
+    // Third way to check whether the string is anagram.
 
     public boolean isAnagramSorting(String s, String t) {
         if (s.length() != t.length())

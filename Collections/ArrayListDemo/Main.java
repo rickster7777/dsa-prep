@@ -179,3 +179,38 @@ public class Main {
     }
 
 }
+
+/*
+Summary:
+Optimized tool selection## Concepts covered in Main.java
+
+1. `List` vs `ArrayList`
+   - `List` is an interface.
+   - `ArrayList` is a concrete implementation.
+   - Use `List<Integer> list = new ArrayList<>();` to program to the interface.
+
+2. `ArrayList` basic operations
+   - `add()`, `remove()`, `indexOf()`, `get()`, `size()`
+   - Iteration with `for (int i = 0; i < size(); i++)` and enhanced `for (int x : list)`
+
+3. `remove()` overload ambiguity
+   - `remove(int index)` removes by position.
+   - `remove(Object value)` removes by value.
+   - For `List<Integer>`, use `Integer.valueOf(1)` to remove the value `1`.
+
+4. `instanceof`
+   - Check object type at runtime: `str instanceof String`
+
+5. List creation utilities
+   - `ArrayList<>()` for mutable lists
+   - `Arrays.asList(...)` returns a fixed-size list
+   - `List.of(...)` creates an immutable list
+
+6. `toArray()` conversions
+   - `Object[] array = list.toArray();`
+   - `Integer[] array2 = list6.toArray(new Integer[0]);`
+   - The typed overload returns an array of the requested runtime type
+
+7. Capacity vs size
+   - `new ArrayList<>(11)` sets initial capacity, but `size()` still reports number of elements (0 until added)
+*/

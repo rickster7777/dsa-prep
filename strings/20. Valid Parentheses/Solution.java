@@ -2,14 +2,28 @@ import java.util.Stack;
 class Solution {
 
     public boolean isValid(String s) {
+        // STEP 1: Check for null or empty string
         if (s == null || s.length() == 0) {
             return true;
         }
+        // STEP 1.1: If the length of the string is odd, it cannot be valid
         if (s.length() % 2 != 0) {
             return false;
         }
         Stack<Character> stack = new Stack<>();
 
+        /*
+        While Stack is correct and commonly used in learning and coding interviews (such as LeetCode), in modern Java it's 
+        generally recommended to use the Deque interface with an ArrayDeque implementation because it's faster 
+        and Stack is a legacy class.
+
+        Deque<Character> stack = new ArrayDeque<>();
+        You use it in the same way:
+
+        stack.push('A');
+        stack.pop();
+        stack.peek();
+        */
         for (char c : s.toCharArray()) {
             if (c == '(' || c == '{' || c == '[') {
                 stack.push(c);

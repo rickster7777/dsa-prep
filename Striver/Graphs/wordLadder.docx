@@ -1,0 +1,695 @@
+LeetCode 127. Word Ladder
+Problem Statement
+
+You are given:
+
+beginWord → Starting word
+endWord → Target word
+wordList → Dictionary of valid words
+
+You can transform one word into another by:
+
+Changing exactly one letter
+The new word must exist in the dictionary
+
+Return the length of the shortest transformation sequence from beginWord to endWord.
+
+If it's impossible, return 0.
+
+Example
+Input
+beginWord = "hit"
+
+endWord = "cog"
+
+wordList =
+
+["hot","dot","dog","lot","log","cog"]
+Valid Transformation
+hit
+ ↓
+hot
+ ↓
+dot
+ ↓
+dog
+ ↓
+cog
+
+Length
+
+hit -> hot -> dot -> dog -> cog
+
+Total words = 5
+
+Output
+
+5
+Invalid Example
+beginWord = "hit"
+
+endWord = "cog"
+
+wordList =
+["hot","dot","dog","lot","log"]
+
+Notice
+
+cog
+
+is missing.
+
+Therefore,
+
+Output
+
+0
+Why BFS?
+
+The question asks for the shortest transformation.
+
+Whenever a problem asks for
+
+Shortest path
+Minimum steps
+Minimum operations
+
+think of
+
+Breadth First Search (BFS)
+
+Because BFS explores level by level.
+
+Graph Representation
+
+Think of every word as a node.
+
+Example
+
+hit
+ |
+hot
+/  \
+dot lot
+|    |
+dog  log
+ \   /
+  cog
+
+Each edge means
+
+These two words differ by exactly one character.
+
+We need the shortest path from
+
+hit
+
+to
+
+cog
+High Level Idea
+
+Instead of comparing every word with every other word,
+
+For each current word,
+
+Try changing
+
+first letter
+second letter
+third letter
+...
+
+to every character
+
+a...z
+
+If the new word exists in dictionary,
+
+it becomes our next BFS node.
+
+Step 1
+
+Convert List into HashSet
+
+Set<String> wordSet = new HashSet<>(wordList);
+
+Why?
+
+Searching inside a List
+
+contains(word)
+
+Time = O(N)
+
+Searching inside HashSet
+
+contains(word)
+
+Time = O(1)
+
+Huge performance improvement.
+
+Step 2
+
+If target doesn't exist
+
+if (!wordSet.contains(endWord))
+    return 0;
+
+Example
+
+begin = hit
+
+end = cog
+
+Dictionary
+
+hot
+dot
+dog
+lot
+log
+
+No matter what,
+
+you'll never reach
+
+cog
+
+Immediately return
+
+0
+Step 3
+
+Create BFS Queue
+
+Queue<String> queue = new LinkedList<>();
+
+Add starting word
+
+queue.offer(beginWord);
+
+Queue
+
+[hit]
+Step 4
+
+Initialize Level
+
+int level = 1;
+
+Why 1?
+
+Because
+
+hit
+
+already counts as first word.
+
+Example
+
+hit
+
+Length = 1
+Step 5
+
+Start BFS
+
+while(!queue.isEmpty())
+
+Continue until
+
+queue becomes empty
+target found
+Step 6
+
+Current Level Size
+
+int size = queue.size();
+
+Suppose queue
+
+Level 1
+
+[hit]
+
+size
+
+1
+
+Next level
+
+[hot]
+
+size
+
+1
+
+Next
+
+[dot lot]
+
+size
+
+2
+
+We process exactly one BFS level at a time.
+
+Step 7
+
+Remove one word
+
+String word = queue.poll();
+
+Example
+
+Queue
+
+[hit]
+
+After poll
+
+word = hit
+
+Queue = []
+Step 8
+
+Try changing every position
+
+for(int j=0;j<word.length();j++)
+
+Suppose
+
+hit
+
+Positions
+
+0 1 2
+
+h i t
+
+We will modify
+
+Position 0
+
+Position 1
+
+Position 2
+
+one by one.
+
+Step 9
+
+Convert String to Character Array
+
+char[] chars = word.toCharArray();
+
+Because
+
+Strings are immutable.
+
+Cannot do
+
+word[0]='a';
+
+Need
+
+char[]
+
+instead.
+
+Step 10
+
+Try every alphabet
+
+for(char c='a'; c<='z'; c++)
+
+Suppose current word
+
+hit
+
+Changing first letter
+
+ait
+bit
+cit
+...
+zit
+
+Changing second letter
+
+hat
+hbt
+hct
+...
+hzt
+
+Changing third letter
+
+hia
+hib
+hic
+...
+hiz
+Step 11
+
+Skip same character
+
+if(chars[j]==c)
+    continue;
+
+Example
+
+Current word
+
+hit
+
+Current position
+
+0
+
+Current character
+
+h
+
+When
+
+c='h'
+
+No need to generate
+
+hit
+
+again.
+
+Skip it.
+
+Step 12
+
+Replace Character
+
+chars[j]=c;
+
+Example
+
+hit
+
+becomes
+
+hot
+Step 13
+
+Create New Word
+
+String nextWord = new String(chars);
+
+Now
+
+nextWord
+
+hot
+Step 14
+
+Reached Target?
+
+if(nextWord.equals(endWord))
+
+Suppose
+
+Current
+
+dog
+
+Generated
+
+cog
+
+Target found.
+
+Return
+
+level+1
+
+Why
+
++1
+
+Current level
+
+dog
+
+Next word
+
+cog
+
+Transformation length increases by one.
+
+Step 15
+
+Valid Dictionary Word?
+
+if(wordSet.contains(nextWord))
+
+Only valid dictionary words are allowed.
+
+Example
+
+Generated
+
+hot
+
+Exists
+
+Yes
+
+Add to queue.
+
+Generated
+
+hut
+
+Not in dictionary.
+
+Ignore.
+
+Step 16
+
+Push into Queue
+
+queue.offer(nextWord);
+
+Example
+
+Queue
+
+Before
+
+[]
+
+After
+
+[hot]
+Step 17
+
+Mark as Visited
+
+wordSet.remove(nextWord);
+
+Why remove?
+
+To prevent revisiting the same word.
+
+Example
+
+Without removing
+
+hot
+
+↓
+
+dot
+
+↓
+
+hot
+
+↓
+
+dot
+
+↓
+
+hot
+
+Infinite revisits.
+
+Removing acts as a visited set.
+
+Step 18
+
+Finish Current Level
+
+After processing every word in current level
+
+level++;
+
+Example
+
+Level 1
+
+hit
+
+↓
+
+Level 2
+
+hot
+
+↓
+
+Level 3
+
+dot lot
+
+↓
+
+Level 4
+
+dog log
+
+↓
+
+Level 5
+
+cog
+Complete Dry Run
+
+Input
+
+begin = hit
+
+end = cog
+
+Dictionary
+
+hot
+dot
+dog
+lot
+log
+cog
+Level 1
+
+Queue
+
+[hit]
+
+Generate
+
+hot
+
+Queue
+
+[hot]
+Level 2
+
+Remove
+
+hot
+
+Generate
+
+dot
+
+lot
+
+Queue
+
+[dot lot]
+Level 3
+
+Process
+
+dot
+
+↓
+
+dog
+
+Process
+
+lot
+
+↓
+
+log
+
+Queue
+
+[dog log]
+Level 4
+
+Process
+
+dog
+
+↓
+
+cog
+
+Target found.
+
+Return
+
+level + 1
+
+4 + 1 = 5
+
+Answer
+
+5
+Why Remove Instead of Using a Visited Set?
+
+Both approaches work.
+
+Instead of:
+
+Set<String> visited = new HashSet<>();
+
+we simply do:
+
+wordSet.remove(nextWord);
+
+Once a word has been visited, it no longer needs to remain in the dictionary. This saves memory because the same HashSet serves two purposes:
+
+Dictionary lookup
+Visited tracking
+Complexity Analysis
+
+Let:
+
+N = number of words in the dictionary
+L = length of each word
+
+For each visited word:
+
+We try changing every character position (L positions).
+For each position, we try all 26 lowercase letters.
+
+So each word generates at most:
+
+L × 26
+
+possible transformations.
+
+Time Complexity: O(N × L × 26), which simplifies to O(N × L) because 26 is a constant.
+Space Complexity: O(N) for the HashSet and BFS queue.
+Key Takeaways
+Convert wordList to a HashSet for O(1) lookups.
+Use BFS because the problem asks for the shortest transformation sequence.
+Each BFS level represents one additional transformation.
+Generate neighbors by changing one character at a time.
+Remove words from the HashSet as soon as they are enqueued to avoid revisiting them.
+Return level + 1 when endWord is generated, because it represents the next step in the transformation sequence.
+If BFS finishes without finding endWord, return 0.

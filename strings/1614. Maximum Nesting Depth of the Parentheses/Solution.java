@@ -1,6 +1,15 @@
+/*
+Algorithm:
+1. Initialize two variables: `count` to keep track of the current depth of nested parentheses
+    and `maxCount` to keep track of the maximum depth encountered so far.
+2. Iterate through each character in the input string `s`.
+   - If the character is '(', increment `count` and update `maxCount` if `count` exceeds `maxCount`.
+   - If the character is ')', decrement `count`.
+3. After processing all characters, return `maxCount` as the maximum nesting depth of the parentheses in the string.
+*/
 class Solution {
     public int maxDepth(String s) {
-        
+
         int count = 0;
         int maxCount = 0;
 

@@ -11,7 +11,17 @@ public class Reverse {
 
         while (start < end) {
 
-            if (chars[start] == " " || chars[end] == " ") {
+            /*
+              if (chars[start] == " " || chars[end] == " ") {
+                continue;
+            }
+            comparing strings using == checks for reference equality, not content equality.
+            In Java, strings are objects, and using == checks if both references point to the same
+
+           continue can still cause an infinite loop because it doesn't advance start/end.
+Simplest safe fix: split on whitespace and remove the skip logic (same approach as reverseWordssfixed).
+            */
+            if (" ".equals(chars[start]) || " ".equals(chars[end])) {
                 continue;
             }
             String temp = chars[start];

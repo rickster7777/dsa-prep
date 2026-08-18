@@ -53,6 +53,16 @@ class Solution {
             windowSum += nums[right];
 
             // If cost exceeds k, shrink the window
+            // windowSize = right - left + 1
+            // cost = nums[right] * windowSize - windowSum
+
+            // Explanation of cost formula:
+            // we want to make all elements in the window equal to nums[right].
+            // so we calculate how much we need to add to each element in the window
+            // to reach nums[right].
+            // The total cost is the difference between the target sum (nums[right] * windowSize) and
+            // the current sum of the window (windowSum).
+
             while ((long) nums[right] * (right - left + 1) - windowSum > k) {
                 windowSum -= nums[left];
                 left++;

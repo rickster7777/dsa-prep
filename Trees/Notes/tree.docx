@@ -121,3 +121,407 @@ If recursion is not allowed, first ask yourself:
 If yes → Use Stack
 
 If no (e.g., level order) → Use Queue
+
+
+5 August 2026
+Striver
+
+1. Full Binary Tree:
+A Full Binary Tree, also known as a Strict Binary Tree, adheres to the structural property where every node has either zero or two children.
+No node of this tree has just a single child, all internal nodes have exactly two children or in the case of leaf nodes, no children.
+
+2. Complete Binary Tree:
+A Complete Binary Tree is a specialised form of Binary Tree where all levels are filled completely except possibly the last level, which is filled from left to right.
+All levels of the tree, except possibly the last one, are fully filled. If the last level is not completely filled, it is filled from left to right, ensuring
+that nodes are positioned as far left as possible.
+
+
+In a complete binary tree, all leaf nodes are in the last level or the second-to-last level, and they are positioned towards the leftmost side.
+One important aspect to note is that although it might seem similar to a full binary tree, a complete binary tree doesn't require all nodes to
+have two children; it's about the positioning and arrangement of nodes.
+
+3. Perfect Binary Tree:
+A Perfect Binary tree is a type of Binary Tree where all leaf nodes are at the same level and the number of leaf nodes is maximised for that level.
+
+Every node in a perfect binary tree has either zero or two children. This means that every internal node (non-leaf node) has exactly two children and
+all leaf nodes are at the same level.
+
+4. Balanced Binary Tree:
+A Balanced Binary tree is a type of Binary Tree where the heights of the two subtrees of any node differ by at most one. This property ensures that the
+tree remains relatively well-balanced, preventing the tree from becoming highly skewed or degenerate.
+
+
+5. Degenerate Tree:
+A Degenerate Tree is a Binary Tree where the nodes are arranged in a single path leaning to the right or left. The tree resembles a linked list in its
+structure where each node points to the next node in a linear fashion.
+
+There’s a lot of imbalance in the tree structure due to the sequential arrangement of nodes. This lack of balance results in a tree that resembles a
+singly linked list rather than a branching structure.
+
+----------------------------------------------------------------------------------------------------------------------------
+Input:
+
+4 2 5 3 -1 7 6 -1 9 -1 -1 8 -1 1
+
+Here, -1 means no child.
+
+The tree is:
+
+                4
+              /   \
+             2     5
+            /     / \
+           3     7   6
+            \       /
+             9     8
+            /
+           1
+
+Now let's understand each traversal one by one.
+
+1. Preorder (Root → Left → Right)
+
+Rule:
+
+Visit Root
+Go Left
+Go Right
+
+Let's start from the root.
+
+Step 1
+Visit 4
+
+Output:
+
+4
+
+Move left to 2.
+
+Step 2
+Visit 2
+
+Output:
+
+4 2
+
+Move left to 3.
+
+Step 3
+Visit 3
+
+Output:
+
+4 2 3
+
+Left child = null
+
+Go right to 9.
+
+Step 4
+Visit 9
+
+Output:
+
+4 2 3 9
+
+Go left to 1.
+
+Step 5
+Visit 1
+
+Output:
+
+4 2 3 9 1
+
+No children.
+
+Backtrack all the way to 4.
+
+Step 6
+
+Go to right subtree.
+
+Visit 5.
+
+Output:
+
+4 2 3 9 1 5
+
+Go left.
+
+Visit 7.
+
+Output:
+
+4 2 3 9 1 5 7
+
+No children.
+
+Go back.
+
+Go right to 6.
+
+Visit 6.
+
+Output:
+
+4 2 3 9 1 5 7 6
+
+Go left.
+
+Visit 8.
+
+Output:
+
+4 2 3 9 1 5 7 6 8
+
+Done.
+
+✅ Preorder
+
+[4,2,3,9,1,5,7,6,8]
+2. Inorder (Left → Root → Right)
+
+Rule
+
+Left
+Root
+Right
+
+Start at 4.
+
+Cannot visit 4 yet.
+
+Go left.
+
+At 2
+
+Cannot visit.
+
+Go left.
+
+At 3
+
+Go left.
+
+Nothing.
+
+Visit 3.
+
+Output
+
+3
+
+Go right.
+
+At 9
+
+Go left.
+
+At 1
+
+Left = null
+
+Visit 1
+
+Output
+
+3 1
+
+Back to 9
+
+Visit 9
+
+Output
+
+3 1 9
+
+Right = null
+
+Back to 2
+
+Visit 2
+
+Output
+
+3 1 9 2
+
+Back to 4
+
+Visit 4
+
+Output
+
+3 1 9 2 4
+
+Go right subtree.
+
+At 5
+
+Go left.
+
+At 7
+
+Visit 7
+
+Output
+
+3 1 9 2 4 7
+
+Back to 5
+
+Visit 5
+
+Output
+
+3 1 9 2 4 7 5
+
+Go right.
+
+At 6
+
+Go left.
+
+Visit 8
+
+Output
+
+3 1 9 2 4 7 5 8
+
+Back to 6
+
+Visit 6
+
+Output
+
+3 1 9 2 4 7 5 8 6
+
+Done.
+
+✅ Inorder
+
+[3,1,9,2,4,7,5,8,6]
+3. Postorder (Left → Right → Root)
+
+Rule
+
+Left
+Right
+Root
+
+This one is easiest if you think: visit the node only after finishing both subtrees.
+
+Start at 4.
+
+Cannot visit.
+
+Go left.
+
+At 2
+
+Go left.
+
+At 3
+
+Left = null
+
+Go right.
+
+At 9
+
+Go left.
+
+At 1
+
+Both children done.
+
+Visit 1.
+
+Output
+
+1
+
+Back to 9
+
+Both children done.
+
+Visit 9
+
+Output
+
+1 9
+
+Back to 3
+
+Both children done.
+
+Visit 3
+
+Output
+
+1 9 3
+
+Back to 2
+
+Right already null.
+
+Visit 2
+
+Output
+
+1 9 3 2
+
+Back to 4
+
+Go right subtree.
+
+At 5
+
+Go left.
+
+Visit 7
+
+Output
+
+1 9 3 2 7
+
+Go right.
+
+At 6
+
+Go left.
+
+Visit 8
+
+Output
+
+1 9 3 2 7 8
+
+Visit 6
+
+Output
+
+1 9 3 2 7 8 6
+
+Back to 5
+
+Visit 5
+
+Output
+
+1 9 3 2 7 8 6 5
+
+Back to 4
+
+Visit 4
+
+Output
+
+1 9 3 2 7 8 6 5 4
+
+Done.
+
+✅ Postorder
+
+[1,9,3,2,7,8,6,5,4]

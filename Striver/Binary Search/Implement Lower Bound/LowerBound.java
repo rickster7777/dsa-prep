@@ -64,11 +64,14 @@ public class LowerBound {
         int[] arr1 = { 1, 2, 2, 3 };
         int target1 = 2;
         System.out.println("Lower Bound Index: " + LowerBound.lowerBound(arr1, target1)); // Output: 1
+        //explanation: Index 1 is the smallest index such that arr[1] >= x.
         System.out.println("Lower Bound Index temp 2:" + LowerBound.lowerBoundTemp2(arr1, target1)); // Output: 1
 
         int[] arr2 = { 3, 5, 8, 15, 19 };
         int target2 = 9;
         System.out.println("Lower Bound Index: " + LowerBound.lowerBound(arr2, target2)); // Output: 3
+        //explanation: Index 3 is the smallest index such that arr[3] >= x.
+
         System.out.println("Lower Bound Index temp 2:" + LowerBound.lowerBoundTemp2(arr2, target2));
 
         // int[] arr3 = { 1, 3, 5, 7, 9 };

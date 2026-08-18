@@ -1,10 +1,16 @@
 //was not able to compare adjacent strings in the array
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Solution {
- // provide the updated logic for non adjacent anagrams only that particular part
- 
+ // In LC prob solution is needed only for the adjacent anagrams, 
+ // but here I have also added a solution for non-adjacent anagrams as well, just for the sake of learning.
+ // this will work for both adjacent and non-adjacent anagrams, but the time complexity will be O(n^2) for non-adjacent anagrams, 
+ // which is not optimal.
     public static List<String> removeNonAdjacentAnagrams(String[] words) {
         List<String> result = new ArrayList<>();
         Set<String> seenAnagrams = new HashSet<>();

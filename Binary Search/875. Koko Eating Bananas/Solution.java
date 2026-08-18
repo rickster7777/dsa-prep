@@ -52,7 +52,16 @@ class Solution {
     public static void main(String[] args) {
         int[] piles = {3,6,7,11};
         int h = 8;
-        Solution.minEatingSpeed(piles, h);
+
+        System.out.println(Solution.minEatingSpeed(piles, h));
+
+        // Explanation:
+        // For k = 4:
+        // Pile 0: 3 / 4 → 1 hour
+        // Pile 1: 6 / 4 → 2 hours (6 bananas → 4 in first hour, 2 in second)
+        // Pile 2: 7 / 4 → 2 hours (7 bananas → 4 in first hour, 3 in second)
+        // Pile 3: 11 / 4 → 3 hours (11 bananas → 4 in first hour, 4 in second, 3 in
+        // third)
     }
 }
 /*

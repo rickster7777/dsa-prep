@@ -58,6 +58,33 @@ public class Solution {
         return maxPrefixLength;
     }
 
+    // slightly better version of the above code
+    private static int commonPrefixLengthOptimized(int a, int b) {
+        String s1 = String.valueOf(a);
+        String s2 = String.valueOf(b);
+
+        int i = 0;
+        int limit = Math.min(s1.length(), s2.length());
+
+        while (i < limit && s1.charAt(i) == s2.charAt(i)) {
+            i++;
+        }
+
+        return i;
+    }
+
+    public static int longestCommonPrefixOptimized(int[] arr1, int[] arr2) {
+        int result = 0;
+
+        for (int x : arr1) {
+            for (int y : arr2) {
+                result = Math.max(result, commonPrefixLengthOptimized(x, y));
+            }
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         // Test case 1
         int[] arr1 = { 1, 10, 100 };

@@ -65,6 +65,7 @@ public class Solution {
             maxCount = Math.max(maxCount, count[s.charAt(right) - 'A']);
 
             // STEP 4: Check if window is valid
+            // this is the core logic
             // What makes a window valid? For a window:
             // window size - frequency of most common char <= k
 
