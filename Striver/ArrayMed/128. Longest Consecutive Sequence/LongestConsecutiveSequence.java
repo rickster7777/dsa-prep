@@ -54,24 +54,27 @@ public class LongestConsecutiveSequence {
     public static int longestConsecutive(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
 
+        // STEP 1: Add all elements to a HashSet for O(1) lookups
         Set<Integer> set = new HashSet<>();
         for (int num : nums) {
             set.add(num);
         }
 
         int longest = 0;
-
+        // STEP 2: Iterate through the set to find the longest consecutive sequence
         for (int num : set) {
             // Start only if this is the beginning of a sequence
             if (!set.contains(num - 1)) {
                 int currentNum = num;
                 int count = 1;
 
+                // STEP 3: Expand the sequence forward
                 while (set.contains(currentNum + 1)) {
                     currentNum++;
                     count++;
                 }
 
+                // STEP 4: Update the longest sequence found
                 longest = Math.max(longest, count);
             }
         }

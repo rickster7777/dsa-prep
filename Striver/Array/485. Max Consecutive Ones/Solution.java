@@ -10,6 +10,7 @@ Input: nums = [1,0,1,1,0,1]
 Output: 2
 */
 class Solution {
+    // This is a single-pass counting approach
     public int findMaxConsecutiveOnes(int[] nums) {
         int maxCount = 0;   // Stores the maximum consecutive 1s found
         int currentCount = 0; // Counts current consecutive 1s

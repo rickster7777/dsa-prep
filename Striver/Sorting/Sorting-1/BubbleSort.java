@@ -1,3 +1,4 @@
+package Striver.Sorting;
 /*
 What the loops do
 
@@ -29,6 +30,9 @@ public class BubbleSort {
 
             // THis inner loop performs the comparisons and swaps
             // It goes up to n-i-1 because the last i elements are already sorted
+
+            // swap adjacent elements if they are in the wrong order
+            // unlike selection sort here, we compare and swap adjacent elements
             for (int j = 0; j < n - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
                     // swap

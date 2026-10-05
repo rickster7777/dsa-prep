@@ -1,3 +1,4 @@
+package Striver.Sorting;
 /**
  * MergeSort - A stable, divide-and-conquer sorting algorithm
  * 

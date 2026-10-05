@@ -63,12 +63,14 @@ class Solution {
     }
 
     public int[] rearrangeArrayOptimal(int[] nums) {
+        // STEP 1: Create a result array of the same length as nums and
+        // initialize two pointers for positive and negative indices.
         int[] res = new int[nums.length];
 
         int posIndex = 0; // even indices
         int negIndex = 1; // odd indices
         // Fill positive numbers at even indices and negative numbers at odd indices
-        // key idea: separate indices for pos and negatives and fill accordingly
+        // STEP 2: Key idea: separate indices for pos and negatives and fill accordingly
         for (int num : nums) {
             if (num > 0) {
                 res[posIndex] = num;

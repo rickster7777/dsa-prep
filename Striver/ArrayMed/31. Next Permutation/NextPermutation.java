@@ -13,7 +13,8 @@ public class NextPermutation {
 
         //if the array is in complete descending order like 321 then we just reverse the array to make it smallest
         // and below steps will be skipped.
-        if (i >= 0) {  // Only proceed if a valid decreasing element is found
+        // // Step 2️⃣: Only proceed if a valid decreasing element is found
+        if (i >= 0) {
             int j = n - 1;
 
             // Step 2️⃣: Find the next larger number to swap

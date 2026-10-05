@@ -40,19 +40,19 @@ public class Solution {
         List<Integer> leaders = new ArrayList<>();
         int n = arr.length;
 
-        // Start from the last element, which is always a leader
+        // STEP 1:Start from the last element, which is always a leader
         int maxFromRight = arr[n - 1];
         leaders.add(maxFromRight);
 
-        // Traverse the array from right to left
+        // STEP 2: Traverse the array from right to left
         for (int i = n - 2; i >= 0; i--) {
             if (arr[i] > maxFromRight) {
-                leaders.add(arr[i]);
-                maxFromRight = arr[i];
+                leaders.add(arr[i]); // Add the current element to the list of leaders
+                maxFromRight = arr[i]; // Update the maximum element encountered so far
             }
         }
 
-        // Since we traversed from right to left, we need to reverse the list
+        // STEP 3: Since we traversed from right to left, we need to reverse the list
         Collections.reverse(leaders);
 
         return leaders;

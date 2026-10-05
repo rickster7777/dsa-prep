@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 public class LRUCache11 {
 
+    //STEP 1: Create a Node class for doubly linked list
     class Node {
         int key, value;
         Node prev, next;
@@ -34,6 +35,7 @@ public class LRUCache11 {
         }
     }
 
+    //STEP 2: Define the LRUCache constructor with capacity, HashMap, and head/tail nodes
     private final int capacity;
     private HashMap<Integer, Node> cache;
     private Node head, tail; // dummy head and tail
@@ -49,7 +51,9 @@ public class LRUCache11 {
         tail.prev = head;
     }
 
-    // GET: return value if key exists, else -1
+    // From here, we will implement the get and put methods to manage the cache.
+
+    // STEP 3.1 GET: return value if key exists, else -1
     public int get(int key) {
         if (!cache.containsKey(key)) return -1;
 
@@ -58,7 +62,7 @@ public class LRUCache11 {
         return node.value;
     }
 
-    // PUT: insert or update the key-value pair
+    // STEP 3.2 PUT: insert or update the key-value pair
     public void put(int key, int value) {
         if (cache.containsKey(key)) {
             Node node = cache.get(key);
@@ -78,6 +82,7 @@ public class LRUCache11 {
         }
     }
 
+    // STEP 4: Helper methods for linked list operations
     // Helper: move node to front
     private void moveToFront(Node node) {
         removeNode(node);

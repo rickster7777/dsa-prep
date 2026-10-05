@@ -1,3 +1,4 @@
+package Striver.Sorting;
 /**
  * QuickSort - An efficient divide-and-conquer sorting algorithm
  *

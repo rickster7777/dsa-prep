@@ -11,7 +11,7 @@ integer overflow, uses constant space, performs fewer operations, and is the pre
 
 class Solution {
     public boolean isPalindrome(int x) {
-
+        // STEP 1: Handle edge cases
         // Negative numbers are not palindromes because of the '-' sign
         // Numbers ending with 0 (but not 0 itself) cannot be palindromes
         if (x < 0 || (x % 10 == 0 && x != 0)) {
@@ -21,7 +21,8 @@ class Solution {
         // This will store the reversed second half of the number
         int rev = 0;
 
-        // Reverse digits until we reach (or cross) the middle of the number
+        // STEP 2: Reverse digits until we reach (or cross) the middle of the number
+        // In usual reversing we use the condition x > 0, but here we use x > rev to stop when we've reversed half the digits
         while (x > rev) {
 
             // Take the last digit of x  
@@ -38,6 +39,18 @@ class Solution {
         // For odd number of digits: middle digit is ignored using rev / 10
         return x == rev || x == rev / 10;
         //here rev/10 removes the middle digit in case of odd length numbers, because the middle digit doesn't affect the palindrome property.
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Test cases
+        int[] testCases = {121, -121, 10, 12321, 123321, 0};
+
+        for (int testCase : testCases) {
+            boolean result = solution.isPalindrome(testCase);
+            System.out.println("Is " + testCase + " a palindrome? " + result);
+        }
     }
 }
 

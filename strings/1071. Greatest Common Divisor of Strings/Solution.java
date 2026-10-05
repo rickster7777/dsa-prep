@@ -49,4 +49,17 @@ class Solution {
     private int gcd(int a, int b) {
         return b == 0 ? a : gcd(b, a % b);
     }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        String str1 = "ABABAB"; // example input string 1
+        String str2 = "ABAB";   // example input string 2
+        // call gcdOfStrings method and print the result (expected "AB")
+        System.out.println("GCD of Strings: " + solution.gcdOfStrings(str1, str2));
+
+        String str3 = "LEET";   // example input string 3
+        String str4 = "CODE";   // example input string 4
+        // call gcdOfStrings method and print the result (expected "")
+        System.out.println("GCD of Strings: " + solution.gcdOfStrings(str3, str4));
+    }
 }

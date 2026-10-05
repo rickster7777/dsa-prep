@@ -49,4 +49,39 @@ public class Solution {
 /*
          * Substring "aaa" → valid (each a appears 3 times)Substring "aab" → invalid (b appears less than 3 times)
          * Output = 3
+    s = "aaabb", k = 3
+
+"aaa" → a appears 3 times ✅
+"aaabb" → b appears only 2 times ❌
+
+Answer = 3
+
+Another:
+
+s = "ababbc", k = 2
+
+"ababb" → a = 2, b = 3 ✅
+Answer = 5
+Key observation
+
+Suppose we're looking at:
+
+s = "aaabbc"
+k = 3
+
+Character frequencies:
+
+a → 3 ✅
+b → 2 ❌
+c → 1 ❌
+
+If a character occurs less than k times, it cannot exist in a valid substring.
+
+So b and c become natural splitting points:
+
+aaa | b | b | c
+
+We can recursively solve the portions around those invalid characters.
+
+This leads to a divide-and-conquer / recursion solution.
          */

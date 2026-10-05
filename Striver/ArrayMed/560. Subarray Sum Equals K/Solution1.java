@@ -31,20 +31,20 @@ public class Solution1 {
         // Value: index where it first occurred
         Map<Integer, Integer> map = new HashMap<>();
 
-        // Base case: prefix sum of 0 exists at index -1 (before array starts)
+        // Step 1: Base case: prefix sum of 0 exists at index -1 (before array starts)
         // This handles subarrays starting from index 0
         map.put(0, -1);
 
         int sum = 0; // Running cumulative sum
         int maxLen = 0; // Maximum length of subarray found so far
 
-        // Iterate through each element and maintain running sum
+        // STEP 2: Iterate through each element and maintain running sum
         for (int i = 0; i < nums.length; i++) {
             // Add current element to the cumulative sum
             sum += nums[i];
 
             /**
-             * KEY LOGIC: If (sum - k) exists in map, we found a valid subarray
+             * STEP 3: KEY LOGIC: If (sum - k) exists in map, we found a valid subarray
              * 
              * Why? Because if we had prefix sum (sum - k) at some earlier index j,
              * then the subarray from (j+1) to current index i has sum = sum - (sum - k) = k

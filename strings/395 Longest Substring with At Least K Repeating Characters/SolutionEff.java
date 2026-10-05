@@ -1,45 +1,48 @@
+class SolutionEff {
 
-public class SolutionEff {
-    public static int longestSubstring(String s, int k) {
-        int maxLen = 0;
+    public int longestSubstring(String s, int k) {
+        return solve(s, 0, s.length(), k);
+    }
 
-        for (int targetUnique = 1; targetUnique <= 26; targetUnique++) {
-            int[] freq = new int[26];
-            int left = 0, right = 0;
-            int unique = 0; // Number of unique characters in window
-            int countAtLeastK = 0;
+    private int solve(String s, int start, int end, int k) {
 
-            while (right < s.length()) {
-                if (unique <= targetUnique) {
-                    int idx = s.charAt(right) - 'a';
-                    if (freq[idx] == 0)
-                        unique++;
-                    freq[idx]++;
-                    if (freq[idx] == k)
-                        countAtLeastK++;
-                    right++;
-                } else {
-                    int idx = s.charAt(left) - 'a';
-                    if (freq[idx] == k)
-                        countAtLeastK--;
-                    freq[idx]--;
-                    if (freq[idx] == 0)
-                        unique--;
-                    left++;
-                }
+        // Step 1: Count frequency of every character
+        int[] freq = new int[26];
 
-                if (unique == targetUnique && unique == countAtLeastK) {
-                    maxLen = Math.max(maxLen, right - left);
-                }
+        for (int i = start; i < end; i++) {
+            freq[s.charAt(i) - 'a']++;
+        }
+
+        // Step 2: Find a character that appears fewer than k times
+        for (int i = start; i < end; i++) {
+
+            char ch = s.charAt(i);
+
+            if (freq[ch - 'a'] < k) {
+
+                // Step 3: This character cannot be part
+                // of any valid substring.
+                //
+                // So split the problem around it.
+
+                int left = solve(s, start, i, k);
+                int right = solve(s, i + 1, end, k);
+
+                // Step 4: Take the better side
+                return Math.max(left, right);
             }
         }
 
-        return maxLen;
+        // Step 5: Every character appears at least k times
+        // Therefore the entire substring is valid.
+        return end - start;
     }
 
     public static void main(String[] args) {
-        String s = "aabab";
-        int k = 3;
-        System.out.println("Sliding Window Optimized: " + longestSubstring(s, k)); // Output: 3
+        SolutionEff solution = new SolutionEff();
+        String s = "aaabb";           // example input string
+        int k = 3;                    // required minimum frequency per character in substring
+        // call efficient implementation and print the result (expected 3 for "aaa")
+        System.out.println("Efficient: " + solution.longestSubstring(s, k));
     }
 }
