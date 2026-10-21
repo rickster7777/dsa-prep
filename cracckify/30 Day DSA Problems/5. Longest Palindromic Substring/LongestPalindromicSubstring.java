@@ -50,9 +50,11 @@ public class LongestPalindromicSubstring {
             right++;
         }
         // Return the palindrome found by expanding around the center
-        // why left + 1 because we decrement left one extra time in the while loop when the characters are no longer equal,
+        // why left + 1 because we decrement left one extra time in the while loop when
+        // the characters are no longer equal,
         // so we need to add 1 to get back to the last valid index of the palindrome.
-        // Similarly, right is incremented one extra time, so we can use it directly as the end index for substring.
+        // Similarly, right is incremented one extra time, so we can use it directly as
+        // the end index for substring.
         return s.substring(left + 1, right);
     }
 
@@ -81,20 +83,56 @@ public class LongestPalindromicSubstring {
 
         return longest;
     }
+    /*
+    Your expand-around-center approach is the right practical choice for this problem: it handles odd- and even-length palindromes in O(n²) time and O(1) extra space, which is suitable for the constraint n ≤ 1000.
+    There’s one important issue in the current implementation: expandAroundCenter creates a substring for every center. In Java, creating each substring copies its characters, so on inputs with many long palindromes—such as "aaaaaa..."—that can make the total work O(n³), despite the comment claiming O(n²).
+    A better version tracks the best palindrome’s bounds while expanding, then creates just one substring at the end:
+    */
+    // Approach 2
+    private static void expandAndUpdate(String s, int left, int right, int[] best) {
+        while (left >= 0 && right < s.length()
+                && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+
+        int start = left + 1;
+        int end = right - 1;
+
+        if (end - start > best[1] - best[0]) {
+            best[0] = start;
+            best[1] = end;
+        }
+    }
+
+    public static String longestPalindromeOp(String s) {
+        if (s == null || s.isEmpty()) {
+            return "";
+        }
+
+        int[] best = { 0, 0 };
+
+        for (int i = 0; i < s.length(); i++) {
+            expandAndUpdate(s, i, i, best); // Odd-length centers
+            expandAndUpdate(s, i, i + 1, best); // Even-length centers
+        }
+
+        return s.substring(best[0], best[1] + 1);
+    }
 
     // Test the implementation
     public static void main(String[] args) {
-        String input = "babad"; //output: "bab" or "aba"
-        //explanation: "aba" is also a valid answer.
+        String input = "babad"; // output: "bab" or "aba"
+        // explanation: "aba" is also a valid answer.
         System.out.println("Longest Palindromic Substring: " + longestPalindrome(input)); // Output: "bab" or "aba"
 
-        String input2 = "cbbd"; //output: "bb"
+        String input2 = "cbbd"; // output: "bb"
         System.out.println("Longest Palindromic Substring: " + longestPalindrome(input2)); // Output: "bb"
 
-        String input3 = "a"; //output: "a"
+        String input3 = "a"; // output: "a"
         System.out.println("Longest Palindromic Substring: " + longestPalindrome(input3)); // Output: "a"
 
-        String input4 = "ac"; //output: "a" or "c"
-        System.out.println("Longest Palindromic Substring: " + longestPalindrome(input4 )); // Output: "a" or "c"
+        String input4 = "ac"; // output: "a" or "c"
+        System.out.println("Longest Palindromic Substring: " + longestPalindrome(input4)); // Output: "a" or "c"
     }
 }

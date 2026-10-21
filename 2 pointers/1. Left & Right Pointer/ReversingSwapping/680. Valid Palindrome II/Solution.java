@@ -1,4 +1,28 @@
 
+/*
+Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+The goal is to determine whether a string can become a palindrome after deleting zero or one character.
+
+Example 1:
+
+Input: s = "aba"
+Output: true
+
+Example 2:
+Input: s = "abca"
+Output: true
+Explanation: You could delete the character 'c'.
+
+Example 3:
+Input: s = "abc"
+Output: false
+
+Constraints:
+
+1 <= s.length <= 105
+s consists of lowercase English letters.
+
+*/
 class Solution {
 
     // public boolean validP(StringBuilder sb) {
@@ -65,7 +89,8 @@ class Solution {
 
     public static void main(String[] args) {
         Solution sol = new Solution();
-        String s = "eccerr";
+        String s = "aba"; // output: true
+        //explanation:
 
         boolean result = sol.validPalindrome(s);
         System.out.println(result);

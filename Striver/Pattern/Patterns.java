@@ -14,7 +14,7 @@ public class Patterns {
             for (int j = 0; j < 5; j++) {
                 System.out.print("* ");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -29,14 +29,14 @@ public class Patterns {
          * * *
          * * * *
          * * * * *
-
+        PTR: j <= i
          */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j <= i; j++) {
                 System.out.print("* ");
 
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -44,18 +44,19 @@ public class Patterns {
 
         System.out.println("Third Pattern: ");
         /*
-         * 
+         *
          * 1
          * 1 2
          * 1 2 3
          * 1 2 3 4
          * 1 2 3 4 5
+        PTR: j + 1 + " "
          */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j <= i; j++) {
                 System.out.print(j + 1 + " ");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -63,18 +64,19 @@ public class Patterns {
 
         System.out.println("fourth Pattern: ");
         /*
-         * 
+         *
          * 1
          * 2 2
          * 3 3 3
          * 4 4 4 4
          * 5 5 5 5 5
+        PTR: i + 1 + " "
          */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j <= i; j++) {
                 System.out.print(i + 1 + " ");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -82,18 +84,22 @@ public class Patterns {
 
         System.out.println("fifth Pattern: ");
         /*
-         * 
          * * * * *
          * * * *
          * * *
          * *
-         * 
+         *
+        PTR: for (int j = 1; j <= 5 - i; j++)
+        its same as
+        for (int j = 5; j > i; j--) ?
+        Yes! ✅ Both conditions run the inner loop the same number of times, but there is one important difference: 
+        the value of j changes differently.
          */
         for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5 - i; j++) {
+            for (int j = 5; j > i; j--) {
                 System.out.print("* ");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -107,12 +113,13 @@ public class Patterns {
          * 1 2 3
          * 1 2
          * 1
+         * PTR: for (int j = 0; j < 5 - i; j++)
          */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5 - i; j++) {
                 System.out.print(j + 1 + " ");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -122,15 +129,15 @@ public class Patterns {
         System.out.println("seventh Pattern: ");
 
         int n = 5;
-        for (int i = 1; i <= n; i++) {
-            
+        for (int i = 0; i < n; i++) {
+
             // Print spaces
-            for (int j = 1; j <= n - i; j++) {
+            for (int j = 0; j < n - i; j++) {
                 System.out.print(" ");
             }
 
             // Print stars
-            for (int j = 1; j <= (2 * i - 1); j++) {
+            for (int j = 0; j < (2 * i + 1); j++) {
                 System.out.print("*");
             }
 
@@ -144,15 +151,15 @@ public class Patterns {
         //Reverse Pyramid Pattern
         System.out.println("eighth Pattern: ");
         int n = 5;
-        for (int i = n; i >= 1; i--) {
+        for (int i = n; i > 0; i--) {
 
             // Print spaces
-            for (int j = 1; j <= n - i; j++) {
+            for (int j = 0; j < n - i; j++) {
                 System.out.print(" ");
             }
 
             // Print stars
-            for (int j = 1; j <= (2 * i - 1); j++) {
+            for (int j = 0; j < (2 * i - 1); j++) {
                 System.out.print("*");
             }
 
@@ -168,15 +175,15 @@ public class Patterns {
         int n = 5;
 
         // Upper half of the diamond
-        for (int i = 1; i <= n; i++) {
+        for (int i = 0; i < n; i++) {
 
             // Print spaces
-            for (int j = 1; j <= n - i; j++) {
+            for (int j = 0; j < n - i; j++) {
                 System.out.print(" ");
             }
 
             // Print stars
-            for (int j = 1; j <= (2 * i - 1); j++) {
+            for (int j = 0; j < (2 * i - 1); j++) {
                 System.out.print("*");
             }
 
@@ -184,15 +191,15 @@ public class Patterns {
         }
 
         // Lower half of the diamond
-        for (int i = n - 1; i >= 1; i--) {
+        for (int i = n; i > 0; i--) {
 
             // Print spaces
-            for (int j = 1; j <= n - i; j++) {
+            for (int j = 0; j < n - i; j++) {
                 System.out.print(" ");
             }
 
             // Print stars
-            for (int j = 1; j <= (2 * i - 1); j++) {
+            for (int j = 0; j < (2 * i - 1); j++) {
                 System.out.print("*");
             }
 
@@ -208,16 +215,16 @@ public class Patterns {
         int n = 5;
 
         // Upper half of the hollow diamond
-        for (int i = 1; i <= n; i++) {
+        for (int i = 0; i < n; i++) {
 
             // Print spaces
-            for (int j = 1; j <= n - i; j++) {
+            for (int j = 0; j < n - i; j++) {
                 System.out.print(" ");
             }
 
             // Print stars and spaces
-            for (int j = 1; j <= (2 * i - 1); j++) {
-                if (j == 1 || j == (2 * i - 1)) {
+            for (int j = 0; j < (2 * i + 1); j++) {
+                if (j == 0 || j == (2 * i)) {
                     System.out.print("*");
                 } else {
                     System.out.print(" ");
@@ -228,16 +235,16 @@ public class Patterns {
         }
 
         // Lower half of the hollow diamond
-        for (int i = n - 1; i >= 1; i--) {
+             for (int i = n - 1; i > 0; i--) {
 
-            // Print spaces
-            for (int j = 1; j <= n - i; j++) {
+            // Step 3: Leading spaces
+            for (int j = 0; j < n - i + 1; j++) {
                 System.out.print(" ");
             }
 
-            // Print stars and spaces
-            for (int j = 1; j <= (2 * i - 1); j++) {
-                if (j == 1 || j == (2 * i - 1)) {
+            // Step 4: Boundary stars and inner spaces
+            for (int j = 0; j < 2 * i - 1; j++) {
+                if (j == 0 || j == 2 * i - 2) {
                     System.out.print("*");
                 } else {
                     System.out.print(" ");
@@ -266,7 +273,7 @@ public class Patterns {
     //                 System.out.print("* ".repeat(count));
     //             }
     //         }
-    //         System.out.println("");
+    //         System.out.println();
     //     }
 
 
@@ -285,12 +292,15 @@ public class Patterns {
 
     public static void main(String[] args) {
         Patterns patterns = new Patterns();
-        // patterns.first();
-        // patterns.second();
-        // patterns.third();
-        // patterns.fourth();
-        // patterns.fifth();
-        // patterns.sixth();
+        patterns.first();
+        patterns.second();
+        patterns.third();
+        patterns.fourth();
+        patterns.fifth();
+        patterns.sixth();
+        patterns.seventh();
+        patterns.eighth();
+        patterns.ninth();
         patterns.tenth();
     }
 }

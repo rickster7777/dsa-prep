@@ -27,7 +27,8 @@ public class Solution {
 
         for (int i = n - 2; i >= 0; i--) {
 
-            if (arr[i] > max) {
+            if (arr[i] > max) { // if the current element is greater than the max,
+            // we need to update the max and replace the current element with the previous max
                 int temp = max;
                 max = arr[i];
                 arr[i] = temp;
@@ -56,5 +57,16 @@ public class Solution {
         }
 
         return arr;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] arr1 = {17, 18, 5, 4, 6, 1};
+        int[] result1 = solution.replaceElements(arr1);
+        System.out.println(java.util.Arrays.toString(result1)); // Output: [18, 6, 6, 6, 1, -1]
+
+        int[] arr2 = {400};
+        int[] result2 = solution.replaceElements(arr2);
+        System.out.println(java.util.Arrays.toString(result2)); // Output: [-1]
     }
 }

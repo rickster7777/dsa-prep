@@ -77,7 +77,7 @@ public class Solution {
     // In the LC prob 387 It's required that instead of character index needs to be
     // returned
     // So this code highlights how index can be tracked along with the character.
-
+    // HAVE NOT SEEN IT BEFORE
     public int firstUniqChar(String s) {
         Map<Character, int[]> map = new LinkedHashMap<>();
 
